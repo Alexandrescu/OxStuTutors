@@ -1,10 +1,15 @@
 // gulpfile.js
 var gulp = require('gulp');
+
+// Running the express
 var server = require('gulp-express');
+
+// Compiling sass
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
 // This is the vendor store.
 // Everything that needs copied in the public folder
-
 var vendor;
 vendor = [
     {
@@ -12,7 +17,7 @@ vendor = [
         destination: '/angular/'
     },
     {
-        file: './bower_components/bootstrap/dist/css/*.css',
+        file: './bower_components/bootstrap/dist/css/*',
         destination: '/bootstrap/css/'
     },
     {
@@ -31,6 +36,15 @@ gulp.task('vendor', function() {
     });
 
 });
+
+// Compiling sass
+gulp.task('styles:scss', function() {
+    gulp.src('./styles/**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('public/stylesheets'));
+})
 
 gulp.task('server', function () {
     // Start the server at the beginning of the task
