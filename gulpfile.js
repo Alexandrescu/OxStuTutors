@@ -2,6 +2,36 @@
 var gulp = require('gulp');
 var server = require('gulp-express');
 
+// This is the vendor store.
+// Everything that needs copied in the public folder
+
+var vendor;
+vendor = [
+    {
+        file: './bower_components/angular/angular.js',
+        destination: '/angular/'
+    },
+    {
+        file: './bower_components/bootstrap/dist/css/*.css',
+        destination: '/bootstrap/css/'
+    },
+    {
+        file: './bower_components/bootstrap/dist/js/*.js',
+        destination: '/bootstrap/js/'
+    }
+];
+
+var vendorLocation = './public/vendor';
+
+gulp.task('vendor', function() {
+
+    vendor.forEach(function(entry) {
+       gulp.src(entry.file).
+           pipe(gulp.dest(vendorLocation + entry.destination));
+    });
+
+});
+
 gulp.task('server', function () {
     // Start the server at the beginning of the task
     server.run({
@@ -20,3 +50,5 @@ gulp.task('server', function () {
     gulp.watch(['app/images/**/*'], server.notify);
     gulp.watch(['app.js', 'routes/**/*.js'], [server.run]);
 });
+
+gulp.task('default', ['vendor', 'server']);
