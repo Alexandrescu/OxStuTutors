@@ -1,0 +1,3 @@
+# Ingoring node modules
+node_modules/
+.idea/
