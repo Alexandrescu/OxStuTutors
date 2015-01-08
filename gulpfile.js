@@ -4,6 +4,10 @@ var gulp = require('gulp');
 // Running the express
 var server = require('gulp-express');
 
+// Compressing images
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
+
 // Compiling sass
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -46,6 +50,7 @@ gulp.task('styles:scss', function() {
         .pipe(gulp.dest('public/stylesheets'));
 })
 
+// Running the express server
 gulp.task('server', function () {
     // Start the server at the beginning of the task
     server.run({
@@ -53,9 +58,11 @@ gulp.task('server', function () {
         file: './bin/www'
     });
 
+    gulp.watch(['./styles/**.*scss'], ['styles:scss']);
+
     // Restart the server when file changes
     gulp.watch(['views/**/*.jade'], server.notify);
-    gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
+    gulp.watch(['./public/stylesheets/**/*.css'], server.notify);
     //gulp.watch(['{.tmp,app}/styles/**/*.css'], ['styles:css', server.notify]);
     //Event object won't pass down to gulp.watch's callback if there's more than one of them.
     //So the correct way to use server.notify is as following:
@@ -63,6 +70,18 @@ gulp.task('server', function () {
     gulp.watch(['app/scripts/**/*.js'], ['jshint']);
     gulp.watch(['app/images/**/*'], server.notify);
     gulp.watch(['app.js', 'routes/**/*.js'], [server.run]);
+});
+
+
+// Task for compressing images
+gulp.task('imageCompression', function() {
+    return gulp.src('./media/*')
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest('./public/media/'));
 });
 
 gulp.task('default', ['vendor', 'server']);
