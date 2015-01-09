@@ -27,6 +27,10 @@ vendor = [
     {
         file: './bower_components/bootstrap/dist/js/*.js',
         destination: '/bootstrap/js/'
+    },
+    {
+        file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
+        destination: '/bootstrap/sass/'
     }
 ];
 
@@ -58,7 +62,7 @@ gulp.task('server', function () {
         file: './bin/www'
     });
 
-    gulp.watch(['./styles/**.*scss'], ['styles:scss']);
+    gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
 
     // Restart the server when file changes
     gulp.watch(['views/**/*.jade'], server.notify);
