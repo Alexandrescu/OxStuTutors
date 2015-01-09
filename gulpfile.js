@@ -84,4 +84,4 @@ gulp.task('imageCompression', function() {
         .pipe(gulp.dest('./public/media/'));
 });
 
-gulp.task('default', ['vendor', 'server']);
+gulp.task('default', ['styles:scss', 'vendor', 'server']);

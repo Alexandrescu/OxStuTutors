@@ -1,0 +1,18 @@
+.jumbotron {
+  background-image: url('/media/oxford.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+
+  h1 {
+    font-weight: bold;
+  }
+}
+
+.panel h3 {
+  margin-top: 0;
+}

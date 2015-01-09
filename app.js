@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes are matched by order of creation.
+// JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
 app.use('/users', users);
 

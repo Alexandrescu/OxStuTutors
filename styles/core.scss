@@ -1,0 +1,92 @@
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  padding-top: 50px;
+}
+
+body .page {
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2 {
+  letter-spacing: -1px;
+}
+
+fieldset {
+  min-width: 0;
+  margin-bottom: 20px;
+}
+
+table thead th {
+  background-color: #ddd;
+}
+
+select, textarea, input, .form-control {
+  font-size: 16px; //ios input zoom prevention hack
+}
+
+.dropdown-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 12px;
+}
+
+.footer {
+  margin-top: 50px;
+  color: #999;
+
+  .container {
+    border-top: 1px solid #ccc;
+    padding: 20px 5px 20px 5px;
+    border-radius: 4px;
+  }
+  a, a:visited {
+    color: #999;
+  }
+  .links {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      padding-right: 10px;
+      margin-right: 10px;
+      list-style: none;
+      border-right: 1px dotted #999;
+    }
+    li:last-child {
+      padding-right: 0;
+      margin-right: 0;
+      border: none;
+    }
+  }
+}
+
+.ajax-spinner {
+  position: absolute;
+  z-index: 999;
+  display: none;
+  padding: 5px;
+  font-size: inherit;
+  line-height: 11px;
+  background-color: #ccc;
+  border-radius: 4px;
+
+  img {
+    width: inherit;
+    height: inherit;
+    margin: 0;
+  }
+}​
+
+ .force-wrap {
+   white-space: pre-wrap; /* css-3 */
+   white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+   white-space: -pre-wrap; /* Opera 4-6 */
+   white-space: -o-pre-wrap; /* Opera 7 */
+   word-wrap: break-word; /* Internet Explorer 5.5+ */
+ }
