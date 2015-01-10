@@ -3,6 +3,9 @@ var gulp = require('gulp');
 
 // Running the express
 var server = require('gulp-express');
+var serverOptions = {
+    file: './bin/www'
+}
 
 // Compressing images
 var imagemin = require('gulp-imagemin');
@@ -52,16 +55,15 @@ gulp.task('styles:scss', function() {
         .pipe(sass())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/stylesheets'));
-})
+});
+
+gulp.task('express-run', function() {
+    // Start the server at the beginning of the task
+    server.run(serverOptions);
+});
 
 // Running the express server
 gulp.task('server', function () {
-    // Start the server at the beginning of the task
-    server.run({
-        // file: 'app.js'
-        file: './bin/www'
-    });
-
     gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
 
     // Restart the server when file changes
@@ -88,4 +90,4 @@ gulp.task('imageCompression', function() {
         .pipe(gulp.dest('./public/media/'));
 });
 
-gulp.task('default', ['styles:scss', 'vendor', 'server']);
+gulp.task('default', ['styles:scss', 'vendor', 'server', 'express-run']);

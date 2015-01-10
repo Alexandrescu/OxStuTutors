@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 
 router.get('/users', function(req, res) {
   console.log('Users in index router\n');
+  res.send('Mock');
 });
 
 module.exports = router;
