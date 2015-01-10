@@ -11,3 +11,6 @@ sass/
 
 # [TODO] This is the imported from the other project. Will not appear in master
 imports/
+
+# Ignoring mongodb
+database/
