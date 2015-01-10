@@ -4,7 +4,9 @@ html(ng-app)
     block head
       title #{title}
     link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/index.css')
+    // CSS cascading order has this on the 3rd level of priority
+      and on equal level of priority the latter wins
+    link(rel='stylesheet', href='/stylesheets/core.css')
     script(src='/vendor/angular/angular.js')
 
     block neck
