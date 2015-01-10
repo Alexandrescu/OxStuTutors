@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var server = require('gulp-express');
 var serverOptions = {
     file: './bin/www'
-}
+};
 
 // Compressing images
 var imagemin = require('gulp-imagemin');
@@ -21,32 +21,34 @@ var vendor;
 vendor = [
     {
         file: './bower_components/angular/angular.js',
-        destination: '/angular/'
+        destination: './public/vendor/angular/'
     },
     {
         file: './bower_components/bootstrap/dist/css/*',
-        destination: '/bootstrap/css/'
+        destination: './public/vendor/bootstrap/css/'
     },
     {
         file: './bower_components/bootstrap/dist/js/*.js',
-        destination: '/bootstrap/js/'
+        destination: './public/vendor/bootstrap/js/'
     },
     {
         file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
-        destination: '/bootstrap/sass/'
+        destination: './sass/'
     }
 ];
-
-var vendorLocation = './public/vendor';
 
 gulp.task('vendor', function() {
 
     vendor.forEach(function(entry) {
        gulp.src(entry.file).
-           pipe(gulp.dest(vendorLocation + entry.destination));
+           pipe(gulp.dest(entry.destination));
     });
-
 });
+
+// TODO: Implement task dependency on gulp styles:scss
+// At the moment styles:scss will crash if I call it without vendor first.
+// Tried using the callback method in vendor but I reckon there's more to be done
+// when I am running several streams.
 
 // Compiling sass
 gulp.task('styles:scss', function() {
@@ -57,13 +59,14 @@ gulp.task('styles:scss', function() {
         .pipe(gulp.dest('public/stylesheets'));
 });
 
-gulp.task('express-run', function() {
+gulp.task('express-run', function(cb) {
     // Start the server at the beginning of the task
     server.run(serverOptions);
+    cb();
 });
 
 // Running the express server
-gulp.task('server', function () {
+gulp.task('server', ['express-run'], function () {
     gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
 
     // Restart the server when file changes
@@ -75,7 +78,7 @@ gulp.task('server', function () {
 
     gulp.watch(['app/scripts/**/*.js'], ['jshint']);
     gulp.watch(['app/images/**/*'], server.notify);
-    gulp.watch(['app.js', 'routes/**/*.js'], [server.run]);
+    gulp.watch(['app.js', 'routes/**/*.js'], ['express-run']);
 });
 
 
@@ -90,4 +93,6 @@ gulp.task('imageCompression', function() {
         .pipe(gulp.dest('./public/media/'));
 });
 
-gulp.task('default', ['styles:scss', 'vendor', 'server', 'express-run']);
+gulp.task('build', ['imageCompression', 'vendor']);
+
+gulp.task('default', ['styles:scss', 'server']);
