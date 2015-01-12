@@ -6,24 +6,32 @@ extends ../layouts/layout
 block head
   title Sign Up
 
+block neck
+  script(src='/javascripts/signup/index.js')
+
 block body
   div.row
      div.col-sm-12
        div.page-header
          h1 Sign Up
 
-       div#signup
-       form
-         div.form-group.bnt-group
-           label.btn.btn-primary
-         div.form-group
-           label.control-label Pick a Username:
-           input.form-control(type='text', name='username', placeholder='Username')
-         div.form-group
-           label.control-label Enter your email:
-           input.form-control(type='text', name='email', placeholder='Email')
-         div.form-group
-           label.control-label Password:
-           input.form-control(type='password', name='password', placeholder='Password')
-         div.form-group
-           button.btn.btn-primary.btn-signup(type='button') Create account
+       div#signup(ng-controller='SignUpCtrl')
+         form
+           div.form-group.bnt-group
+             span.control-label(style='margin-right:10px') I want to:
+             span.btn.btn-primary(ng-model='user.type', btn-radio="'Client'", style='margin-right:10px') Find a tutor
+             span.btn.btn-primary(ng-model='user.type', btn-radio="'Tutor'") Become a tutor
+           div(ng-show='user.type')
+             div.form-group
+               label.control-label Pick a Username:
+               input.form-control(type='text', name='username', placeholder='Username', ng-model='user.name')
+             div.form-group
+               label.control-label Enter your email:
+               input.form-control(type='text', name='email', placeholder='Email', ng-model='user.email')
+             div.form-group
+               label.control-label Password:
+               input.form-control(type='password', name='password', placeholder='Password', ng-model='user.password')
+             div.form-group
+               button.btn.btn-primary.btn-signup(type='button') Create account
+             div
+               {{ user | json }}

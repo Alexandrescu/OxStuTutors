@@ -7,6 +7,7 @@ bower_components/
 public/vendor/
 public/stylesheets/
 public/media/
+public/javascripts/
 sass/
 
 # [TODO] This is the imported from the other project. Will not appear in master
