@@ -77,8 +77,9 @@ gulp.task('server', ['express-run'], function () {
     //So the correct way to use server.notify is as following:
 
     gulp.watch(['app/scripts/**/*.js'], ['jshint']);
-    gulp.watch(['app/images/**/*'], server.notify);
-    gulp.watch(['app.js', 'routes/**/*.js'], ['express-run']);
+
+    gulp.watch(['./routes/**/*.js'], server.notify);
+    gulp.watch(['app.js', 'passport.js', './routes/**/*.js'], ['express-run']);
 });
 
 
