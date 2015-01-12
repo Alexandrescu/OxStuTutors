@@ -47,7 +47,6 @@ app.workflow = require('./module/workflow');
 // Routes in files
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var login = require('./routes/login');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.

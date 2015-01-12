@@ -16,15 +16,15 @@ block body
          h1 Sign Up
 
        div#signup(ng-controller='SignUpCtrl')
-         form
+         form(ng-submit='submit()')
            div.form-group.bnt-group
              span.control-label(style='margin-right:10px') I want to:
-             span.btn.btn-primary(ng-model='user.type', btn-radio="'Client'", style='margin-right:10px') Find a tutor
-             span.btn.btn-primary(ng-model='user.type', btn-radio="'Tutor'") Become a tutor
-           div(ng-show='user.type')
+             span.btn.btn-primary(ng-model='user.role', btn-radio="'Client'", style='margin-right:10px') Find a tutor
+             span.btn.btn-primary(ng-model='user.role', btn-radio="'Tutor'") Become a tutor
+           div(ng-show='user.role')
              div.form-group
                label.control-label Pick a Username:
-               input.form-control(type='text', name='username', placeholder='Username', ng-model='user.name')
+               input.form-control(type='text', name='username', placeholder='Username', ng-model='user.username')
              div.form-group
                label.control-label Enter your email:
                input.form-control(type='text', name='email', placeholder='Email', ng-model='user.email')
@@ -32,6 +32,6 @@ block body
                label.control-label Password:
                input.form-control(type='password', name='password', placeholder='Password', ng-model='user.password')
              div.form-group
-               button.btn.btn-primary.btn-signup(type='button') Create account
+               button.btn.btn-primary.btn-signup(type='submit') Create account
              div
                {{ user | json }}

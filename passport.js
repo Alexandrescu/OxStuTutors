@@ -44,11 +44,13 @@ module.exports = function(app, passport) {
         });
     }
 
-
+    /*
     passport.use(new LocalStrategy(
         function(username, password, done) {
             passAuthenticate(username, password, done);
         }));
+        */
+    passport.use(User.createStrategy());
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
 

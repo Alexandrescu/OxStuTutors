@@ -6,7 +6,11 @@ var passportLocalMongoose = require('passport-local-mongoose');
 // Username, hash, salt and password are in the care of the plugin
 // TODO: Get rid of dependency
 
-var User = new Schema({});
+var User = new Schema({
+    username: String,
+    role: String,
+    email: String
+});
 
 User.plugin(passportLocalMongoose);
 
