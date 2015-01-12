@@ -1,5 +1,5 @@
 doctype html
-html(ng-app)
+html(ng-app='oxstututors')
   head
     block head
       title #{title}
@@ -7,7 +7,11 @@ html(ng-app)
     // CSS cascading order has this on the 3rd level of priority
       and on equal level of priority the latter wins
     link(rel='stylesheet', href='/stylesheets/core.css')
-    script(src='/vendor/angular/angular.js')
+    // Importing angular and angular app
+    // TODO decide what to do with angular modules
+    // script(src='/vendor/angular/angular.js')
+    script(src='/javascripts/allangular.js')
+    script(src='/javascripts/app.js')
 
     block neck
 
@@ -36,7 +40,7 @@ html(ng-app)
               li: a(href='/login/')
                 i.fa.fa-user
                 | Sign In
-    div.page
+    div.page.container
       block body
 
     div.footer

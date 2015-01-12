@@ -15,6 +15,9 @@ var pngquant = require('imagemin-pngquant');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
+// Concatenating files
+var concat = require('gulp-concat');
+
 // This is the vendor store.
 // Everything that needs copied in the public folder
 var vendor;
@@ -59,6 +62,24 @@ gulp.task('styles:scss', function() {
         .pipe(gulp.dest('public/stylesheets'));
 });
 
+// Moving javascript
+// TODO: Add minify uglify jshint etc.
+gulp.task('js', function() {
+    gulp.src('./source/**/*.js')
+        .pipe(gulp.dest('./public/javascripts'));
+});
+
+gulp.task('angular', function() {
+    console.log('Doing angular');
+
+    gulp.src([
+        './bower_components/angular/angular.js',
+        './bower_components/angular-bootstrap/ui-bootstrap.js'])
+        .pipe(concat('allangular.js'))
+        .pipe(gulp.dest('./public/javascripts/'));
+});
+
+// This is a bug fix
 gulp.task('express-run', function(cb) {
     // Start the server at the beginning of the task
     server.run(serverOptions);
@@ -68,10 +89,12 @@ gulp.task('express-run', function(cb) {
 // Running the express server
 gulp.task('server', ['express-run'], function () {
     gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
+    gulp.watch(['./source/**/*.js'], ['js']);
 
     // Restart the server when file changes
     gulp.watch(['views/**/*.jade'], server.notify);
     gulp.watch(['./public/stylesheets/**/*.css'], server.notify);
+    gulp.watch(['./public/source/**/*.js'], server.notify);
     //gulp.watch(['{.tmp,app}/styles/**/*.css'], ['styles:css', server.notify]);
     //Event object won't pass down to gulp.watch's callback if there's more than one of them.
     //So the correct way to use server.notify is as following:
@@ -94,6 +117,6 @@ gulp.task('imageCompression', function() {
         .pipe(gulp.dest('./public/media/'));
 });
 
-gulp.task('build', ['imageCompression', 'vendor']);
+gulp.task('build', ['imageCompression', 'vendor', 'angular']);
 
 gulp.task('default', ['styles:scss', 'server']);
