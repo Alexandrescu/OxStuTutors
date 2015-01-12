@@ -39,6 +39,11 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Mongoose
+mongoose.connect('mongodb://localhost/oxstu');
+
+app.workflow = require('./module/workflow');
+
 // Routes in files
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -47,7 +52,6 @@ var login = require('./routes/login');
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
-app.use('/', login);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -83,8 +87,5 @@ app.use(function(err, req, res, next) {
 
 // Passport config
 require('./passport.js')(app, passport);
-
-// Mongoose
-mongoose.connect('mongodb://localhost/oxstu');
 
 module.exports = app;
