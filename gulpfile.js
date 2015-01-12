@@ -102,7 +102,7 @@ gulp.task('server', ['express-run'], function () {
     gulp.watch(['app/scripts/**/*.js'], ['jshint']);
 
     gulp.watch(['./routes/**/*.js'], server.notify);
-    gulp.watch(['app.js', 'passport.js', './routes/**/*.js'], ['express-run']);
+    gulp.watch(['app.js', 'passport.js', './routes/**/*.js', 'views/**/*.js'], ['express-run']);
 });
 
 
