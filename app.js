@@ -5,9 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Required by passport
+var session = require('express-session');
+var http = require('http');
+var mongoose = require('mongoose');
+var passport = require('passport');
 
+// Required by livereload - not sure if still needed
+// TODO Test if this is needed
 var app = module.exports.app = exports.app = express();
 app.use(require('connect-livereload')());
 
@@ -20,12 +25,29 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('OxStuTutors'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// From passport tutorial
+var sessionOptions = {
+    secret: 'OxStuTutors',
+    resave: false,
+    saveUninitialized: true
+};
+
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes in files
+var routes = require('./routes/index');
+var users = require('./routes/users');
+var login = require('./routes/login');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
+app.use('/', login);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -59,5 +81,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// Passport config
+require('./passport.js')(app, passport);
+
+// Mongoose
+mongoose.connect('mongodb://localhost/oxstu');
 
 module.exports = app;

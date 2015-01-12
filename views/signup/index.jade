@@ -1,0 +1,28 @@
+//
+   Created by Andrei on 12/01/15.
+
+extends ../layouts/layout
+
+block head
+  title Sign Up
+
+block body
+  div.row
+    div.page-header
+      h1 Sign Up
+
+    div#signup
+    form
+      div.form-group.bnt-group
+        label.btn.btn-primary
+      div.form-group
+        label.control-label Pick a Username:
+        input.form-control(type='text', name='username', placeholder='Username')
+      div.form-group
+        label.control-label Enter your email:
+        input.form-control(type='text', name='email', placeholder='Email')
+      div.form-group
+        label.control-label Password:
+        input.form-control(type='password', name='password', placeholder='Password')
+      div.form-group
+        button.btn.btn-primary.btn-signup(type='button') Create account
