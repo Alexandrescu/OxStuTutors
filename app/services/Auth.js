@@ -35,7 +35,9 @@ angular.module('oxstututors')
             },
 
             createUser: function(userinfo, callback) {
+                // angular.noop - function that doesn't do anything
                 var cb = callback || angular.noop;
+
                 User.save(userinfo,
                     function(user) {
                         $rootScope.currentUser = user;

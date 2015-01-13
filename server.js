@@ -48,8 +48,8 @@ mongoose.connect('mongodb://localhost/oxstu');
 app.workflow = require('./module/workflow');
 
 // Routes in files
-var routes = require('./routes/index');
-var authRoutes = require('./routes/auth');
+var routes = require('./lib/routes/index');
+var authRoutes = require('./lib/routes/auth');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.

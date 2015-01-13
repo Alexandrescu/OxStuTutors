@@ -10,16 +10,20 @@ ox.controller('SignUpCtrl', function($scope, Auth){
 
     $scope.submit = function(form) {
         Auth.createUser({
-                email: $scope.user.email,
                 username: $scope.user.username,
-                password: $scope.user.password
+                password: $scope.user.password,
+                email: $scope.user.email,
+                role: $scope.user.role
             },
             function(err) {
                 $scope.errors = {};
 
-                if (!err) {
+                if (!err)
+                {
                     $location.path('/');
-                } else {
+                }
+                else
+                {
                     angular.forEach(err.errors, function(error, field) {
                         form[field].$setValidity('mongoose', false);
                         $scope.errors[field] = error.type;
