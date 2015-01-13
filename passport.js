@@ -2,7 +2,7 @@
 
 module.exports = function(app, passport) {
     var LocalStrategy = require('passport-local').Strategy;
-    var User = require('./models/User.js');
+    var User = require('./lib/models/User.js');
 
 
     // Function to initiate the authentication.

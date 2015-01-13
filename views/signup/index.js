@@ -1,6 +1,6 @@
 // This file contains the logic for these routes
 var passport = require('passport');
-var User = require('../../models/User');
+var User = require('.././User');
 
 'use strict';
 
