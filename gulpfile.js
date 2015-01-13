@@ -65,7 +65,11 @@ gulp.task('styles:scss', function() {
 // Moving javascript
 // TODO: Add minify uglify jshint etc.
 gulp.task('js', function() {
-    gulp.src('./source/**/*.js')
+    gulp.src('./app/controllers/*')
+        .pipe(concat('controllers.js'))
+        .pipe(gulp.dest('./public/javascripts/'));
+
+    gulp.src('./app/app.js')
         .pipe(gulp.dest('./public/javascripts'));
 });
 
@@ -74,7 +78,8 @@ gulp.task('angular', function() {
 
     gulp.src([
         './bower_components/angular/angular.js',
-        './bower_components/angular-bootstrap/ui-bootstrap.js'])
+        './bower_components/angular-bootstrap/ui-bootstrap.js',
+        './bower_components/angular-route/angular-route.js'])
         .pipe(concat('allangular.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 });
@@ -89,7 +94,7 @@ gulp.task('express-run', function(cb) {
 // Running the express server
 gulp.task('server', ['express-run'], function () {
     gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
-    gulp.watch(['./source/**/*.js'], ['js']);
+    gulp.watch(['./app/**/*.js'], ['js']);
 
     // Restart the server when file changes
     gulp.watch(['views/**/*.jade'], server.notify);
@@ -99,10 +104,10 @@ gulp.task('server', ['express-run'], function () {
     //Event object won't pass down to gulp.watch's callback if there's more than one of them.
     //So the correct way to use server.notify is as following:
 
-    gulp.watch(['app/scripts/**/*.js'], ['jshint']);
+    //gulp.watch(['app/scripts/**/*.js'], ['jshint']);
 
     gulp.watch(['./routes/**/*.js'], server.notify);
-    gulp.watch(['app.js', 'passport.js', './routes/**/*.js', 'views/**/*.js'], ['express-run']);
+    gulp.watch(['server.js', 'passport.js', './routes/**/*.js', 'views/**/*.js'], ['express-run']);
 });
 
 

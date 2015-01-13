@@ -1,3 +1,15 @@
+/**
+ * Server side:
+ * Will route the layout which is situate at '/'
+ *
+ *          and
+ *
+ * Client Side:
+ * Angular is loading different templates for each path
+ */
+
+'use strict';
+
 var express;
 express = require('express');
 
@@ -9,23 +21,12 @@ passport = require('passport');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    console.log('Index');
-    res.render('index', { title: 'Express' });
+    res.render('layouts/layout', { title: 'OxStuTutors' });
 });
 
-/* GET users listing. */
-router.get('/signup/', function(req, res) {
-    res.render('signup/index', {});
-});
-
-router.post('/signup/', require('../views/signup/index.js').init);
-
-router.get('/login/', function(req, res) {
-   res.render('login/index', { user: req.user });
-});
-
-router.post('/login/', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+/* Partials */
+router.get('/index', function(req, res) {
+    res.render('index');
 });
 
 module.exports = router;

@@ -1,3 +1,6 @@
+'use strict';
+
+// Module dependencies
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -39,19 +42,19 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Mongoose
+// Connect to the db
 mongoose.connect('mongodb://localhost/oxstu');
 
 app.workflow = require('./module/workflow');
 
 // Routes in files
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var authRoutes = require('./routes/auth');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
-app.use('/users', users);
+app.use('/auth', authRoutes);
 
 // ** Routing
 //require('./routes/index')(app, passport);
@@ -90,5 +93,7 @@ app.use(function(err, req, res, next) {
 
 // Passport config
 require('./passport.js')(app, passport);
+
+// require('./lib/config/routes')(app);
 
 module.exports = app;

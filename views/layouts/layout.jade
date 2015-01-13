@@ -12,6 +12,8 @@ html(ng-app='oxstututors')
     // script(src='/vendor/angular/angular.js')
     script(src='/javascripts/allangular.js')
     script(src='/javascripts/app.js')
+    script(src='/javascripts/controllers.js')
+    base(href='/')
 
     block neck
 
@@ -40,7 +42,7 @@ html(ng-app='oxstututors')
               li: a(href='/login/')
                 i.fa.fa-user
                 | Sign In
-    div.page.container
+    div.page.container(ng-view)
       block body
 
     div.footer
