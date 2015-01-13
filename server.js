@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 // Required by passport
 var session = require('express-session');
@@ -42,10 +43,21 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// Bootstrap models
+// This is needed to be able to initialize the controllers
+var modelsPath = path.join(__dirname, 'lib/models');
+fs.readdirSync(modelsPath).forEach(function (file) {
+    require(modelsPath + '/' + file);
+});
+
+app.workflow = require('./module/workflow');
+
 // Connect to the db
 mongoose.connect('mongodb://localhost/oxstu');
 
-app.workflow = require('./module/workflow');
+// Passport config
+require('./passport.js')(app, passport);
 
 // Routes in files
 var routes = require('./lib/routes/index');
@@ -91,8 +103,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// Passport config
-require('./passport.js')(app, passport);
 
 // require('./lib/config/routes')(app);
 
