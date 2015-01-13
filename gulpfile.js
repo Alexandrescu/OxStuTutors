@@ -69,6 +69,9 @@ gulp.task('js', function() {
         .pipe(concat('controllers.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 
+    gulp.src('./app/services/*')
+        .pipe(gulp.dest('./public/javascripts/services'));
+
     gulp.src('./app/app.js')
         .pipe(gulp.dest('./public/javascripts'));
 });
@@ -79,7 +82,9 @@ gulp.task('angular', function() {
     gulp.src([
         './bower_components/angular/angular.js',
         './bower_components/angular-bootstrap/ui-bootstrap.js',
-        './bower_components/angular-route/angular-route.js'])
+        './bower_components/angular-route/angular-route.js',
+        './bower_components/angular-resource/angular-resource.js',
+        './bower_components/angular-cookies/angular-cookies.js'])
         .pipe(concat('allangular.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 });

@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='oxstututors')
+html
   head
     block head
       title #{title}
@@ -11,13 +11,12 @@ html(ng-app='oxstututors')
     // TODO decide what to do with angular modules
     // script(src='/vendor/angular/angular.js')
     script(src='/javascripts/allangular.js')
-    script(src='/javascripts/app.js')
-    script(src='/javascripts/controllers.js')
+
     base(href='/')
 
     block neck
 
-  body
+  body(ng-app='oxstututors')
     div.navbar.navbar-default.navbar-fixed-top
       div.container
         div.navbar-header
@@ -55,3 +54,9 @@ html(ng-app='oxstututors')
         div.clearfix
     div.ajax-spinner
     block feet
+
+    script(src='/javascripts/app.js')
+    script(src='/javascripts/controllers.js')
+    script(src='/javascripts/services/Auth.js')
+    script(src='/javascripts/services/Session.js')
+    script(src='/javascripts/services/User.js')

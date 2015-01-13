@@ -3,21 +3,29 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('SignUpCtrl', ['$scope', '$http', function($scope, $http){
+ox.controller('SignUpCtrl', function($scope, Auth){
     $scope.user = {
         role: null
     };
 
-    $scope.submit = function() {
-        console.log("submit2");
+    $scope.submit = function(form) {
+        Auth.createUser({
+                email: $scope.user.email,
+                username: $scope.user.username,
+                password: $scope.user.password
+            },
+            function(err) {
+                $scope.errors = {};
 
-        $http.post('/signup/', {user: $scope.user})
-            .success(function(data, status, headers, config) {
-                console.log(data);
-                console.log('Congratulations!');
-            })
-            .error(function(data, status, headers, config){
-                console.log('Error');
-            });
+                if (!err) {
+                    $location.path('/');
+                } else {
+                    angular.forEach(err.errors, function(error, field) {
+                        form[field].$setValidity('mongoose', false);
+                        $scope.errors[field] = error.type;
+                    });
+                }
+            }
+        );
     };
-}]);
+});

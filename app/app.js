@@ -2,7 +2,9 @@
 
 angular.module('oxstututors', [
     'ui.bootstrap',
-    'ngRoute'
+    'ngRoute',
+    'ngResource',
+    'ngCookies'
 ])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
