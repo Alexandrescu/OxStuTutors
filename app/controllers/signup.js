@@ -9,6 +9,7 @@ ox.controller('SignUpCtrl', function($scope, Auth){
     };
 
     $scope.submit = function(form) {
+        console.log('Reaching');
         Auth.createUser({
                 username: $scope.user.username,
                 password: $scope.user.password,
@@ -26,7 +27,7 @@ ox.controller('SignUpCtrl', function($scope, Auth){
                 {
                     angular.forEach(err.errors, function(error, field) {
                         form[field].$setValidity('mongoose', false);
-                        $scope.errors[field] = error.type;
+                        $scope.errors[field] = error.message;
                     });
                 }
             }
