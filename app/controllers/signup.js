@@ -3,13 +3,12 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('SignUpCtrl', function($scope, Auth){
+ox.controller('SignUpCtrl', function($scope, Auth, $location){
     $scope.user = {
         role: null
     };
 
     $scope.submit = function(form) {
-        console.log('Reaching');
         Auth.createUser({
                 username: $scope.user.username,
                 password: $scope.user.password,

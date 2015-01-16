@@ -4,54 +4,43 @@ module.exports = function(app, passport) {
     var LocalStrategy = require('passport-local').Strategy;
     var User = require('./lib/models/User.js');
 
+    // Serialize sessions
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
 
-    // Function to initiate the authentication.
-    function passAuthenticate(username, password, done) {
-        // Allowing connections vis username or email.
-        // Setting up conditions for both kinds of auth.
-        var conditions;
-        if(username.indexOf('@') === -1) {
-            conditions.username = username;
-        }
-        else {
-            conditions.email = username;
-        }
+    passport.deserializeUser(function(id, done) {
+        User.findOne({ _id: id }, function (err, user) {
+            done(err, user);
+        });
+    });
 
-        // Searching in the database
-        app.db.models.User.findOne(conditions, function(err, user) {
-            if(err) {
-                return done(err);
-            }
-
-            if(!user) {
-                // User not found.
-                return done(null, false, { message: 'Unknown user' });
-            }
-
-            app.db.models.User.validatePassword(password, user.password, function(err, isValid){
-                if(err) {
+    // Use local strategy
+    passport.use(new LocalStrategy({
+            usernameField: 'username',
+            passwordField: 'password'
+        },
+        function(username, password, done) {
+            User.findOne({ username: username }, function (err, user) {
+                if (err) {
                     return done(err);
                 }
-
-                if(!isValid) {
-                    // Since creating users means no duplicate username,
-                    // someone can duplicate the user base.
-                    return done(null, false, { message: 'Invalid password'});
+                if (!user) {
+                    return done(null, false, {
+                        'errors': {
+                            'username': { type: 'Username is not registered.' }
+                        }
+                    });
                 }
-
+                if (!user.authenticate(password)) {
+                    return done(null, false, {
+                        'errors': {
+                            'password': { type: 'Password is incorrect.' }
+                        }
+                    });
+                }
                 return done(null, user);
             });
-        });
-    }
-
-    /*
-    passport.use(new LocalStrategy(
-        function(username, password, done) {
-            passAuthenticate(username, password, done);
-        }));
-        */
-    passport.use(User.createStrategy());
-    passport.serializeUser(User.serializeUser());
-    passport.deserializeUser(User.deserializeUser());
-
+        }
+    ));
 };
