@@ -10,6 +10,7 @@ module.exports = function(app, passport) {
     });
 
     passport.deserializeUser(function(id, done) {
+        // TODO use findbyid
         User.findOne({ _id: id }, function (err, user) {
             done(err, user);
         });

@@ -1,18 +1,15 @@
 'use strict';
 
 angular.module('oxstututors')
-    .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
-        // User is saved in the cookie store to "login"
-        $rootScope.currentUser = $cookieStore.get('user') || null;
-        $cookieStore.remove('user');
-
+    .factory('Auth', function Auth($location, $rootScope, Session, User) {
         return {
 
             login: function(provider, user, callback) {
                 var cb = callback || angular.noop;
+
                 Session.save({
                     provider: provider,
-                    email: user.email,
+                    username: user.username,
                     password: user.password,
                     rememberMe: user.rememberMe
                 }, function(user) {

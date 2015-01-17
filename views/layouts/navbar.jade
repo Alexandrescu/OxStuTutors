@@ -1,4 +1,4 @@
-div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl')
+div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
   div.container
     div.navbar-header
       a.navbar-brand(href='/')
@@ -14,11 +14,13 @@ div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl')
         li: a(href='/signup/') Sign Up
         li: a(href='/contact/') Contact
       ul.nav.navbar-nav.navbar-right(ng-hide='currentUser')
-        li: a(href='/signin/')
+        li: a(href='/login/')
           i.fa.fa-user
           | Sign In
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
         li: a(href='/auth/users/')
           i.fa.fa-user
           | {{ currentUser.username }}
-        li: a(ng-click='logout()') Log out
+        li: a(ng-click='logout()')
+          i.fa.fa-user
+          | Log out
