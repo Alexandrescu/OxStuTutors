@@ -1,0 +1,24 @@
+div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl')
+  div.container
+    div.navbar-header
+      a.navbar-brand(href='/')
+        span.navbar-brand-label #{projectName}
+      button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    div.navbar-collapse.my-navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li: a(href='/') Home
+        li: a(href='/about/') About
+        li: a(href='/signup/') Sign Up
+        li: a(href='/contact/') Contact
+      ul.nav.navbar-nav.navbar-right(ng-hide='currentUser')
+        li: a(href='/signin/')
+          i.fa.fa-user
+          | Sign In
+      ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
+        li: a(href='/auth/users/')
+          i.fa.fa-user
+          | {{ currentUser.username }}
+        li: a(ng-click='logout()') Log out
