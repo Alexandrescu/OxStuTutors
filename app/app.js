@@ -17,7 +17,14 @@ angular.module('oxstututors', [
                 templateUrl: '/auth/signup',
                 controller: 'SignUpCtrl'
             })
-            .otherwise({});
+            .when('/login/', {
+                templateUrl: '/auth/login',
+                controller: 'LoginCtrl'
+            })
+            .otherwise({
+                // Should redirect to an error page
+                redirectTo: '/'
+            });
 
         $locationProvider.html5Mode(true);
     })
