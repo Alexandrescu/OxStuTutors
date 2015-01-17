@@ -105,7 +105,7 @@ gulp.task('server', ['express-run'], function () {
     // Restart the server when file changes
     gulp.watch(['views/**/*.jade'], server.notify);
     gulp.watch(['./public/stylesheets/**/*.css'], server.notify);
-    gulp.watch(['./public/source/**/*.js'], server.notify);
+    gulp.watch(['./public/**/*.js'], server.notify);
     //gulp.watch(['{.tmp,app}/styles/**/*.css'], ['styles:css', server.notify]);
     //Event object won't pass down to gulp.watch's callback if there's more than one of them.
     //So the correct way to use server.notify is as following:
