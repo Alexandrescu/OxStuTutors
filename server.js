@@ -1,13 +1,22 @@
+'use strict';
+
+// Module dependencies
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Required by passport
+var session = require('express-session');
+var http = require('http');
+var mongoose = require('mongoose');
+var passport = require('passport');
 
+// Required by livereload - not sure if still needed
+// TODO Test if this is needed
 var app = module.exports.app = exports.app = express();
 app.use(require('connect-livereload')());
 
@@ -20,13 +29,48 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('OxStuTutors'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// From passport tutorial
+var sessionOptions = {
+    secret: 'OxStuTutors',
+    resave: false,
+    saveUninitialized: true
+};
+
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Bootstrap models
+// This is needed to be able to initialize the controllers
+var modelsPath = path.join(__dirname, 'lib/models');
+fs.readdirSync(modelsPath).forEach(function (file) {
+    require(modelsPath + '/' + file);
+});
+
+app.workflow = require('./module/workflow');
+
+// Connect to the db
+mongoose.connect('mongodb://localhost/oxstu');
+
+// Passport config
+require('./passport.js')(app, passport);
+
+// Routes in files
+var routes = require('./lib/routes/index');
+var authRoutes = require('./lib/routes/auth');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
-app.use('/users', users);
+app.use('/auth', authRoutes);
+
+// ** Routing
+//require('./routes/index')(app, passport);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,5 +103,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+// require('./lib/config/routes')(app);
 
 module.exports = app;

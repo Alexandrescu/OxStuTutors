@@ -1,40 +1,24 @@
 doctype html
-html(ng-app)
+html
   head
     block head
       title #{title}
     link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/index.css')
-    script(src='/vendor/angular/angular.js')
+    // CSS cascading order has this on the 3rd level of priority
+      and on equal level of priority the latter wins
+    link(rel='stylesheet', href='/stylesheets/core.css')
+    // Importing angular and angular app
+    // TODO decide what to do with angular modules
+    // script(src='/vendor/angular/angular.js')
+    script(src='/javascripts/allangular.js')
+
+    base(href='/')
 
     block neck
 
-  body
-    div.navbar.navbar-default.navbar-fixed-top
-      div.container
-        div.navbar-header
-          a.navbar-brand(href='/')
-            span.navbar-brand-label #{projectName}
-          button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-        div.navbar-collapse.my-navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li: a(href='/') Home
-            li: a(href='/about/') About
-            li: a(href='/signup/') Sign Up
-            li: a(href='/contact/') Contact
-          ul.nav.navbar-nav.navbar-right
-            if user && user.username
-              li: a(href='#{user.defaultReturnUrl}')
-                i.fa.fa-user
-                | #{user.username}
-            else
-              li: a(href='/login/')
-                i.fa.fa-user
-                | Sign In
-    div.page
+  body(ng-app='oxstututors')
+    include navbar
+    div.page.container(ng-view)
       block body
 
     div.footer
@@ -42,8 +26,14 @@ html(ng-app)
         span.copyright.pull-right
           | &#169; #{copyrightYear} #{copyrightName}
         ul.links
-          li: a(href='/') Home
+          li: a(href='/') Home {{currentuser}}
           li: a(href='/contact/') Contact
         div.clearfix
     div.ajax-spinner
     block feet
+
+    script(src='/javascripts/app.js')
+    script(src='/javascripts/controllers.js')
+    script(src='/javascripts/services/Auth.js')
+    script(src='/javascripts/services/Session.js')
+    script(src='/javascripts/services/User.js')

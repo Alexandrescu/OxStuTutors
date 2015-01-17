@@ -1,3 +1,5 @@
+@import '../sass/bootstrap/_mixins.scss';
+
 html, body {
   overflow-x: hidden;
   height: 100%;
@@ -5,11 +7,10 @@ html, body {
 
 body {
   padding-top: 50px;
-}
-
-body .page {
-  width: 100%;
-  height: 100%;
+  .page {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 h1, h2 {
@@ -29,10 +30,40 @@ select, textarea, input, .form-control {
   font-size: 16px; //ios input zoom prevention hack
 }
 
+.input-group-btn .btn-group:first-of-type .btn {
+  @include border-left-radius(0);
+}
+
 .dropdown-header {
   font-weight: bold;
   text-transform: uppercase;
   padding-left: 12px;
+}
+
+.navbar {
+  @extend .navbar;
+  @include box-shadow(0 2px 5px rgba(0, 0, 0, .125));
+
+  .navbar-brand {
+    @extend .navbar-brand;
+
+    font-weight: bold;
+    color: #003d5f;
+    position: relative;
+    display: inline-block;
+
+    .navbar-logo {
+      position: absolute;
+      top: 10px;
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  .navbar-brand-label {
+    @extend .navbar-brand-label;
+    margin-left: 35px;
+  }
 }
 
 .footer {

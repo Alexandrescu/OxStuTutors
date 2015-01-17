@@ -1,15 +1,29 @@
+@import '../sass/bootstrap/_variables.scss';
+
 .jumbotron {
   background-image: url('/media/oxford.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 
-  width: 100%;
-  height: 100%;
+  width: calc(100%);
+  height: calc(100%);
 
   text-align: center;
 
   h1 {
     font-weight: bold;
+  }
+
+  @media (max-width: $screen-tablet) {
+    h1 {
+      font-size: ($font-size-base * 3.5);
+    }
+  }
+
+  @media (min-width: $screen-tablet) {
+    h1 {
+      font-size: ($font-size-base * 7.5);
+    }
   }
 }
 
