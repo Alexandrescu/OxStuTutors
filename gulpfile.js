@@ -84,7 +84,8 @@ gulp.task('angular', function() {
         './bower_components/angular-bootstrap/ui-bootstrap.js',
         './bower_components/angular-route/angular-route.js',
         './bower_components/angular-resource/angular-resource.js',
-        './bower_components/angular-cookies/angular-cookies.js'])
+        './bower_components/angular-cookies/angular-cookies.js',
+        './bower_components/angular-http-auth/src/http-auth-interceptor.js'])
         .pipe(concat('allangular.js'))
         .pipe(gulp.dest('./public/javascripts/'));
 });
