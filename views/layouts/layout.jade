@@ -32,15 +32,14 @@ html
             li: a(href='/about/') About
             li: a(href='/signup/') Sign Up
             li: a(href='/contact/') Contact
-          ul.nav.navbar-nav.navbar-right
-            if user && user.username
-              li: a(href='#{user.defaultReturnUrl}')
-                i.fa.fa-user
-                | #{user.username}
-            else
-              li: a(href='/login/')
-                i.fa.fa-user
-                | Sign In
+          ul.nav.navbar-nav.navbar-right(ng-hide='currentUser')
+            li: a(href='/login/')
+              i.fa.fa-user
+              | Sign In
+          ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
+            li: a(href='/auth/users/')
+              i.fa.fa-user
+              | {{ currentUser.username }}
     div.page.container(ng-view)
       block body
 
@@ -49,7 +48,7 @@ html
         span.copyright.pull-right
           | &#169; #{copyrightYear} #{copyrightName}
         ul.links
-          li: a(href='/') Home
+          li: a(href='/') Home {{currentuser}}
           li: a(href='/contact/') Contact
         div.clearfix
     div.ajax-spinner
