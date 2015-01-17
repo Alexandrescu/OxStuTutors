@@ -19,8 +19,6 @@ div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
           | Sign In
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
         li: a(href='/auth/users/')
-          i.fa.fa-user
           | {{ currentUser.username }}
-        li: a(ng-click='logout()')
-          i.fa.fa-user
-          | Log out
+        li: a(ng-click='logout()', href='#')
+          | Logout
