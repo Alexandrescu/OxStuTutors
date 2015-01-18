@@ -15,10 +15,20 @@ var http = require('http');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-// Required by livereload - not sure if still needed
-// TODO Test if this is needed
-var app = module.exports.app = exports.app = express();
-app.use(require('connect-livereload')());
+
+var app = express();
+var env = process.env.NODE_ENV || 'development';
+// This will be generated
+var config;
+if ('production' === env) {
+    config = require('./lib/config/config_production');
+}
+else {
+    // should be development - not necessary tho
+
+    app.use(require('connect-livereload')());
+    config = require('./lib/config/config_development');
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +42,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('OxStuTutors'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// *** Configuring Passport js
+
 // From passport tutorial
 var sessionOptions = {
     secret: 'OxStuTutors',
@@ -43,6 +55,12 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Passport config
+require('./passport.js')(app, passport);
+
+// *** Connecting to Mongo
+mongoose.connect(config.mongodb.uri);
+
 
 // Bootstrap models
 // This is needed to be able to initialize the controllers
@@ -51,15 +69,7 @@ fs.readdirSync(modelsPath).forEach(function (file) {
     require(modelsPath + '/' + file);
 });
 
-app.workflow = require('./module/workflow');
-
-// Connect to the db
-mongoose.connect('mongodb://localhost/oxstu');
-
-// Passport config
-require('./passport.js')(app, passport);
-
-// Routes in files
+// *** Routes
 var routes = require('./lib/routes/index');
 var authRoutes = require('./lib/routes/auth');
 
@@ -107,3 +117,9 @@ app.use(function(err, req, res, next) {
 // require('./lib/config/routes')(app);
 
 module.exports = app;
+
+app.set('port', config.port);
+
+app.listen(app.get('port'), function() {
+    //debug('Express server listening on port ' + server.address().port);
+});

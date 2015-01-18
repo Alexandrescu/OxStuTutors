@@ -4,7 +4,7 @@ var gulp = require('gulp');
 // Running the express
 var server = require('gulp-express');
 var serverOptions = {
-    file: './bin/www'
+    file: './server.js'
 };
 
 // Compressing images
@@ -41,11 +41,14 @@ vendor = [
 ];
 
 gulp.task('vendor', function() {
-
+    var last;
     vendor.forEach(function(entry) {
-       gulp.src(entry.file).
+       last = gulp.src(entry.file).
            pipe(gulp.dest(entry.destination));
     });
+
+    // ****** THIS WORKS BECAUSE SASS IS THE LAST STREAM
+    return last;
 });
 
 // TODO: Implement task dependency on gulp styles:scss
@@ -54,7 +57,7 @@ gulp.task('vendor', function() {
 // when I am running several streams.
 
 // Compiling sass
-gulp.task('styles:scss', function() {
+gulp.task('styles:scss', ['vendor'], function() {
     gulp.src('./styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -77,8 +80,6 @@ gulp.task('js', function() {
 });
 
 gulp.task('angular', function() {
-    console.log('Doing angular');
-
     gulp.src([
         './bower_components/angular/angular.js',
         './bower_components/angular-bootstrap/ui-bootstrap.js',
@@ -91,29 +92,33 @@ gulp.task('angular', function() {
 });
 
 // This is a bug fix
-gulp.task('express-run', function(cb) {
+gulp.task('express:run', function(cb) {
     // Start the server at the beginning of the task
     server.run(serverOptions);
     cb();
 });
 
 // Running the express server
-gulp.task('server', ['express-run'], function () {
+gulp.task('server', ['express:run'], function () {
     gulp.watch(['./styles/**/*.scss'], ['styles:scss']);
     gulp.watch(['./app/**/*.js'], ['js']);
 
     // Restart the server when file changes
-    gulp.watch(['views/**/*.jade'], server.notify);
-    gulp.watch(['./public/stylesheets/**/*.css'], server.notify);
-    gulp.watch(['./public/**/*.js'], server.notify);
+    gulp.watch(
+        [
+            'views/**/*.jade',
+            './public/stylesheets/**/*.css',
+            './public/**/*.js'
+        ], server.notify);
+
+
     //gulp.watch(['{.tmp,app}/styles/**/*.css'], ['styles:css', server.notify]);
     //Event object won't pass down to gulp.watch's callback if there's more than one of them.
     //So the correct way to use server.notify is as following:
 
     //gulp.watch(['app/scripts/**/*.js'], ['jshint']);
 
-    gulp.watch(['./routes/**/*.js'], server.notify);
-    gulp.watch(['server.js', 'passport.js', './lib/**/*.js', 'views/**/*.js'], ['express-run']);
+    gulp.watch(['server.js', 'passport.js', './lib/**/*.js'], ['express:run']);
 });
 
 
@@ -128,6 +133,6 @@ gulp.task('imageCompression', function() {
         .pipe(gulp.dest('./public/media/'));
 });
 
-gulp.task('build', ['imageCompression', 'vendor', 'angular']);
+gulp.task('build', ['imageCompression', 'vendor', 'angular', 'js', 'styles:scss']);
 
-gulp.task('default', ['styles:scss', 'server']);
+gulp.task('default', ['server']);
