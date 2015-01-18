@@ -113,11 +113,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-// require('./lib/config/routes')(app);
-
-module.exports = app;
-
 app.set('port', config.port);
 
 app.listen(app.get('port'), function() {
