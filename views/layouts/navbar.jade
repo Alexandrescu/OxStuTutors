@@ -10,15 +10,15 @@ div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
     div.navbar-collapse.my-navbar-collapse.collapse
       ul.nav.navbar-nav
         li: a(href='/') Home
+        li: a(href='/search/') Search
         li: a(href='/about/') About
-        li: a(href='/signup/') Sign Up
         li: a(href='/contact/') Contact
       ul.nav.navbar-nav.navbar-right(ng-hide='currentUser')
         li: a(href='/login/')
           i.fa.fa-user
           | Sign In
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
-        li: a(href='/auth/users/')
+        li: a(href='/users/{{currentUser._id}}')
           | {{ currentUser.username }}
         li: a(ng-click='logout()', href='#')
           | Logout
