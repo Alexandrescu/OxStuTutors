@@ -20,6 +20,10 @@ angular.module('oxstututors', [
                 templateUrl: '/auth/login',
                 controller: 'LoginCtrl'
             })
+            .when('/users/:userId/', {
+                templateUrl: '/users/',
+                controller: 'UsersCtrl'
+            })
             .otherwise({
                 // Should redirect to an error page
                 redirectTo: '/'

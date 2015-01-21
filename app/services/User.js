@@ -6,7 +6,7 @@
 
 angular.module('oxstututors')
     .factory('User', function ($resource) {
-        return $resource('/auth/users/:id/', {},
+        return $resource('/auth/users/:userId/', {},
             {
                 'update': {
                     method:'PUT'
