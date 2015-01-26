@@ -6,12 +6,17 @@ html
     link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.css')
     // CSS cascading order has this on the 3rd level of priority
       and on equal level of priority the latter wins
-    link(rel='stylesheet', href='/stylesheets/core.css')
     // Importing angular and angular app
     // TODO decide what to do with angular modules
     // script(src='/vendor/angular/angular.js')
-    script(src='/javascripts/allangular.js')
 
+    script(src='http://hammerjs.github.io/dist/hammer.min.js')
+    script(src='/javascripts/allangular.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js')
+    script(src='/vendor/material/angular-material.js')
+    link(rel='stylesheet', href='/vendor/material/angular-material.css')
+    link(rel='stylesheet', href='/stylesheets/core.css')
     base(href='/')
 
     block neck

@@ -37,6 +37,10 @@ vendor = [
     {
         file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
         destination: './sass/'
+    },
+    {
+        file: './bower_components/angular-material/angular-material.*',
+        destination: './public/vendor/material/'
     }
 ];
 
