@@ -41,6 +41,10 @@ vendor = [
     {
         file: './bower_components/angular-material/angular-material.*',
         destination: './public/vendor/material/'
+    },
+    {
+        file: './bower_components/ng-flow/dist/ng-flow*js',
+        destination: './public/vendor/ngFlow/'
     }
 ];
 
@@ -61,7 +65,7 @@ gulp.task('vendor', function() {
 // when I am running several streams.
 
 // Compiling sass
-gulp.task('styles:scss', ['vendor'], function() {
+gulp.task('styles:scss', function() {
     gulp.src('./styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
