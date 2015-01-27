@@ -5,7 +5,8 @@ angular.module('oxstututors', [
     'ngRoute',
     'ngResource',
     'http-auth-interceptor',
-    'ngMaterial'
+    'ngMaterial',
+    'flow'
 ])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
