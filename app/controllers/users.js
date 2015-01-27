@@ -10,8 +10,22 @@ ox.controller('UsersCtrl', function($scope, $routeParams, User){
     }
 
     User.get({userId: $routeParams.userId}, function(profile) {
-        $scope.profile = profile;
+        $scope.profile = profile.profile;
+        $scope.username = profile.username;
         // Now you have the 'profile'
     });
+
+    // This should be included in a service
+    var nameMap = {
+        'subjects' : 'Subjects',
+        'approach' : 'My approach to teaching'
+    };
+
+    $scope.PrettyName = function(name) {
+        if(name in nameMap) {
+            return nameMap[name];
+        }
+        return name;
+    }
 
 });
