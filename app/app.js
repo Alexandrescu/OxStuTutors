@@ -25,6 +25,10 @@ angular.module('oxstututors', [
                 templateUrl: '/users/',
                 controller: 'UsersCtrl'
             })
+            .when('/editProfile/', {
+                templateUrl: '/users/edit',
+                controller: 'EditProfileCtrl'
+            })
             .otherwise({
                 // Should redirect to an error page
                 redirectTo: '/'
