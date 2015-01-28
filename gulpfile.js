@@ -43,8 +43,8 @@ vendor = [
         destination: './public/vendor/material/'
     },
     {
-        file: './bower_components/ng-flow/dist/ng-flow*js',
-        destination: './public/vendor/ngFlow/'
+        file: './bower_components/angular-file-upload/angular-file-upload.js',
+        destination: './public/vendor/angular-file-upload/'
     }
 ];
 
@@ -82,6 +82,9 @@ gulp.task('js', function() {
 
     gulp.src('./app/services/*')
         .pipe(gulp.dest('./public/javascripts/services'));
+
+    gulp.src('./app/directives/*')
+        .pipe(gulp.dest('./public/javascripts/directives'));
 
     gulp.src('./app/app.js')
         .pipe(gulp.dest('./public/javascripts'));

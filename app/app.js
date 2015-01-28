@@ -6,7 +6,7 @@ angular.module('oxstututors', [
     'ngResource',
     'http-auth-interceptor',
     'ngMaterial',
-    'flow'
+    'angularFileUpload'
 ])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
