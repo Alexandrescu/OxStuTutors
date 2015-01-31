@@ -9,6 +9,7 @@ ox.controller('UsersCtrl', function($scope, $routeParams, User){
         $scope.thisIsMe = true;
     }
 
+    $scope.img = "/avatar/" + $routeParams.userId;
     User.get({userId: $routeParams.userId}, function(profile) {
         $scope.profile = profile.profile;
         $scope.username = profile.username;

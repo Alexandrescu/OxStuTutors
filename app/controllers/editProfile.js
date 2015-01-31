@@ -8,13 +8,12 @@ ox.controller('EditProfileCtrl', function($scope, $location, User, FileUploader)
         $location.path('/login');
     };
 
-    $scope.saveChanges = function() {
-        console.log('Saving');
-        User.update();
-    };
-
-    $scope.uploader = new FileUploader({
-        url: 'auth/users/profileImage',
+    var uploader = $scope.uploader = new FileUploader({
+        url: '/avatar/',
         queueLimit: 1
     });
+
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+    }
 });

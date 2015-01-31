@@ -72,6 +72,7 @@ conn.once('open', function() {
 app.mongoCollection = 'oxstu';
 app.workflow = require('./module/workflow');
 app.fs = fs;
+app.lwip = require('lwip');
 
 // Bootstrap models
 // This is needed to be able to initialize the controllers
@@ -83,11 +84,13 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 // *** Routes
 var routes = require('./lib/routes/index');
 var authRoutes = require('./lib/routes/auth');
+var avatarRoutes = require('./lib/routes/avatar');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
 app.use('/auth', authRoutes);
+app.use('/avatar', avatarRoutes);
 
 // ** Routing
 //require('./routes/index')(app, passport);

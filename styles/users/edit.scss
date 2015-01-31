@@ -4,3 +4,11 @@
   line-height: 20px;
   margin-bottom: 5px;
 }
+
+.crop {
+  background-size: cover;
+  width:200px;
+  height:200px;
+  background-position: center;
+  overflow: hidden;
+}
