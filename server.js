@@ -1,6 +1,7 @@
 'use strict';
 
 // Module dependencies
+var debug = require('debug');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,7 +15,7 @@ var session = require('express-session');
 var http = require('http');
 var mongoose = require('mongoose');
 var passport = require('passport');
-
+var Grid = require('gridfs-stream');
 
 var app = express();
 var env = process.env.NODE_ENV || 'development';
@@ -61,6 +62,16 @@ require('./passport.js')(app, passport);
 // *** Connecting to Mongo
 mongoose.connect(config.mongodb.uri);
 
+Grid.mongo = mongoose.mongo;
+
+var conn = mongoose.connection;
+conn.once('open', function() {
+    app.gfs = Grid(conn.db);
+});
+
+app.mongoCollection = 'oxstu';
+app.workflow = require('./module/workflow');
+app.fs = fs;
 
 // Bootstrap models
 // This is needed to be able to initialize the controllers
