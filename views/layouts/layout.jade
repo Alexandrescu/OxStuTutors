@@ -3,6 +3,8 @@ html
   head
     block head
       title #{title}
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
     link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.css')
     // CSS cascading order has this on the 3rd level of priority
       and on equal level of priority the latter wins
@@ -25,19 +27,16 @@ html
 
   body(ng-app='oxstututors')
     include navbar
-    div.page.container(ng-view)
-      block body
+    div.page.content(ng-view)
 
-    div.footer
-      div.container
-        span.copyright.pull-right
-          | &#169; #{copyrightYear} #{copyrightName}
-        ul.links
-          li: a(href='/') Home {{currentuser}}
-          li: a(href='/contact/') Contact
-        div.clearfix
-    div.ajax-spinner
-    block feet
+      div.footer
+        div.container
+          span.copyright.pull-right
+            | &#169; #{copyrightYear} #{copyrightName}
+          ul.links
+            li: a(href='/') Home {{currentuser}}
+            li: a(href='/contact/') Contact
+          div.clearfix
 
     script(src='/javascripts/app.js')
     script(src='/javascripts/controllers.js')

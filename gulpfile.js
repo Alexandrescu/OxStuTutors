@@ -43,6 +43,10 @@ vendor = [
         destination: './public/vendor/material/'
     },
     {
+        file: './bower_components/angular-material/default-theme.*',
+        destination: './public/vendor/material/'
+    },
+    {
         file: './bower_components/angular-file-upload/angular-file-upload.js',
         destination: './public/vendor/angular-file-upload/'
     }

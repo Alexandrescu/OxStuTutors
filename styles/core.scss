@@ -10,7 +10,8 @@ body {
   .page {
     width: 100%;
     height: 100%;
-  }
+  };
+  min-height: 100%;
 }
 
 h1, h2 {
@@ -96,23 +97,6 @@ select, textarea, input, .form-control {
     }
   }
 }
-
-.ajax-spinner {
-  position: absolute;
-  z-index: 999;
-  display: none;
-  padding: 5px;
-  font-size: inherit;
-  line-height: 11px;
-  background-color: #ccc;
-  border-radius: 4px;
-
-  img {
-    width: inherit;
-    height: inherit;
-    margin: 0;
-  }
-}​
 
  .force-wrap {
    white-space: pre-wrap; /* css-3 */

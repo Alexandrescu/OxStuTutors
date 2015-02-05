@@ -1,24 +1,24 @@
-div.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
+md-toolbar.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
   div.container
     div.navbar-header
-      a.navbar-brand(href='/')
-        span.navbar-brand-label #{projectName}
+      a.navbar-brand(href='#')
+        span.navbar-brand-label OxStuTutors
       button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
         span.icon-bar
         span.icon-bar
         span.icon-bar
     div.navbar-collapse.my-navbar-collapse.collapse
       ul.nav.navbar-nav
-        li: a(href='/') Home
-        li: a(href='/search/') Search
-        li: a(href='/about/') About
-        li: a(href='/contact/') Contact
+        li: md-button(href='/') Home
+        li: md-button(href='/search/') Search
+        li: md-button(href='/about/') About
+        li: md-button(href='/contact/') Contact
       ul.nav.navbar-nav.navbar-right(ng-hide='currentUser')
-        li: a(href='/login/')
+        li: md-button(href='/login/')
           i.fa.fa-user
           | Sign In
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
-        li: a(href='/users/{{currentUser._id}}')
+        li: md-button(href='/users/{{currentUser._id}}')
           | {{ currentUser.username }}
-        li: a(ng-click='logout()', href='#')
+        li: md-button(ng-click='logout()', href='#')
           | Logout
