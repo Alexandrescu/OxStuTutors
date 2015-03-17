@@ -1,24 +1,25 @@
-//
-   Created by Andrei on 12/01/15.
-div.row(ng-show='thisIsMe')
-  div.col-sm-12
-    p Check here if the profile is complete
-div.row(style='background-color:#44d0ff; min-height:200px')
-  div.col-sm-8
-    div
-      h1 USERS {{username}} Profile {{profile}}
-      span Subject this guy teaches
-  div.col-sm-4
-    p We will have a photo here
-div.row(ng-repeat='(key, value) in profile' )
-  div.col-sm-12(ng-show='value.length')
-    md-toolbar.md-theme-light
-      h1.md-toolbar-tools
-        span {{ PrettyName(key) }}
-    md-content
-      md-list
-        md-item(ng-repeat="item in [].concat(value)")
-          md-item-content
-            div.md-title-content
-              h4 {{item}}
-          md-divider(ng-if='!$last')
+div.container
+  div.row(ng-show='thisIsMe')
+    div.col-sm-12
+      p Check here if the profile is complete ha
+  div.row(class='userHeader')
+    div.col-sm-8
+      div
+        h1 {{username}}
+          a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-large', style="margin:20px") Edit
+        span Subject this guy teaches
+    div.col-sm-4
+      p We will have a photo here
+      img(ng-src='{{img}}' style='max-height:200px')
+  div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
+    div.col-sm-12(ng-show='value.length')
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools
+          span {{ PrettyName(key) }}
+      md-content
+        md-list
+          md-item(ng-repeat="item in [].concat(value)")
+            md-item-content
+              div.md-title-content
+                h4 {{item}}
+            md-divider(ng-if='!$last')
