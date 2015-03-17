@@ -4,7 +4,8 @@ angular.module('oxstututors')
   .factory('Profile', ['User', function(User) {
     var nameMap = {
       'subjects' : 'Subjects',
-      'approach' : 'My approach to teaching'
+      'approach' : 'My approach to teaching',
+      'qualifications' : 'Qualifications'
     };
 
     var Profile = {};
@@ -25,9 +26,11 @@ angular.module('oxstututors')
         .join(' ');
     };
 
-    Profile.init = function(userId) {
+    Profile.init = function(userId, scope) {
+      scope.img = "/avatar/" + userId;
       User.get({userId: userId}, function(profile) {
-        Profile.profile = profile.profile;
+        scope.profile = profile.profile;
+        scope.username = profile.username;
       })
     };
 
