@@ -5,7 +5,9 @@ angular.module('oxstututors')
     var nameMap = {
       'subjects' : 'Subjects',
       'approach' : 'My approach to teaching',
-      'qualifications' : 'Qualifications'
+      'qualifications' : 'Qualifications',
+      'funFact' : 'Fun fact',
+      'personalVideo' : 'Personal video'
     };
 
     var Profile = {};

@@ -15,11 +15,11 @@ div.container
       div(ng-hide='uploader.queue.length')
         img(ng-src='{{img}}' style='max-height:200px')
   div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
-    div.col-sm-12(ng-show='value.length')
+    div.col-sm-12
       md-toolbar.md-theme-light
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
-      md-content
+      md-content(ng-show='value')
         md-list
           md-item(ng-repeat="item in [].concat(value)")
             md-item-content
