@@ -3,7 +3,10 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('EditProfileCtrl', function($scope, $location, User, FileUploader){
+ox.controller('EditProfileCtrl',
+  ['$scope', '$location', 'User', 'FileUploader', 'Profile',
+  function($scope, $location, User, FileUploader, Profile){
+
   if(!$scope.currentUser) {
       $location.path('/login');
   }
@@ -17,5 +20,7 @@ ox.controller('EditProfileCtrl', function($scope, $location, User, FileUploader)
       console.info('onSuccessItem', fileItem, response, status, headers);
   };
 
-  $scope.img = "/avatar/" + $scope.currentUser._id;
-});
+  Profile.init($scope.currentUser._id, $scope);
+
+  $scope.PrettyName = Profile.subjectName;
+}]);

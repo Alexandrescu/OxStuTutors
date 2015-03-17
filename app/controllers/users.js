@@ -10,12 +10,7 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
         $scope.thisIsMe = true;
     }
 
-    $scope.img = "/avatar/" + $routeParams.userId;
-    User.get({userId: $routeParams.userId}, function(profile) {
-        $scope.profile = profile.profile;
-        $scope.username = profile.username;
-        // Now you have the 'profile'
-    });
+    $scope.profile = Profile.init($routeParams.userId, $scope);
 
     $scope.PrettyName = Profile.subjectName;
 
