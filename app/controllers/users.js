@@ -3,7 +3,8 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('UsersCtrl', function($scope, $routeParams, User, $mdToast){
+ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profile',
+  function($scope, $routeParams, User, $mdToast, Profile){
     // This is used to have a check on top of the page saying to complete your profile
     if($scope.currentUser && $scope.currentUser._id === $routeParams.userId) {
         $scope.thisIsMe = true;
@@ -16,40 +17,17 @@ ox.controller('UsersCtrl', function($scope, $routeParams, User, $mdToast){
         // Now you have the 'profile'
     });
 
-    // This should be included in a service
-    var nameMap = {
-        'subjects' : 'Subjects',
-        'approach' : 'My approach to teaching'
-    };
-
-    $scope.PrettyName = function(name) {
-        if(name in nameMap) {
-            return nameMap[name];
-        }
-        return name;
-    };
-
-    var toastPosition = {
-        bottom: true,
-        right: true,
-        top: false
-    };
-
-    var getToastPosition = function() {
-        return Object.keys(toastPosition)
-            .filter(function(pos) { return toastPosition[pos]; })
-            .join(' ');
-    };
+    $scope.PrettyName = Profile.subjectName;
 
     var toast = $mdToast.simple()
       .content('Action Toast!')
       .action('OK')
       .highlightAction(false)
-      .position(getToastPosition());
+      .position(Profile.getToastPosition());
 
 
     $mdToast.show(toast).then(function() {
         alert('You clicked \'OK\'.');
     });
 
-});
+}]);
