@@ -3,9 +3,9 @@
 angular.module('oxstututors')
   .factory('Profile', ['User', function(User) {
     var nameMap = {
-      'subjects' : 'Subjects',
+      'subjects' : 'Tutoring Subjects',
       'approach' : 'My approach to teaching',
-      'qualifications' : 'Qualifications',
+      'qualifications' : 'Degree',
       'funFact' : 'Fun fact',
       'personalVideo' : 'Personal video'
     };
