@@ -4,8 +4,10 @@
 var ox = angular.module('oxstututors');
 
 ox.controller('EditProfileCtrl',
-  ['$scope', '$location', 'User', 'FileUploader', 'Profile',
-  function($scope, $location, User, FileUploader, Profile){
+  ['$scope', '$location', 'User', 'FileUploader', 'Profile', 'Subject',
+  function($scope, $location, User, FileUploader, Profile, Subject){
+
+  $scope.profileInput = [];
 
   if(!$scope.currentUser) {
       $location.path('/login');
@@ -22,5 +24,17 @@ ox.controller('EditProfileCtrl',
 
   Profile.init($scope.currentUser._id, $scope);
 
-  $scope.PrettyName = Profile.subjectName;
+  $scope.PrettyName = Profile.fieldName;
+  $scope.prettySubject = Profile.subjectName;
+
+  $scope.isSubject = function(key) {
+    return key == 'subjects';
+  };
+
+  $scope.updateSubject = function () {
+    $scope.profile.subjects.push({subject : "", categories : []});
+  };
+
+  $scope.tutoringSubject = Subject.get();
+
 }]);

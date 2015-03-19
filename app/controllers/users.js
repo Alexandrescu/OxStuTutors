@@ -12,7 +12,7 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
 
     $scope.profile = Profile.init($routeParams.userId, $scope);
 
-    $scope.PrettyName = Profile.subjectName;
+    $scope.PrettyName = Profile.fieldName;
 
     var toast = $mdToast.simple()
       .content('Action Toast!')

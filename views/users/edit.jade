@@ -5,8 +5,10 @@ div.container
   div.row(class='userHeader')
     div.col-sm-8
       div
-        h1 EDIIIIT {{currentUser}} Profile {{profile}}
+        h1 EDIIIIT {{currentUser}} Profile
+        pre {{profile}}
         span Subject this guy teaches
+
     div.col-sm-4
       input(type='file' nv-file-select uploader='uploader')
       div(ng-repeat='item in uploader.queue')
@@ -15,10 +17,12 @@ div.container
       div(ng-hide='uploader.queue.length')
         img(ng-src='{{img}}' style='max-height:200px')
   div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
-    div.col-sm-12
+    // Showing
+    div.col-sm-12(ng-hide="profileInput[key]")
       md-toolbar.md-theme-light
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
+          md-button(class='md-accent', ng-click="profileInput[key] = true") Edit
       md-content(ng-show='value')
         md-list
           md-item(ng-repeat="item in [].concat(value)")
@@ -26,3 +30,24 @@ div.container
               div.md-title-content
                 h4 {{item}}
             md-divider(ng-if='!$last')
+    // Editing
+    div.col-sm-12(ng-show="profileInput[key]")
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools
+          span {{ PrettyName(key) }}
+          md-button(class='md-accent', ng-click="profileInput[key] = false") Cancel
+      md-content(ng-show='isSubject(key)')
+        md-list
+          md-item(ng-repeat='v in value')
+            md-item-content
+              div(flex)
+                md-select(ng-model='profile[key][$index].subject')
+                  md-option(ng-repeat='subject in tutoringSubject',
+                  value='{{subject.subject}}') {{ prettySubject(subject.subject) }}
+              div(flex)
+                | Checkbox {{level}}
+                md-list
+        md-button(class='md-primary', ng-click='updateSubject()') Add new
+      md-content(ng-hide='isSubject(key)')
+        md-input-container
+          textarea(columns="1", md-maxlength="500", ng-model='profile[key]')

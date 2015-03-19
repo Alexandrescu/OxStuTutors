@@ -6,7 +6,7 @@ angular.module('oxstututors')
       'subjects' : 'Tutoring Subjects',
       'approach' : 'My approach to teaching',
       'qualifications' : 'Degree',
-      'funFact' : 'Fun fact',
+      'funFact' : 'Fun fact!',
       'personalVideo' : 'Personal video'
     };
 
@@ -36,11 +36,24 @@ angular.module('oxstututors')
       })
     };
 
-    Profile.subjectName = function(name) {
+    Profile.fieldName = function(name) {
       if(name in nameMap) {
         return nameMap[name];
       }
       return name;
+    };
+
+    var subjectMap = {
+      'compsci' : 'Computer Science',
+      'maths' : 'Mathematics',
+      'oxbridge' : 'OxBridge interview'
+    };
+
+    Profile.subjectName = function(abrv) {
+      if(abrv in subjectMap) {
+        return subjectMap[abrv];
+      }
+      return abrv;
     };
 
     return Profile;
