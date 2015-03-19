@@ -32,7 +32,7 @@ ox.controller('EditProfileCtrl',
   };
 
   $scope.updateSubject = function () {
-    $scope.profile.subjects.push({subject : "", categories : []});
+    $scope.profile.subjects.push({subject : "", categories : {}});
   };
 
   $scope.tutoringSubject = Subject.get();

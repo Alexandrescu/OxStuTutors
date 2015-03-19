@@ -6,6 +6,7 @@ div.container
     div.col-sm-8
       div
         h1 EDIIIIT {{currentUser}} Profile
+        pre {{tutoringSubject}}
         pre {{profile}}
         span Subject this guy teaches
 
@@ -41,12 +42,13 @@ div.container
           md-item(ng-repeat='v in value')
             md-item-content
               div(flex)
-                md-select(ng-model='profile[key][$index].subject')
+                md-select(ng-model='profile[key][$index]')
                   md-option(ng-repeat='subject in tutoringSubject',
-                  value='{{subject.subject}}') {{ prettySubject(subject.subject) }}
+                  ng-value='subject') {{ prettySubject(subject.subject) }}
               div(flex)
-                | Checkbox {{level}}
-                md-list
+                md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
+                  ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}
+
         md-button(class='md-primary', ng-click='updateSubject()') Add new
       md-content(ng-hide='isSubject(key)')
         md-input-container
