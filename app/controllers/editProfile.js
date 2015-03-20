@@ -22,7 +22,7 @@ ox.controller('EditProfileCtrl',
       console.info('onSuccessItem', fileItem, response, status, headers);
   };
 
-  Profile.init($scope.currentUser._id, $scope);
+  var getProfilePromise = Profile.init($scope.currentUser._id, $scope);
 
   $scope.PrettyName = Profile.fieldName;
   $scope.prettySubject = Profile.subjectName;
@@ -35,9 +35,36 @@ ox.controller('EditProfileCtrl',
     $scope.profile.subjects.push({subject : "", categories : {}});
   };
 
-  $scope.tutoringSubject = Subject.get();
+  var getSubjectPromise = Subject.get().$promise;
+  var loadSubjectsPromise = getProfilePromise.then(function(){
+    getSubjectPromise.then(function(subjects) {
+      var subjectsLength = subjects.length;
+      for(var i = 0; i < subjectsLength; i++) {
+        var userSubjectLength = $scope.profile.subjects.length;
+        for(var j = 0; j < userSubjectLength; j++) {
+          if($scope.profile.subjects[j].subject == subjects[i].subject) {
+            subjects[i] = $scope.profile.subjects[j];
+          }
+        }
+      }
+
+      $scope.tutoringSubject = subjects;
+    })
+  });
+
+  $scope.loadSubjects = function() {
+    return loadSubjectsPromise;
+  };
 
   $scope.updateUser = function(field) {
+    if($scope.isSubject(field)) {
+      // Need to check for dummy subject
+      var dummy = $scope.profile.subjects.pop();
+      if(dummy.subject && dummy.subject != "") {
+        $scope.profile.subjects.push(dummy);
+      }
+    }
+
     var promise = User.update({
       profile: {
         field: field,
@@ -52,4 +79,7 @@ ox.controller('EditProfileCtrl',
     });
   };
 
+  $scope.isDegree = function(key) {
+    return key == 'qualifications';
+  }
 }]);

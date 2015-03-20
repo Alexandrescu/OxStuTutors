@@ -30,10 +30,10 @@ angular.module('oxstututors')
 
     Profile.init = function(userId, scope) {
       scope.img = "/avatar/" + userId;
-      User.get({userId: userId}, function(profile) {
+      return User.get({userId: userId}, function(profile) {
         scope.profile = profile.profile;
         scope.username = profile.username;
-      })
+      }).$promise;
     };
 
     Profile.fieldName = function(name) {

@@ -24,12 +24,19 @@ div.container
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
           md-button(class='md-accent', ng-click="profileInput[key] = true") Edit
-      md-content(ng-show='value')
+      md-content(class='md-padding' ng-show='value && !isSubject(key) && !isDegree(key)')
+        | {{value}}
+      md-content(ng-show='value && isSubject(key)')
         md-list
-          md-item(ng-repeat="item in [].concat(value)")
+          md-item(ng-repeat='item in value track by $index')
             md-item-content
               div.md-title-content
-                h4 {{item}}
+                h3 {{prettySubject(item.subject)}}
+                md-list
+                  md-item(ng-repeat='(qualName, isQual) in item.categories')
+                    md-item-contetn
+                    div.md-title-content(ng-show='isQual')
+                      h5 {{qualName}}
             md-divider(ng-if='!$last')
     // Editing
     div.col-sm-12(ng-show="profileInput[key]")
@@ -43,7 +50,8 @@ div.container
           md-item(ng-repeat='v in value track by $index')
             md-item-content
               div(flex)
-                md-select(ng-model='profile[key][$index]')
+                md-select(ng-model='profile[key][$index]', md-on-open="loadSubjects()")
+                  md-select-label {{ profile[key][$index].subject ? prettySubject(profile[key][$index].subject) : 'Choose subject' }}
                   md-option(ng-repeat='subject in tutoringSubject',
                   ng-value='subject') {{ prettySubject(subject.subject) }}
               div(flex)
