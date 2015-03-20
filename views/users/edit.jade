@@ -37,9 +37,10 @@ div.container
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
           md-button(class='md-accent', ng-click="profileInput[key] = false") Cancel
+          md-button(class='md-accent', ng-click='updateUser(key)') Save
       md-content(ng-show='isSubject(key)')
         md-list
-          md-item(ng-repeat='v in value')
+          md-item(ng-repeat='v in value track by $index')
             md-item-content
               div(flex)
                 md-select(ng-model='profile[key][$index]')
@@ -48,7 +49,6 @@ div.container
               div(flex)
                 md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
                   ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}
-
         md-button(class='md-primary', ng-click='updateSubject()') Add new
       md-content(ng-hide='isSubject(key)')
         md-input-container

@@ -37,4 +37,19 @@ ox.controller('EditProfileCtrl',
 
   $scope.tutoringSubject = Subject.get();
 
+  $scope.updateUser = function(field) {
+    var promise = User.update({
+      profile: {
+        field: field,
+        fieldValue: $scope.profile[field]
+      }
+    }).$promise;
+
+    promise.then(function(response) {
+      if(response.success) {
+        $scope.profileInput[field] = false;
+      }
+    });
+  };
+
 }]);
