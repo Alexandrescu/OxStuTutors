@@ -25,4 +25,6 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
         alert('You clicked \'OK\'.');
     });
 
+    $scope.isDegree = Profile.isDegree;
+    $scope.isSubject = Profile.isSubject;
 }]);

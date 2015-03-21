@@ -27,9 +27,7 @@ ox.controller('EditProfileCtrl',
   $scope.PrettyName = Profile.fieldName;
   $scope.prettySubject = Profile.subjectName;
 
-  $scope.isSubject = function(key) {
-    return key == 'subjects';
-  };
+  $scope.isSubject = Profile.isSubject;
 
   $scope.updateSubject = function () {
     $scope.profile.subjects.push({subject : "", categories : {}});
@@ -79,7 +77,5 @@ ox.controller('EditProfileCtrl',
     });
   };
 
-  $scope.isDegree = function(key) {
-    return key == 'qualifications';
-  }
+  $scope.isDegree = Profile.isDegree;
 }]);

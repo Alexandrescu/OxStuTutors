@@ -56,5 +56,13 @@ angular.module('oxstututors')
       return abrv;
     };
 
+    Profile.isDegree = function(key) {
+      return key == 'qualifications';
+    };
+
+    Profile.isSubject = function(key) {
+      return key == 'subjects';
+    };
+
     return Profile;
   }]);
