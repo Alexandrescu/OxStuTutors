@@ -16,10 +16,18 @@ div.container
       md-toolbar.md-theme-light
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
-      md-content
+          md-button(class='md-accent', ng-click="profileInput[key] = true") Edit
+      md-content(class='md-padding' ng-show='value && !isSubject(key) && !isDegree(key)')
+        | {{value}}
+      md-content(ng-show='value && isSubject(key)')
         md-list
-          md-item(ng-repeat="item in [].concat(value)")
+          md-item(ng-repeat='item in value track by $index')
             md-item-content
               div.md-title-content
-                h4 {{item}}
+                h3 {{prettySubject(item.subject)}}
+                md-list
+                  md-item(ng-repeat='(qualName, isQual) in item.categories')
+                    md-item-contetn
+                    div.md-title-content(ng-show='isQual')
+                      h5 {{qualName}}
             md-divider(ng-if='!$last')
