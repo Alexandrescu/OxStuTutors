@@ -46,7 +46,8 @@ angular.module('oxstututors')
     var subjectMap = {
       'compsci' : 'Computer Science',
       'maths' : 'Mathematics',
-      'oxbridge' : 'OxBridge interview'
+      'oxbridge' : 'OxBridge interview',
+      'chemestry' : 'Chemistry'
     };
 
     Profile.subjectName = function(abrv) {

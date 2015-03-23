@@ -16,7 +16,6 @@ div.container
       md-toolbar.md-theme-light
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}
-          md-button(class='md-accent', ng-click="profileInput[key] = true") Edit
       md-content(class='md-padding' ng-show='value && !isSubject(key) && !isDegree(key)')
         | {{value}}
       md-content(ng-show='value && isSubject(key)')
