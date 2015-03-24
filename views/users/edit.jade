@@ -38,6 +38,11 @@ div.container
                     div.md-title-content(ng-show='isQual')
                       h5 {{qualName}}
             md-divider(ng-if='!$last')
+      md-content(ng-show='value && isDegree(key)')
+        md-list
+          md-item(ng-repeat='item in value track by $index')
+            md-item-content
+              md-content(class='md-padding') {{item}}
     // Editing
     div.col-sm-12(ng-show="profileInput[key]")
       md-toolbar.md-theme-light
@@ -58,6 +63,13 @@ div.container
                 md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
                   ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}
         md-button(class='md-primary', ng-click='updateSubject()') Add new
-      md-content(ng-hide='isSubject(key)')
+      md-content(ng-show='isDegree(key)')
+        md-list
+          md-item(ng-repeat='v in value track by $index')
+            md-item-content
+              md-input-container
+                input(ng-model='profile[key][$index]', size='30', maxlength='30')
+        md-button(class='md-primary', ng-click='updateDegree()') Add new
+      md-content(ng-hide='isSubject(key) || isDegree(key)')
         md-input-container
           textarea(columns="1", md-maxlength="500", ng-model='profile[key]')

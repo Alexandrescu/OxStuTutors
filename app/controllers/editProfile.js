@@ -78,4 +78,7 @@ ox.controller('EditProfileCtrl',
   };
 
   $scope.isDegree = Profile.isDegree;
+  $scope.updateDegree = function() {
+    $scope.profile.qualifications.push("");
+  }
 }]);
