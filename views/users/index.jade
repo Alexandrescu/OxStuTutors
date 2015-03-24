@@ -8,6 +8,7 @@ div.container
         h1 {{username}}
           a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-sm', style="margin-left:20px") Edit
         span Subject this guy teaches
+        pre {{summary}}
     div.col-sm-4
       p We will have a photo here
       img(ng-src='{{img}}' style='max-height:200px')

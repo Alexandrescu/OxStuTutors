@@ -33,7 +33,15 @@ angular.module('oxstututors')
       return User.get({userId: userId}, function(profile) {
         scope.profile = profile.profile;
         scope.username = profile.username;
+        scope.summary = profile.summary;
       }).$promise;
+    };
+
+    Profile.summary = function(userId, result) {
+      User.get({userId: userId}, function(user) {
+        console.log(user.summary);
+        result[userId] = user.summary;
+      });
     };
 
     Profile.fieldName = function(name) {
