@@ -31,3 +31,8 @@ div.container
                     div.md-title-content(ng-show='isQual')
                       h5 {{qualName}}
             md-divider(ng-if='!$last')
+      md-content(ng-show='value && isDegree(key)')
+        md-list
+          md-item(ng-repeat='item in value track by $index')
+            md-item-content
+              md-content(class='md-padding') {{item}}
