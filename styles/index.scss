@@ -1,12 +1,9 @@
 @import '../sass/bootstrap/_variables.scss';
 
-.jumbotron {
+.cover {
   background-image: url('/media/oxford.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-
-  width: calc(100%);
-  height: calc(100%);
 
   text-align: center;
 

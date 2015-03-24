@@ -5,11 +5,11 @@
 'use strict';
 
 angular.module('oxstututors')
-    .factory('User', function ($resource) {
-        return $resource('/auth/users/:id/', {},
-            {
-                'update': {
-                    method:'PUT'
-                }
-            });
-    });
+  .factory('User', function ($resource) {
+    return $resource('/auth/users/:userId/', {},
+      {
+        'update': {
+          method: 'PUT'
+        }
+      });
+  });

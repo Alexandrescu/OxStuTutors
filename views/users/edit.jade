@@ -1,0 +1,75 @@
+div.container
+  div.row(ng-show='thisIsMe')
+    div.col-sm-12
+      p Check here if the profile is complete
+  div.row(class='userHeader')
+    div.col-sm-8
+      div
+        h1 EDIIIIT {{currentUser}} Profile
+        pre {{tutoringSubject}}
+        pre {{profile}}
+        span Subject this guy teaches
+
+    div.col-sm-4
+      input(type='file' nv-file-select uploader='uploader')
+      div(ng-repeat='item in uploader.queue')
+        div.crop(ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 200, width: 200 }")
+        button(ng-click='item.upload()') Save Changes
+      div(ng-hide='uploader.queue.length')
+        img(ng-src='{{img}}' style='max-height:200px')
+  div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
+    // Showing
+    div.col-sm-12(ng-hide="profileInput[key]")
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools
+          span {{ PrettyName(key) }}
+          md-button(class='md-accent', ng-click="profileInput[key] = true") Edit
+      md-content(class='md-padding' ng-show='value && !isSubject(key) && !isDegree(key)')
+        | {{value}}
+      md-content(ng-show='value && isSubject(key)')
+        md-list
+          md-item(ng-repeat='item in value track by $index')
+            md-item-content
+              div.md-title-content
+                h3 {{prettySubject(item.subject)}}
+                md-list
+                  md-item(ng-repeat='(qualName, isQual) in item.categories')
+                    md-item-contetn
+                    div.md-title-content(ng-show='isQual')
+                      h5 {{qualName}}
+            md-divider(ng-if='!$last')
+      md-content(ng-show='value && isDegree(key)')
+        md-list
+          md-item(ng-repeat='item in value track by $index')
+            md-item-content
+              md-content(class='md-padding') {{item}}
+    // Editing
+    div.col-sm-12(ng-show="profileInput[key]")
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools
+          span {{ PrettyName(key) }}
+          md-button(class='md-accent', ng-click="profileInput[key] = false") Cancel
+          md-button(class='md-accent', ng-click='updateUser(key)') Save
+      md-content(ng-show='isSubject(key)')
+        md-list
+          md-item(ng-repeat='v in value track by $index')
+            md-item-content
+              div(flex)
+                md-select(ng-model='profile[key][$index]', md-on-open="loadSubjects()")
+                  md-select-label {{ profile[key][$index].subject ? prettySubject(profile[key][$index].subject) : 'Choose subject' }}
+                  md-option(ng-repeat='subject in tutoringSubject',
+                  ng-value='subject') {{ prettySubject(subject.subject) }}
+              div(flex)
+                md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
+                  ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}
+        md-button(class='md-primary', ng-click='updateSubject()') Add new
+      md-content(ng-show='isDegree(key)')
+        md-list
+          md-item(ng-repeat='v in value track by $index')
+            md-item-content
+              md-input-container
+                input(ng-model='profile[key][$index]', size='30', maxlength='30')
+        md-button(class='md-primary', ng-click='updateDegree()') Add new
+      md-content(ng-hide='isSubject(key) || isDegree(key)')
+        md-input-container
+          textarea(columns="1", md-maxlength="500", ng-model='profile[key]')

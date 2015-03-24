@@ -4,7 +4,9 @@ angular.module('oxstututors', [
     'ui.bootstrap',
     'ngRoute',
     'ngResource',
-    'http-auth-interceptor'
+    'http-auth-interceptor',
+    'ngMaterial',
+    'angularFileUpload'
 ])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
@@ -19,6 +21,14 @@ angular.module('oxstututors', [
             .when('/login/', {
                 templateUrl: '/auth/login',
                 controller: 'LoginCtrl'
+            })
+            .when('/users/:userId/', {
+                templateUrl: '/users/',
+                controller: 'UsersCtrl'
+            })
+            .when('/editProfile/', {
+                templateUrl: '/users/edit',
+                controller: 'EditProfileCtrl'
             })
             .otherwise({
                 // Should redirect to an error page

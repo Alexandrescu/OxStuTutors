@@ -1,6 +1,7 @@
 'use strict';
 
 // Module dependencies
+var debug = require('debug');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,7 +15,7 @@ var session = require('express-session');
 var http = require('http');
 var mongoose = require('mongoose');
 var passport = require('passport');
-
+var Grid = require('gridfs-stream');
 
 var app = express();
 var env = process.env.NODE_ENV || 'development';
@@ -61,6 +62,17 @@ require('./passport.js')(app, passport);
 // *** Connecting to Mongo
 mongoose.connect(config.mongodb.uri);
 
+Grid.mongo = mongoose.mongo;
+
+var conn = mongoose.connection;
+conn.once('open', function() {
+    app.gfs = Grid(conn.db);
+});
+
+app.mongoCollection = 'oxstu';
+app.workflow = require('./module/workflow');
+app.fs = fs;
+app.lwip = require('lwip');
 
 // Bootstrap models
 // This is needed to be able to initialize the controllers
@@ -72,11 +84,15 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 // *** Routes
 var routes = require('./lib/routes/index');
 var authRoutes = require('./lib/routes/auth');
+var avatarRoutes = require('./lib/routes/avatar');
+var subjectRoutes = require('./lib/routes/subject');
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
 app.use('/auth', authRoutes);
+app.use('/avatar', avatarRoutes);
+app.use('/subject', subjectRoutes);
 
 // ** Routing
 //require('./routes/index')(app, passport);

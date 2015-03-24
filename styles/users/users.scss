@@ -1,0 +1,19 @@
+.thumbnail {
+  max-width: 200px;
+  max-height: 150px;
+  line-height: 20px;
+  margin-bottom: 5px;
+}
+
+.crop {
+  background-size: cover;
+  width:200px;
+  height:200px;
+  background-position: center;
+  overflow: hidden;
+}
+
+.userHeader {
+  background-color:#44d0ff;
+  min-height:250px;
+}

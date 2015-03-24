@@ -37,6 +37,18 @@ vendor = [
     {
         file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
         destination: './sass/'
+    },
+    {
+        file: './bower_components/angular-material/angular-material.*',
+        destination: './public/vendor/material/'
+    },
+    {
+        file: './bower_components/angular-material/default-theme.*',
+        destination: './public/vendor/material/'
+    },
+    {
+        file: './bower_components/angular-file-upload/angular-file-upload.js',
+        destination: './public/vendor/angular-file-upload/'
     }
 ];
 
@@ -57,7 +69,7 @@ gulp.task('vendor', function() {
 // when I am running several streams.
 
 // Compiling sass
-gulp.task('styles:scss', ['vendor'], function() {
+gulp.task('styles:scss', function() {
     gulp.src('./styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -74,6 +86,9 @@ gulp.task('js', function() {
 
     gulp.src('./app/services/*')
         .pipe(gulp.dest('./public/javascripts/services'));
+
+    gulp.src('./app/directives/*')
+        .pipe(gulp.dest('./public/javascripts/directives'));
 
     gulp.src('./app/app.js')
         .pipe(gulp.dest('./public/javascripts'));
