@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('oxstututors')
-  .factory('Subject', function($resource) {
+  .factory('Subject', function ($resource) {
     return $resource('/subject/', {}, {
-      'get' : {
+      'get': {
         method: 'GET',
         isArray: true
       }

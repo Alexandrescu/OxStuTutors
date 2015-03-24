@@ -5,54 +5,54 @@ var ox = angular.module('oxstututors');
  * @author: nerv
  * @version: 0.1.2, 2014-01-09
  */
-ox.directive('ngThumb', ['$window', function($window) {
-    var helper = {
-        support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-        isFile: function(item) {
-            return angular.isObject(item) && item instanceof $window.File;
-        },
-        isImage: function(file) {
-            var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-        }
-    };
+ox.directive('ngThumb', ['$window', function ($window) {
+  var helper = {
+    support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+    isFile: function (item) {
+      return angular.isObject(item) && item instanceof $window.File;
+    },
+    isImage: function (file) {
+      var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+      return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+    }
+  };
 
-    return {
-        restrict: 'A',
-        template: '<img/>',
-        link: function(scope, element, attributes) {
-            if (!helper.support) return;
+  return {
+    restrict: 'A',
+    template: '<img/>',
+    link: function (scope, element, attributes) {
+      if (!helper.support) return;
 
-            var params = scope.$eval(attributes.ngThumb);
+      var params = scope.$eval(attributes.ngThumb);
 
-            if (!helper.isFile(params.file)) return;
-            if (!helper.isImage(params.file)) return;
+      if (!helper.isFile(params.file)) return;
+      if (!helper.isImage(params.file)) return;
 
-            var canvas = element.find('img');
-            var reader = new FileReader();
+      var canvas = element.find('img');
+      var reader = new FileReader();
 
-            reader.onload = onLoadFile;
-            reader.readAsDataURL(params.file);
+      reader.onload = onLoadFile;
+      reader.readAsDataURL(params.file);
 
-            function onLoadFile(event) {
-                var img = new Image();
-                img.onload = onLoadImage;
-                img.src = event.target.result;
-            }
+      function onLoadFile(event) {
+        var img = new Image();
+        img.onload = onLoadImage;
+        img.src = event.target.result;
+      }
 
-            function onLoadImage() {
-                //var width = params.width || this.width / this.height * params.height;
-                //var height = params.height || this.height / this.width * params.width;
-                var widthRatio = this.width / params.width;
-                var heightRatio = this.height / params.height;
-                var bestRatio = Math.min(widthRatio, heightRatio);
+      function onLoadImage() {
+        //var width = params.width || this.width / this.height * params.height;
+        //var height = params.height || this.height / this.width * params.width;
+        var widthRatio = this.width / params.width;
+        var heightRatio = this.height / params.height;
+        var bestRatio = Math.min(widthRatio, heightRatio);
 
-                var width = this.width / bestRatio;
-                var height = this.height / bestRatio;
+        var width = this.width / bestRatio;
+        var height = this.height / bestRatio;
 
-                canvas.attr({ width: width, height: height, src: this.src });
-                //canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
-            }
-        }
-    };
+        canvas.attr({width: width, height: height, src: this.src});
+        //canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+      }
+    }
+  };
 }]);

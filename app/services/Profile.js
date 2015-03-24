@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('oxstututors')
-  .factory('Profile', ['User', function(User) {
+  .factory('Profile', ['User', function (User) {
     var nameMap = {
-      'subjects' : 'Tutoring Subjects',
-      'approach' : 'My approach to teaching',
-      'qualifications' : 'Degree',
-      'funFact' : 'Fun fact!',
-      'personalVideo' : 'Personal video'
+      'subjects': 'Tutoring Subjects',
+      'approach': 'My approach to teaching',
+      'qualifications': 'Degree',
+      'funFact': 'Fun fact!',
+      'personalVideo': 'Personal video'
     };
 
     var Profile = {};
@@ -16,60 +16,62 @@ angular.module('oxstututors')
     // profile page.
 
     var toastPosition = {
-      bottom : true,
-      right : true,
+      bottom: true,
+      right: true,
       left: false,
       top: false
     };
 
-    Profile.getToastPosition = function() {
+    Profile.getToastPosition = function () {
       return Object.keys(toastPosition)
-        .filter(function(pos) { return toastPosition[pos]; })
+        .filter(function (pos) {
+          return toastPosition[pos];
+        })
         .join(' ');
     };
 
-    Profile.init = function(userId, scope) {
+    Profile.init = function (userId, scope) {
       scope.img = "/avatar/" + userId;
-      return User.get({userId: userId}, function(profile) {
+      return User.get({userId: userId}, function (profile) {
         scope.profile = profile.profile;
         scope.username = profile.username;
         scope.summary = profile.summary;
       }).$promise;
     };
 
-    Profile.summary = function(userId, result) {
-      User.get({userId: userId}, function(user) {
+    Profile.summary = function (userId, result) {
+      User.get({userId: userId}, function (user) {
         console.log(user.summary);
         result[userId] = user.summary;
       });
     };
 
-    Profile.fieldName = function(name) {
-      if(name in nameMap) {
+    Profile.fieldName = function (name) {
+      if (name in nameMap) {
         return nameMap[name];
       }
       return name;
     };
 
     var subjectMap = {
-      'compsci' : 'Computer Science',
-      'maths' : 'Mathematics',
-      'oxbridge' : 'OxBridge interview',
-      'chemestry' : 'Chemistry'
+      'compsci': 'Computer Science',
+      'maths': 'Mathematics',
+      'oxbridge': 'OxBridge interview',
+      'chemestry': 'Chemistry'
     };
 
-    Profile.subjectName = function(abrv) {
-      if(abrv in subjectMap) {
+    Profile.subjectName = function (abrv) {
+      if (abrv in subjectMap) {
         return subjectMap[abrv];
       }
       return abrv;
     };
 
-    Profile.isDegree = function(key) {
+    Profile.isDegree = function (key) {
       return key == 'qualifications';
     };
 
-    Profile.isSubject = function(key) {
+    Profile.isSubject = function (key) {
       return key == 'subjects';
     };
 

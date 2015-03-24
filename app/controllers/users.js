@@ -4,10 +4,10 @@
 var ox = angular.module('oxstututors');
 
 ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profile',
-  function($scope, $routeParams, User, $mdToast, Profile){
+  function ($scope, $routeParams, User, $mdToast, Profile) {
     // This is used to have a check on top of the page saying to complete your profile
-    if($scope.currentUser && $scope.currentUser._id === $routeParams.userId) {
-        $scope.thisIsMe = true;
+    if ($scope.currentUser && $scope.currentUser._id === $routeParams.userId) {
+      $scope.thisIsMe = true;
     }
 
     $scope.profile = Profile.init($routeParams.userId, $scope);
@@ -21,11 +21,11 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
       .position(Profile.getToastPosition());
 
 
-    $mdToast.show(toast).then(function() {
-        alert('You clicked \'OK\'.');
+    $mdToast.show(toast).then(function () {
+      alert('You clicked \'OK\'.');
     });
 
     $scope.isDegree = Profile.isDegree;
     $scope.isSubject = Profile.isSubject;
     $scope.prettySubject = Profile.subjectName;
-}]);
+  }]);

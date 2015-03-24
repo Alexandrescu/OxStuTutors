@@ -4,16 +4,15 @@
 'use strict';
 
 angular.module('oxstututors')
-    .factory('Avatar', function ($resource) {
-        return $resource('/avatar/:userId/', {},
-            {
-                get :
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'image/jpg'
-                    }
-                }
-            }
-        );
-    });
+  .factory('Avatar', function ($resource) {
+    return $resource('/avatar/:userId/', {},
+      {
+        get: {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'image/jpg'
+          }
+        }
+      }
+    );
+  });
