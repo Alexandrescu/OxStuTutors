@@ -31,14 +31,6 @@ html
     include navbar
     div.page.content(ng-view)
 
-      div.footer
-        div.container
-          span.copyright.pull-right
-            | &#169; #{copyrightYear} #{copyrightName}
-          ul.links
-            li: a(href='/') Home {{currentuser}}
-            li: a(href='/contact/') Contact
-          div.clearfix
 
     script(src='/javascripts/app.js')
     script(src='/javascripts/controllers.js')
@@ -49,3 +41,4 @@ html
     script(src='/javascripts/services/Subject.js')
     script(src='/javascripts/services/User.js')
     script(src='/javascripts/directives/ngThumb.js')
+    script(src='/javascripts/directives/oxSearchProfile.js')

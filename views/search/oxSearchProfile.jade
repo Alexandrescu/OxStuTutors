@@ -1,0 +1,26 @@
+div(class='row')
+  table(class='col-md-12 table table-striped')
+    tr(ng-repeat='user in users')
+      td
+        div(class='row')
+          div(class='col-md-3')
+            img(ng-src="/avatar/{{user.userId}}", style='max-height:200px')
+          div(class='col-md-9')
+            h1 {{user.username}}
+            h2 Subjects
+            md-list
+              md-item(ng-repeat='subject in user.summary.summary')
+                md-item-content
+                  div(md-tile-content)
+                    p {{prettySubject(subject.subject)}} : {{subject.description}}
+            h2 Degree
+            md-list
+              md-item(ng-repeat='degree in user.summary.degree', class='md-padding')
+                md-item-content
+                  | {{degree}}
+
+
+  //div(class='col-md-12',
+  //  ng-repeat='user in users',
+  //  ng-style="{ 'background' : '#ffffff'}")
+
