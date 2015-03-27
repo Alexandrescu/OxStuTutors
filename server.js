@@ -85,13 +85,16 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var routes = require('./lib/routes/index');
 var authRoutes = require('./lib/routes/auth');
 var avatarRoutes = require('./lib/routes/avatar');
+var pagesRoutes = require('./lib/routes/pages');
 var subjectRoutes = require('./lib/routes/subject');
+
 
 // Routes are matched by order of creation.
 // JS is single threaded o/w I can't see this thing working.
 app.use('/', routes);
 app.use('/auth', authRoutes);
 app.use('/avatar', avatarRoutes);
+app.use('/pages', pagesRoutes);
 app.use('/subject', subjectRoutes);
 
 // ** Routing
