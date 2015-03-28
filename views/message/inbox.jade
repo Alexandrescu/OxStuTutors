@@ -1,11 +1,21 @@
-div(layout='column', style="height:100%;")
-  section(layout='row' flex)
+div(layout='column', style='height:100%')
+  section(layout='row', flex)
     md-sidenav(class='md-sidenave-left md-whiteframe-z1',md-component-id="left", md-is-locked-open="$mdMedia('gt-md')")
       md-toolbar(class="md-theme-indigo")
         h1(class="md-toolbar-tools") Sidenav Left
       md-content(class="md-padding")
         p(hide-md show-gt-md)
         | This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
-    md-content(flex class="md-padding")
-      div(layout='column', layout-fill, layout-align='top center')
-        p Hello
+    md-content(flex, class="md-padding", layout='column', layout-fill, layout-align='space-between center')
+      div(layout='row', layout-fill, style='min-height:64px')
+        md-input-container(flex)
+          label Receiver
+          input(ng-model="receiver")
+        md-button(class="md-fab md-primary", aria-label="Comment")
+          span(class='glyphicon glyphicon-send')
+      md-content(flex, layout-fill)
+        p Cool, now it scrolls
+      div(layout='row', layout-fill, style='height:200px')
+        md-input-container(layout-fill)
+          label Message to
+          textarea(ng-model="message", columns="1", md-maxlength="1500")
