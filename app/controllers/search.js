@@ -8,11 +8,13 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
       'Oxbridge Interview',
       'A-Levels',
       'IB',
-      'SAT II',
+      'SAT',
       'GCSE'];
 
     $scope.search = [];
-    $scope.search = User.search();
+    User.search(function(results) {
+      $scope.search = results;
+    });
     $scope.selectedCategories = {};
 
     $scope.selectAllCategories = function (value) {
@@ -20,16 +22,15 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
         $scope.selectedCategories[$scope.categories[i]] = value;
       }
     };
+    $scope.selectAllCategories(false);
 
     var prettySubject = Profile.subjectName;
     var subjects = [];
 
     Subject.get({}, function(sbjs){
-      console.log(sbjs);
       for(var i = 0; i < sbjs.length; i++) {
         subjects[i] = prettySubject(sbjs[i].subject);
       }
-      console.log(subjects);
     });
 
     $scope.getSubjects = function(query) {
