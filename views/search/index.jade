@@ -20,5 +20,5 @@ div(class='row', style='display:block')
       pre Cat: {{categories}}
 
   div(class='col-md-9')
-    ox-search-profile(users='search', selected-subject='selectedSubject', selected-categories='selectedCategories')
-pre {{search | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories}}
+    ox-search-profile(users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
+pre {{userBase | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories}}

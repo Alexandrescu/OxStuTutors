@@ -8,9 +8,9 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
       $scope.selectAllCategories(false);
     });
 
-    $scope.search = [];
+    $scope.userBase = [];
     User.search(function(results) {
-      $scope.search = results;
+      $scope.userBase = results;
     });
 
     $scope.selectedCategories = {};
