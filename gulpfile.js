@@ -69,7 +69,7 @@ gulp.task('vendor', function() {
 // when I am running several streams.
 
 // Compiling sass
-gulp.task('styles:scss', function() {
+gulp.task('styles:scss', ['vendor'], function() {
     gulp.src('./styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
