@@ -20,4 +20,4 @@ div(class='row', style='display:block')
 
   div(class='col-md-9')
     ox-search-profile(users='search', selected-subject='selectedSubject', selected-categories='selectedCategories')
-pre {{search | filterSubject:selectedSubject | filterCategories:selectedCategories}}
+pre {{search | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories}}

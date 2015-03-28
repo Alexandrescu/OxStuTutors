@@ -1,6 +1,6 @@
 div(class='row')
   table(class='col-md-12 table table-striped')
-    tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategories:selectedCategories')
+    tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories')
       td(style='padding: 20px')
         div(class='row')
           div(class='col-sm-3')
@@ -12,7 +12,7 @@ div(class='row')
               md-item(ng-repeat='subject in user.summary.summary')
                 md-item-content
                   div(md-tile-content)
-                    p {{prettySubject(subject.subject)}} : {{subject.description}}
+                    p {{subject.subject}} : {{subject.description}}
             h2 Degree
             md-list
               md-item(ng-repeat='degree in user.summary.degree', class='md-padding')

@@ -1,7 +1,7 @@
 var ox = angular.module('oxstututors');
 
-ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
-  function($scope, User, Subject, Profile) {
+ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
+  function($scope, User, Subject) {
     $scope.categories = [
       'Personal Statement',
       'Oxbridge Admissions Test',
@@ -24,12 +24,11 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
     };
     $scope.selectAllCategories(false);
 
-    var prettySubject = Profile.subjectName;
     var subjects = [];
 
     Subject.get({}, function(sbjs){
       for(var i = 0; i < sbjs.length; i++) {
-        subjects[i] = prettySubject(sbjs[i].subject);
+        subjects[i] = sbjs[i].subject;
       }
     });
 
@@ -53,4 +52,10 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
         return lowercaseSubject.indexOf(lowercaseQuery) === 0;
       }
     }
+
+    $scope.$watch('searchedSubject', function() {
+      if($scope.searchedSubject === "") {
+        $scope.selectedSubject = $scope.searchedSubject;
+      }
+    })
 }]);

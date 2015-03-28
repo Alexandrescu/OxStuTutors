@@ -25,7 +25,6 @@ ox.controller('EditProfileCtrl',
       var getProfilePromise = Profile.init($scope.currentUser._id, $scope);
 
       $scope.PrettyName = Profile.fieldName;
-      $scope.prettySubject = Profile.subjectName;
 
       $scope.isSubject = Profile.isSubject;
 

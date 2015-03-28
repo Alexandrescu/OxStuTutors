@@ -8,15 +8,12 @@ ox.directive('oxSearchProfile', function() {
       users: '=',
       selectedSubject: '=',
       selectedCategories: '='
-    },
-    controller : function($scope, Profile) {
-      $scope.prettySubject = Profile.subjectName;
     }
   }
 });
 
-ox.filter('filterSubject', ['Profile', function(Profile) {
-  return function(input, subject, categories) {
+ox.filter('filterSubject',function() {
+  return function(input, subject) {
     if(!subject) {
       return input;
     }
@@ -26,7 +23,7 @@ ox.filter('filterSubject', ['Profile', function(Profile) {
     for(var i = 0; i < input.length; i++) {
       var sbjs = input[i].profile.subjects;
       for(var j = 0; j < sbjs.length; j++) {
-        if(Profile.subjectName(sbjs[j].subject) === subject) {
+        if(sbjs[j].subject === subject) {
           output.push(input[i]);
         }
       }
@@ -34,10 +31,10 @@ ox.filter('filterSubject', ['Profile', function(Profile) {
 
     return output;
   }
-}]);
+});
 
-ox.filter('filterCategories', function() {
-  return function(input, categories) {
+ox.filter('filterCategoriesInSubject', function() {
+  return function(input, subject, categories) {
     if(!categories) {
       return input;
     }
@@ -46,19 +43,22 @@ ox.filter('filterCategories', function() {
 
     for(var i = 0; i < input.length; i++) {
       var sbjs = input[i].profile.subjects;
+      var added = false;
 
-      var toAdd = true;
+      for(var j = 0; j < sbjs.length && !added; j++) {
+        if(!subject || sbjs[j].subject === subject) {
+          var toAdd = true;
+          for(keyCategory in categories) {
+            if(categories[keyCategory] && !sbjs[j].categories[keyCategory]){
+              toAdd = false;
+            }
+          }
 
-      for(var j = 0; j < sbjs.length; j++){
-        for(var key in categories) {
-          if(categories[key] && !sbjs[j].categories[key]) {
-            toAdd = false;
+          if(toAdd) {
+            output.push(input[i]);
+            added = true;
           }
         }
-      }
-
-      if(toAdd) {
-        output.push(input[i]);
       }
     }
 
