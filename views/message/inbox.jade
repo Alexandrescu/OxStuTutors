@@ -6,16 +6,21 @@ div(layout='column', style='height:100%')
       md-content(class="md-padding")
         p(hide-md show-gt-md)
         | This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
+        pre {{userBase}}
     md-content(flex, class="md-padding", layout='column', layout-fill, layout-align='space-between center')
       div(layout='row', layout-fill, style='min-height:64px')
-        md-input-container(flex)
-          label Receiver
-          input(ng-model="receiver")
-        md-button(class="md-fab md-primary", aria-label="Comment")
+        md-autocomplete(flex,
+        md-selected-item='receiver',
+        md-search-text='searchText',
+        md-items='user in filterUserBase()',
+        md-item-text='user.username',
+        md-floating-label='Receiver')
+          span(md-highlight-text="searchText") {{user.username}}
+        md-button(class="md-fab md-primary", aria-label="Comment", ng-click='sendMessage()')
           span(class='glyphicon glyphicon-send')
       md-content(flex, layout-fill)
         p Cool, now it scrolls
       div(layout='row', layout-fill, style='height:200px')
         md-input-container(layout-fill)
-          label Message to
+          label Message {{receiver? 'to ' + receiver.username : ''}}
           textarea(ng-model="message", columns="1", md-maxlength="1500")
