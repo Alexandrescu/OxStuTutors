@@ -14,6 +14,11 @@ angular.module('oxstututors')
         'search': {
           method: 'GET',
           isArray: true,
+          url: '/auth/users/search'
+        },
+        'allUsers': {
+          method: 'GET',
+          isArray: true,
           url: '/auth/users/all'
         }
       });
