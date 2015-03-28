@@ -16,7 +16,8 @@ div(class='row', style='display:block')
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
       pre Asteas: {{selectedCategories}}
+      pre Subject: {{selectedSubject}}
 
   div(class='col-md-9')
-    ox-search-profile(users='search')
-div {{selectedSubject}}
+    ox-search-profile(users='search', selected-subject='selectedSubject', selected-categories='selectedCategories')
+pre {{search | filterSubject:selectedSubject | filterCategories:selectedCategories}}
