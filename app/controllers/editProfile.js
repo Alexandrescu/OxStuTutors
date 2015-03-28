@@ -38,9 +38,9 @@ ox.controller('EditProfileCtrl',
       var loadSubjectsPromise = getProfilePromise.then(function () {
         getCategoriesPromise.then(function(categories) {
           getSubjectPromise.then(function (subjects) {
-            console.log(categories);
             for (var i = 0; i < subjects.length; i++) {
               subjects[i].categories = {};
+              // This is ensuring that all the subjects have the required values
               for(var j = 0; j < categories.length; j++) {
                 subjects[i].categories[categories[j].category] = false;
               }
