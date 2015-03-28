@@ -25,7 +25,6 @@ ox.controller('EditProfileCtrl',
       var getProfilePromise = Profile.init($scope.currentUser._id, $scope);
 
       $scope.PrettyName = Profile.fieldName;
-      $scope.prettySubject = Profile.subjectName;
 
       $scope.isSubject = Profile.isSubject;
 
@@ -33,20 +32,29 @@ ox.controller('EditProfileCtrl',
         $scope.profile.subjects.push({subject: "", categories: {}});
       };
 
+      var getCategoriesPromise = Subject.categories().$promise;
       var getSubjectPromise = Subject.get().$promise;
-      var loadSubjectsPromise = getProfilePromise.then(function () {
-        getSubjectPromise.then(function (subjects) {
-          var subjectsLength = subjects.length;
-          for (var i = 0; i < subjectsLength; i++) {
-            var userSubjectLength = $scope.profile.subjects.length;
-            for (var j = 0; j < userSubjectLength; j++) {
-              if ($scope.profile.subjects[j].subject == subjects[i].subject) {
-                subjects[i] = $scope.profile.subjects[j];
-              }
-            }
-          }
 
-          $scope.tutoringSubject = subjects;
+      var loadSubjectsPromise = getProfilePromise.then(function () {
+        getCategoriesPromise.then(function(categories) {
+          getSubjectPromise.then(function (subjects) {
+            for (var i = 0; i < subjects.length; i++) {
+              subjects[i].categories = {};
+              // This is ensuring that all the subjects have the required values
+              for(var j = 0; j < categories.length; j++) {
+                subjects[i].categories[categories[j].category] = false;
+              }
+
+              for (var j = 0; j < $scope.profile.subjects.length; j++) {
+                if ($scope.profile.subjects[j].subject == subjects[i].subject) {
+                  subjects[i] = $scope.profile.subjects[j];
+                }
+              }
+              delete subjects[i]._id;
+            }
+
+            $scope.tutoringSubject = subjects;
+          })
         })
       });
 

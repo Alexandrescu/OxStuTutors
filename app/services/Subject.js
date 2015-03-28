@@ -6,6 +6,11 @@ angular.module('oxstututors')
       'get': {
         method: 'GET',
         isArray: true
+      },
+      'categories' : {
+        method: 'GET',
+        isArray: true,
+        url: '/subject/categories'
       }
     });
   });

@@ -24,7 +24,7 @@ div.container
           md-item(ng-repeat='item in value track by $index')
             md-item-content
               div.md-title-content
-                h3 {{prettySubject(item.subject)}}
+                h3 {{item.subject}}
                 md-list
                   md-item(ng-repeat='(qualName, isQual) in item.categories')
                     md-item-contetn

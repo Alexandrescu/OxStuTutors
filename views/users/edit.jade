@@ -6,7 +6,7 @@ div.container
     div.col-sm-8
       div
         h1 EDIIIIT {{currentUser}} Profile
-        pre {{tutoringSubject}}
+        pre Subjects {{tutoringSubject}}
         pre {{profile}}
         span Subject this guy teaches
 
@@ -31,7 +31,7 @@ div.container
           md-item(ng-repeat='item in value track by $index')
             md-item-content
               div.md-title-content
-                h3 {{prettySubject(item.subject)}}
+                h3 {{item.subject}}
                 md-list
                   md-item(ng-repeat='(qualName, isQual) in item.categories')
                     md-item-contetn
@@ -56,9 +56,9 @@ div.container
             md-item-content
               div(flex)
                 md-select(ng-model='profile[key][$index]', md-on-open="loadSubjects()")
-                  md-select-label {{ profile[key][$index].subject ? prettySubject(profile[key][$index].subject) : 'Choose subject' }}
+                  md-select-label {{ profile[key][$index].subject ? profile[key][$index].subject : 'Choose subject' }}
                   md-option(ng-repeat='subject in tutoringSubject',
-                  ng-value='subject') {{ prettySubject(subject.subject) }}
+                  ng-value='subject') {{ subject.subject }}
               div(flex)
                 md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
                   ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}

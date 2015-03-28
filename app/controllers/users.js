@@ -27,5 +27,4 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
 
     $scope.isDegree = Profile.isDegree;
     $scope.isSubject = Profile.isSubject;
-    $scope.prettySubject = Profile.subjectName;
   }]);

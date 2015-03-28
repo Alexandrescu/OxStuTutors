@@ -1,35 +1,30 @@
 var ox = angular.module('oxstututors');
 
-ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
-  function($scope, User, Subject, Profile) {
-    $scope.categories = [
-      'Personal Statement',
-      'Oxbridge Admissions Test',
-      'Oxbridge Interview',
-      'A-Levels',
-      'IB',
-      'SAT',
-      'GCSE'];
+ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
+  function($scope, User, Subject) {
+    $scope.categories = [];
+    Subject.categories({}, function(categories) {
+      $scope.categories = categories;
+      $scope.selectAllCategories(false);
+    });
 
     $scope.search = [];
     User.search(function(results) {
       $scope.search = results;
     });
-    $scope.selectedCategories = {};
 
+    $scope.selectedCategories = {};
     $scope.selectAllCategories = function (value) {
       for(var i in $scope.categories) {
-        $scope.selectedCategories[$scope.categories[i]] = value;
+        $scope.selectedCategories[$scope.categories[i].category] = value;
       }
     };
-    $scope.selectAllCategories(false);
 
-    var prettySubject = Profile.subjectName;
     var subjects = [];
 
     Subject.get({}, function(sbjs){
       for(var i = 0; i < sbjs.length; i++) {
-        subjects[i] = prettySubject(sbjs[i].subject);
+        subjects[i] = sbjs[i].subject;
       }
     });
 
@@ -53,4 +48,10 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject', 'Profile',
         return lowercaseSubject.indexOf(lowercaseQuery) === 0;
       }
     }
+
+    $scope.$watch('searchedSubject', function() {
+      if($scope.searchedSubject === "") {
+        $scope.selectedSubject = $scope.searchedSubject;
+      }
+    })
 }]);
