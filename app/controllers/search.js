@@ -2,27 +2,23 @@ var ox = angular.module('oxstututors');
 
 ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
   function($scope, User, Subject) {
-    $scope.categories = [
-      'Personal Statement',
-      'Oxbridge Admissions Test',
-      'Oxbridge Interview',
-      'A-Levels',
-      'IB',
-      'SAT',
-      'GCSE'];
+    $scope.categories = [];
+    Subject.categories({}, function(categories) {
+      $scope.categories = categories;
+      $scope.selectAllCategories(false);
+    });
 
     $scope.search = [];
     User.search(function(results) {
       $scope.search = results;
     });
-    $scope.selectedCategories = {};
 
+    $scope.selectedCategories = {};
     $scope.selectAllCategories = function (value) {
       for(var i in $scope.categories) {
-        $scope.selectedCategories[$scope.categories[i]] = value;
+        $scope.selectedCategories[$scope.categories[i].category] = value;
       }
     };
-    $scope.selectAllCategories(false);
 
     var subjects = [];
 

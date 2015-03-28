@@ -11,12 +11,13 @@ div(class='row', style='display:block')
 
     div(flex)
       md-checkbox(ng-repeat='category in categories'
-      ng-model='selectedCategories[category]') {{category}}
+      ng-model='selectedCategories[category.category]') {{category.category}}
       section(layout="row" layout-sm="column" layout-align="center center")
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
       pre Asteas: {{selectedCategories}}
       pre Subject: {{selectedSubject}}
+      pre Cat: {{categories}}
 
   div(class='col-md-9')
     ox-search-profile(users='search', selected-subject='selectedSubject', selected-categories='selectedCategories')
