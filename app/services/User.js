@@ -10,6 +10,11 @@ angular.module('oxstututors')
       {
         'update': {
           method: 'PUT'
+        },
+        'search': {
+          method: 'GET',
+          isArray: true,
+          url: '/auth/users/all'
         }
       });
   });

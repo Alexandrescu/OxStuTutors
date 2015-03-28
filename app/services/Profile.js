@@ -53,20 +53,6 @@ angular.module('oxstututors')
       return name;
     };
 
-    var subjectMap = {
-      'compsci': 'Computer Science',
-      'maths': 'Mathematics',
-      'oxbridge': 'OxBridge interview',
-      'chemestry': 'Chemistry'
-    };
-
-    Profile.subjectName = function (abrv) {
-      if (abrv in subjectMap) {
-        return subjectMap[abrv];
-      }
-      return abrv;
-    };
-
     Profile.isDegree = function (key) {
       return key == 'qualifications';
     };

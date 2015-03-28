@@ -35,10 +35,6 @@ vendor = [
         destination: './public/vendor/bootstrap/js/'
     },
     {
-        file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
-        destination: './sass/'
-    },
-    {
         file: './bower_components/angular-material/angular-material.*',
         destination: './public/vendor/material/'
     },
@@ -53,14 +49,17 @@ vendor = [
 ];
 
 gulp.task('vendor', function() {
-    var last;
+    var specialEntry = {
+      file: './bower_components/bootstrap-sass-official/assets/stylesheets/**/*.scss',
+      destination: './sass/'
+    };
+
     vendor.forEach(function(entry) {
-       last = gulp.src(entry.file).
-           pipe(gulp.dest(entry.destination));
+       gulp.src(entry.file).pipe(gulp.dest(entry.destination));
     });
 
     // ****** THIS WORKS BECAUSE SASS IS THE LAST STREAM
-    return last;
+    return gulp.src(specialEntry.file).pipe(gulp.dest(specialEntry.destination));
 });
 
 // TODO: Implement task dependency on gulp styles:scss
@@ -69,7 +68,7 @@ gulp.task('vendor', function() {
 // when I am running several streams.
 
 // Compiling sass
-gulp.task('styles:scss', function() {
+gulp.task('styles:scss', ['vendor'], function() {
     gulp.src('./styles/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
