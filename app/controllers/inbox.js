@@ -41,6 +41,8 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scop
   $scope.showMessages = function(receiver, receiverId, msgs) {
     reloadReceiver = receiver;
 
+    Inbox.readMessages(receiverId, $scope.currentUser._id);
+
     $scope.displayMessages = Inbox.sortByDate(msgs);
     $scope.disableReceiver = true;
     $scope.receiver = {

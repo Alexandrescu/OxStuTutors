@@ -20,7 +20,7 @@ md-toolbar.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
         li: md-button(href='/inbox/')
           span(class="glyphicon glyphicon-envelope")
-            span(class='badge') 10
+            span(class='badge') {{unread?unread:''}}
         li: md-button(href='/users/{{currentUser._id}}')
           | {{ currentUser.username }}
         li: md-button(ng-click='logout()', href='#')

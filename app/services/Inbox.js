@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('oxstututors')
-  .factory('Inbox', ['Auth', 'Message', function (Auth, Message) {
+  .factory('Inbox', ['Message', '$rootScope', function (Message, $rootScope) {
     // After this I should have the user in currentUser
-    Auth.currentUser();
     var Inbox = {};
 
     Inbox.messages = function() {
@@ -53,6 +52,21 @@ angular.module('oxstututors')
       }
 
       return result;
+    };
+
+    Inbox.readMessages = function(fromId, toId) {
+      Message.read({fromId: fromId, toId: toId}, function(res) {
+        $rootScope.unread -= res.read;
+      });
+
+    };
+
+    Inbox.updateUnread = function() {
+      console.log('doing this');
+      Message.unread({to: $rootScope.currentUser._id}, function(counter) {
+        console.log(counter);
+        $rootScope.unread = counter.unread;
+      });
     };
 
     return Inbox;

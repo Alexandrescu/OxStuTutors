@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('oxstututors')
-  .factory('Auth', function Auth($location, $rootScope, Session, User) {
+  .factory('Auth', ['$location', '$rootScope', 'Session', 'User', 'Inbox',
+    function Auth($location, $rootScope, Session, User, Inbox) {
     return {
 
       login: function (provider, user, callback) {
@@ -14,6 +15,7 @@ angular.module('oxstututors')
           rememberMe: user.rememberMe
         }, function (user) {
           $rootScope.currentUser = user;
+          Inbox.updateUnread();
           return cb();
         }, function (err) {
           return cb(err.data);
@@ -22,11 +24,15 @@ angular.module('oxstututors')
 
       logout: function (callback) {
         var cb = callback || angular.noop;
+
         Session.delete(function (res) {
-            $rootScope.currentUser = null;
+            delete $rootScope.unread;
+            delete $rootScope.currentUser;
             return cb();
           },
           function (err) {
+            delete $rootScope.unread;
+            delete $rootScope.currentUser;
             return cb(err.data);
           });
       },
@@ -45,9 +51,11 @@ angular.module('oxstututors')
           });
       },
 
-      currentUser: function () {
+      currentUser: function (callback) {
+        var cb = callback || angular.noop;
         Session.get(function (user) {
           $rootScope.currentUser = user;
+          cb();
         });
       },
 
@@ -78,4 +86,4 @@ angular.module('oxstututors')
         });
       }
     };
-  })
+  }]);
