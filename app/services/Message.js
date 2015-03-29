@@ -18,6 +18,14 @@ angular.module('oxstututors')
           method: 'GET',
           isArray: true,
           url: '/message/all/'
+        },
+        'read' : {
+          method: 'PUT',
+          url: '/message/read/'
+        },
+        'unread' : {
+          method: 'GET',
+          url: '/message/unread/'
         }
       });
   });
