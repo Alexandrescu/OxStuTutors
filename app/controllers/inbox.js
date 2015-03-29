@@ -18,7 +18,17 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   };
 
   $scope.sendMessage = function() {
-    console.log($scope.receiver);
+    $scope.sendingMessage = true;
+    if(!$scope.currentUser || !$scope.receiver || !$scope.message) {
+      $scope.messageRequired = true;
+      $scope.messageError = true;
+      $scope.sendingMessage = false;
+      return;
+    }
+    $scope.messageRequired = false;
+    $scope.buttonDisable = true;
+    $scope.messageDisable = true;
+
     var message = {
       from: $scope.currentUser,
       to: $scope.receiver,
@@ -31,6 +41,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
         reloadReceiver = $scope.receiver.username;
       }
       $scope.message = "";
+      $scope.sendingMessage = false;
     });
   };
 
@@ -46,6 +57,9 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   loadMessages();
 
   $scope.showMessages = function(receiver, receiverId, msgs) {
+    $scope.messageRequired = false;
+    $scope.buttonDisable = false;
+    $scope.messageDisable = false;
     reloadReceiver = receiver;
 
     Inbox.readMessages(receiverId, $scope.currentUser._id);

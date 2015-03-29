@@ -25,7 +25,7 @@ div(layout='column', style='height:100%')
         md-search-text='searchText',
         md-items='user in filterUserBase()',
         md-item-text='user.username',
-        md-floating-label='Receiver')
+        md-floating-label='Receiver', required)
           span(md-highlight-text="searchText") {{user.username}}
       md-content(flex, layout-fill)
         md-list
@@ -38,9 +38,12 @@ div(layout='column', style='height:100%')
                 h2 {{msg.from.username}}
                 h3 {{msg.content}}
             md-divider
+        md-progress-linear(ng-show='sendingMessage', md-mode="indeterminate")
       div(layout='row', layout-fill, style='height:200px')
         md-input-container(layout-fill)
           label Message {{receiver? 'to ' + receiver.username : ''}}
-          textarea(ng-model="message", columns="1", md-maxlength="1500")
-        md-button(class="md-fab md-primary", aria-label="Comment", ng-click='sendMessage()')
+          textarea(ng-model="message", columns="1", md-maxlength="1500", ng-disabled='messageDisable', ng-required='messageRequired')
+          div(ng-show='messageError', ng-messages='messageError')
+            div(ng-message='required') Not a valid message or receiver.
+        md-button(class="md-fab md-primary", aria-label="Comment", ng-click='sendMessage()', ng-disabled='buttonDisable')
           span(class='glyphicon glyphicon-send')
