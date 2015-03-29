@@ -64,6 +64,8 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
         userId: $routeParams.receiverId,
         username: $routeParams.receiver
       }
+      delete $routeParams.receiver;
+      delete $routeParams.receiverId;
     }
     else {
       $scope.receiver = {};

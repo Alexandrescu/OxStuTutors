@@ -9,6 +9,10 @@ div(layout='column', style='height:100%')
             md-item-content
               md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)')
                 md-content {{keyUser}}
+        md-button(layout-fill, ng-click='newMessage()')
+          md-content
+            span(class='glyphicon glyphicon-plus')
+            | New message
         p(hide-md show-gt-md)
         | This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
         pre {{inbox | json}}
