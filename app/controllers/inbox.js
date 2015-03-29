@@ -3,7 +3,7 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Message, User) {
+ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scope, Message, Inbox, User) {
   $scope.userBase = User.allUsers();
 
   $scope.filterUserBase = function() {
@@ -15,6 +15,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Messag
   };
 
   $scope.sendMessage = function() {
+    console.log($scope.receiver);
     var message = {
       from: $scope.currentUser,
       to: $scope.receiver,
@@ -23,5 +24,18 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Messag
     Message.save(message);
   };
 
-  $scope.inbox = Message.all();
+  Message.all(function(inbox) {
+    $scope.inbox = Inbox.groupInbox(inbox, $scope.currentUser._id);
+  });
+
+  $scope.showMessages = function(user, msgs) {
+    console.log(user);
+
+    $scope.displayMessages = Inbox.sortByDate(msgs);
+    $scope.disableReceiver = true;
+    $scope.receiver = {
+      userId: user._id,
+      username: user.username
+    };
+  }
 }]);
