@@ -28,14 +28,12 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scop
     $scope.inbox = Inbox.groupInbox(inbox, $scope.currentUser._id);
   });
 
-  $scope.showMessages = function(user, msgs) {
-    console.log(user);
-
+  $scope.showMessages = function(receiver, receiverId, msgs) {
     $scope.displayMessages = Inbox.sortByDate(msgs);
     $scope.disableReceiver = true;
     $scope.receiver = {
-      userId: user._id,
-      username: user.username
+      userId: receiverId,
+      username: receiver
     };
   }
 }]);

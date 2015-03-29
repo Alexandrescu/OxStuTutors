@@ -7,7 +7,7 @@ div(layout='column', style='height:100%')
         md-list
           md-item(ng-repeat='(keyUser, msgs) in inbox')
             md-item-content
-              md-button(layout-fill, ng-click='showMessages(keyUser, msgs)')
+              md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)')
                 md-content {{keyUser}}
         p(hide-md show-gt-md)
         | This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
