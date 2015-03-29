@@ -22,6 +22,6 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Messag
       to: $scope.receiver,
       message: $scope.message
     };
-    Message.post(message);
+    Message.save(message);
   }
 }]);
