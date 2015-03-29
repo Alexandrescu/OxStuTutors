@@ -4,6 +4,7 @@
 var ox = angular.module('oxstututors');
 
 ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scope, Message, Inbox, User) {
+  var reloadReceiver;
   $scope.userBase = User.allUsers();
 
   $scope.filterUserBase = function() {
@@ -15,20 +16,31 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scop
   };
 
   $scope.sendMessage = function() {
-    console.log($scope.receiver);
     var message = {
       from: $scope.currentUser,
       to: $scope.receiver,
       message: $scope.message
     };
-    Message.save(message);
+    $scope.message = "";
+    Message.save({}, message, function(){
+      loadMessages();
+    });
   };
 
-  Message.all(function(inbox) {
-    $scope.inbox = Inbox.groupInbox(inbox, $scope.currentUser._id);
-  });
+  function loadMessages() {
+    Message.all(function (inbox) {
+      $scope.inbox = Inbox.groupInbox(inbox, $scope.currentUser._id);
+      if(reloadReceiver) {
+        console.log('reloading');
+        $scope.showMessages(reloadReceiver, $scope.inbox[reloadReceiver].receiver, $scope.inbox[reloadReceiver].messages);
+      }
+    });
+  }
+  loadMessages();
 
   $scope.showMessages = function(receiver, receiverId, msgs) {
+    reloadReceiver = receiver;
+
     $scope.displayMessages = Inbox.sortByDate(msgs);
     $scope.disableReceiver = true;
     $scope.receiver = {

@@ -26,7 +26,9 @@ div(layout='column', style='height:100%')
         md-list
           md-item(ng-repeat='msg in displayMessages')
             md-item-content(ng-class='{"message-them" : msg.from._id == currentUser._id}')
-              div(class='md-tile-left md-padding') {{msg.date | date:'MMM d'}}
+              div(class='md-tile-left md-padding')
+              | {{msg.date | date:'shortTime'}} <br>
+              | {{msg.date | date:'MMM d'}}
               div(class='md-tile-content')
                 h2 {{msg.from.username}}
                 h3 {{msg.content}}
