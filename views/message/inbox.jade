@@ -7,7 +7,8 @@ div(layout='column', style='height:100%')
         md-list
           md-item(ng-repeat='(keyUser, msgs) in inbox')
             md-item-content
-              md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)')
+              md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
+              ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
                 md-content {{keyUser}}
         md-button(layout-fill, ng-click='newMessage()')
           md-content

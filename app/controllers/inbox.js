@@ -5,7 +5,8 @@ var ox = angular.module('oxstututors');
 
 ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams',
   function($scope, Message, Inbox, User, $routeParams) {
-  var reloadReceiver, newMessage = false;
+  var reloadReceiver;
+  $scope.newMessageFlag = false;
   $scope.userBase = User.allUsers();
 
   $scope.filterUserBase = function() {
@@ -25,8 +26,8 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     };
     Message.save({}, message, function(){
       loadMessages();
-      if(newMessage) {
-        newMessage = false;
+      if($scope.newMessageFlag) {
+        $scope.newMessageFlag = false;
         reloadReceiver = $scope.receiver.username;
       }
       $scope.message = "";
@@ -49,6 +50,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
 
     Inbox.readMessages(receiverId, $scope.currentUser._id);
 
+    $scope.newMessageFlag = false;
     $scope.displayMessages = Inbox.sortByDate(msgs);
     $scope.disableReceiver = true;
     $scope.receiver = {
@@ -72,7 +74,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     }
     $scope.displayMessages = [];
     $scope.disableReceiver = false;
-    newMessage = true;
+    $scope.newMessageFlag = true;
   };
 
   $scope.newMessage();
