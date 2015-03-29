@@ -6,8 +6,6 @@ var ox = angular.module('oxstututors');
 ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Message, User) {
   $scope.userBase = User.allUsers();
 
-  $scope.test = "Andrei";
-
   $scope.filterUserBase = function() {
     return $scope.userBase.filter(function(user) {
       var lowercaseUserName = angular.lowercase(user.username);
@@ -23,5 +21,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'User', function($scope, Messag
       message: $scope.message
     };
     Message.save(message);
-  }
+  };
+
+  $scope.inbox = Message.all();
 }]);
