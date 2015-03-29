@@ -7,7 +7,11 @@ div(class='row')
             img(ng-src="/avatar/{{user.userId}}", style='max-height:200px')
           div(class='col-sm-9')
             h1
-             a(ng-href='/users/{{user.userId}}') {{user.username}}
+              a(ng-href='/users/{{user.userId}}') {{user.username}}
+              md-button(class='md-fab md-primary',
+              ng-href='http://localhost:3000/inbox/?receiver={{user.username}}&receiverId={{user.userId}}',
+              aria-label='Email')
+                span(class='glyphicon glyphicon-comment')
             h2 Subjects
             md-list
               md-item(ng-repeat='subject in user.summary.summary')

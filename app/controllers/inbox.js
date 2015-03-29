@@ -3,8 +3,9 @@
 
 var ox = angular.module('oxstututors');
 
-ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scope, Message, Inbox, User) {
-  var reloadReceiver;
+ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams',
+  function($scope, Message, Inbox, User, $routeParams) {
+  var reloadReceiver, newMessage = false;
   $scope.userBase = User.allUsers();
 
   $scope.filterUserBase = function() {
@@ -16,14 +17,19 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scop
   };
 
   $scope.sendMessage = function() {
+    console.log($scope.receiver);
     var message = {
       from: $scope.currentUser,
       to: $scope.receiver,
       message: $scope.message
     };
-    $scope.message = "";
     Message.save({}, message, function(){
       loadMessages();
+      if(newMessage) {
+        newMessage = false;
+        reloadReceiver = $scope.receiver.username;
+      }
+      $scope.message = "";
     });
   };
 
@@ -49,5 +55,23 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', function($scop
       userId: receiverId,
       username: receiver
     };
-  }
+  };
+
+  $scope.newMessage = function() {
+    console.log($routeParams);
+    if($routeParams.receiver && $routeParams.receiverId) {
+      $scope.receiver = {
+        userId: $routeParams.receiverId,
+        username: $routeParams.receiver
+      }
+    }
+    else {
+      $scope.receiver = {};
+    }
+    $scope.displayMessages = [];
+    $scope.disableReceiver = false;
+    newMessage = true;
+  };
+
+  $scope.newMessage();
 }]);
