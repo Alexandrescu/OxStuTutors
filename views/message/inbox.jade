@@ -10,12 +10,14 @@ div(layout='column', style='height:100%')
               md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
               ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
                 md-content {{keyUser}}
+                  span(class='badge', ng-show="readCount = (msgs.messages | readMessages:currentUser.username)") {{readCount}}
         md-button(layout-fill, ng-click='newMessage()')
           md-content
             span(class='glyphicon glyphicon-plus')
             | New message
         p(hide-md show-gt-md)
         | This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
+        pre {{currentUser}}
         pre {{inbox | json}}
     md-content(flex, class="md-padding", layout='column', layout-fill, layout-align='space-between center')
       div(layout='row', layout-fill, style='min-height:64px')
@@ -42,7 +44,9 @@ div(layout='column', style='height:100%')
       div(layout='row', layout-fill, style='height:200px')
         md-input-container(layout-fill)
           label Message {{receiver? 'to ' + receiver.username : ''}}
-          textarea(ng-model="message", columns="1", md-maxlength="1500", ng-disabled='messageDisable', ng-required='messageRequired')
+          textarea(ng-model="message", columns="1", md-maxlength="1500",
+          ng-disabled='messageDisable', ng-required='messageRequired',
+          ng-focus='messageError = false')
           div(ng-show='messageError', ng-messages='messageError')
             div(ng-message='required') Not a valid message or receiver.
         md-button(class="md-fab md-primary", aria-label="Comment", ng-click='sendMessage()', ng-disabled='buttonDisable')

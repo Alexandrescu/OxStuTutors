@@ -88,8 +88,22 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     }
     $scope.displayMessages = [];
     $scope.disableReceiver = false;
+    $scope.buttonDisable = false;
+    $scope.messageDisable = false;
     $scope.newMessageFlag = true;
   };
 
   $scope.newMessage();
 }]);
+
+ox.filter('readMessages', function() {
+  return function(messages, user) {
+    var counter = 0;
+    for(var i = 0; i < messages.length; i++) {
+      if(!messages[i].read && messages[i].to.username == user) {
+        counter++;
+      }
+    }
+    return counter;
+  }
+});
