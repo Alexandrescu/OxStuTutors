@@ -64,7 +64,12 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     $scope.messageDisable = false;
     reloadReceiver = receiver;
 
-    Inbox.readMessages(receiverId, $scope.currentUser._id);
+    Inbox.readMessages(receiverId, $scope.currentUser._id, function(update) {
+      console.log({update: update});
+      console.log($scope.readCount);
+      console.log({receiver: receiver});
+      $scope.inbox[receiver].unread -= update;
+    });
 
     $scope.newMessageFlag = false;
     $scope.displayMessages = Inbox.sortByDate(msgs);
@@ -96,15 +101,3 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
 
   $scope.newMessage();
 }]);
-
-ox.filter('readMessages', function() {
-  return function(messages, user) {
-    var counter = 0;
-    for(var i = 0; i < messages.length; i++) {
-      if(!messages[i].read && messages[i].to.username == user) {
-        counter++;
-      }
-    }
-    return counter;
-  }
-});

@@ -10,7 +10,8 @@ div(layout='column', style='height:100%')
               md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
               ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
                 md-content {{keyUser}}
-                  span(class='badge', ng-show="readCount = (msgs.messages | readMessages:currentUser.username)") {{readCount}}
+                  span(class='badge',
+                  ng-show='msgs.unread') {{msgs.unread}}
         md-button(layout-fill, ng-click='newMessage()')
           md-content
             span(class='glyphicon glyphicon-plus')
