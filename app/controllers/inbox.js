@@ -1,11 +1,9 @@
-// This should be linked to the model in models/User
-// TODO add typescript to angular
-
 var ox = angular.module('oxstututors');
 
 ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams',
   function($scope, Message, Inbox, User, $routeParams) {
   var reloadReceiver;
+  // Keeping track if new Message
   $scope.newMessageFlag = false;
   $scope.userBase = User.allUsers();
 
@@ -25,7 +23,10 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
       $scope.sendingMessage = false;
       return;
     }
+
     $scope.messageRequired = false;
+    $scope.messageError = false;
+
     $scope.buttonDisable = true;
     $scope.messageDisable = true;
 
@@ -41,6 +42,8 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
         reloadReceiver = $scope.receiver.username;
       }
       $scope.message = "";
+      $scope.buttonDisable = false;
+      $scope.messageDisable = false;
       $scope.sendingMessage = false;
     });
   };
@@ -49,7 +52,6 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     Message.all(function (inbox) {
       $scope.inbox = Inbox.groupInbox(inbox, $scope.currentUser._id);
       if(reloadReceiver) {
-        console.log('reloading');
         $scope.showMessages(reloadReceiver, $scope.inbox[reloadReceiver].receiver, $scope.inbox[reloadReceiver].messages);
       }
     });
@@ -79,7 +81,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
       $scope.receiver = {
         userId: $routeParams.receiverId,
         username: $routeParams.receiver
-      }
+      };
       delete $routeParams.receiver;
       delete $routeParams.receiverId;
     }
