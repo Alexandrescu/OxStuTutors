@@ -70,16 +70,15 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     $scope.displayMessages = Inbox.sortByDate(msgs);
     $scope.disableReceiver = true;
     $scope.receiver = {
-      userId: receiverId,
+      _id: receiverId,
       username: receiver
     };
   };
 
   $scope.newMessage = function() {
-    console.log($routeParams);
     if($routeParams.receiver && $routeParams.receiverId) {
       $scope.receiver = {
-        userId: $routeParams.receiverId,
+        _id: $routeParams.receiverId,
         username: $routeParams.receiver
       };
       delete $routeParams.receiver;
