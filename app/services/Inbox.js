@@ -5,16 +5,10 @@ angular.module('oxstututors')
     // After this I should have the user in currentUser
     var Inbox = {};
 
-    Inbox.messages = function() {
-      return Message.all();
-    };
-
     Inbox.sortByDate = function(messages) {
       function compare(a, b) {
         var momentA = moment(a.date);
         var momentB = moment(b.date);
-
-        console.log(momentA);
 
         return momentB.diff(momentA);
       }
@@ -33,6 +27,7 @@ angular.module('oxstututors')
           }
           else {
             result[inbox[i].to.username] = {
+              unread: 0,
               receiver : inbox[i].to._id,
               messages : [inbox[i]]
             };
@@ -44,9 +39,13 @@ angular.module('oxstututors')
           }
           else {
             result[inbox[i].from.username] = {
+              unread: 0,
               receiver: inbox[i].from._id,
               messages: [inbox[i]]
             };
+          }
+          if(!inbox[i].read) {
+            result[inbox[i].from.username].unread += 1;
           }
         }
       }
@@ -54,17 +53,16 @@ angular.module('oxstututors')
       return result;
     };
 
-    Inbox.readMessages = function(fromId, toId) {
+    Inbox.readMessages = function(fromId, toId, callback) {
+      var cb = callback || angular.noop;
       Message.read({fromId: fromId, toId: toId}, function(res) {
         $rootScope.unread -= res.read;
+        cb(res.read);
       });
-
     };
 
     Inbox.updateUnread = function() {
-      console.log('doing this');
       Message.unread({to: $rootScope.currentUser._id}, function(counter) {
-        console.log(counter);
         $rootScope.unread = counter.unread;
       });
     };

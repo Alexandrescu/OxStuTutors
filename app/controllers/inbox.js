@@ -17,6 +17,11 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
 
   $scope.sendMessage = function() {
     $scope.sendingMessage = true;
+    if($scope.currentUser._id == $scope.receiver._id) {
+      $scope.messageError = true;
+      $scope.sendingMessage = false;
+      return;
+    }
     if(!$scope.currentUser || !$scope.receiver || !$scope.message) {
       $scope.messageRequired = true;
       $scope.messageError = true;
@@ -65,9 +70,6 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
     reloadReceiver = receiver;
 
     Inbox.readMessages(receiverId, $scope.currentUser._id, function(update) {
-      console.log({update: update});
-      console.log($scope.readCount);
-      console.log({receiver: receiver});
       $scope.inbox[receiver].unread -= update;
     });
 
