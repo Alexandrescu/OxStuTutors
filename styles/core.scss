@@ -45,6 +45,14 @@ select, textarea, input, .form-control {
   @extend .navbar;
   @include box-shadow(0 2px 5px rgba(0, 0, 0, .125));
 
+  .md-button {
+    margin: 0;
+  }
+
+  ul li {
+    margin: 0;
+  }
+
   .navbar-brand {
     @extend .navbar-brand;
 
@@ -98,10 +106,18 @@ select, textarea, input, .form-control {
   }
 }
 
- .force-wrap {
-   white-space: pre-wrap; /* css-3 */
-   white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-   white-space: -pre-wrap; /* Opera 4-6 */
-   white-space: -o-pre-wrap; /* Opera 7 */
-   word-wrap: break-word; /* Internet Explorer 5.5+ */
- }
+.force-wrap {
+ white-space: pre-wrap; /* css-3 */
+ white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+ white-space: -pre-wrap; /* Opera 4-6 */
+ white-space: -o-pre-wrap; /* Opera 7 */
+ word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.message-me {
+  background: #ffffff;
+}
+
+.message-them {
+  background: whitesmoke;
+}

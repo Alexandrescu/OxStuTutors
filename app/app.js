@@ -34,6 +34,10 @@ angular.module('oxstututors', [
         templateUrl: '/pages/search',
         controller: 'SearchCtrl'
       })
+      .when('/inbox/', {
+        templateUrl: '/message/inbox',
+        controller: 'InboxCtrl'
+      })
       .otherwise({
         // Should redirect to an error page
         redirectTo: '/'

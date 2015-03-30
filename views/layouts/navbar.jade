@@ -1,4 +1,4 @@
-md-toolbar.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak)
+md-toolbar.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng-cloak, style='max-height:50px')
   div.container
     div.navbar-header
       a.navbar-brand(href='#')
@@ -18,6 +18,9 @@ md-toolbar.navbar.navbar-default.navbar-fixed-top(ng-controller='NavbarCtrl', ng
           i.fa.fa-user
           | Sign In
       ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
+        li: md-button(href='/inbox/')
+          span(class="glyphicon glyphicon-envelope")
+            span(class='badge') {{unread?unread:''}}
         li: md-button(href='/users/{{currentUser._id}}')
           | {{ currentUser.username }}
         li: md-button(ng-click='logout()', href='#')

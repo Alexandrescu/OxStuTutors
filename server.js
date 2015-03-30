@@ -85,6 +85,7 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var routes = require('./lib/routes/index');
 var authRoutes = require('./lib/routes/auth');
 var avatarRoutes = require('./lib/routes/avatar');
+var messageRoutes = require('./lib/routes/message');
 var pagesRoutes = require('./lib/routes/pages');
 var subjectRoutes = require('./lib/routes/subject');
 
@@ -95,6 +96,7 @@ app.use('/', routes);
 app.use('/auth', authRoutes);
 app.use('/avatar', avatarRoutes);
 app.use('/pages', pagesRoutes);
+app.use('/message', messageRoutes);
 app.use('/subject', subjectRoutes);
 
 // ** Routing
