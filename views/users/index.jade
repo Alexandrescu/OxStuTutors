@@ -6,11 +6,10 @@ div.container
     div.col-sm-8
       div
         ox-search-profile(users='[user]', is-profile='true')
-        pre {{user}}
+        a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-sm', style="margin-left:20px") Edit
     div.col-sm-4
-      p We will have a photo here
       img(ng-src='{{img}}', style='max-height:200px')
-  div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
+  div.row(ng-repeat='(key, value) in user.profile', layout='column', class='md-padding')
     div.col-sm-12(ng-show='value.length')
       md-toolbar.md-theme-light
         h1.md-toolbar-tools

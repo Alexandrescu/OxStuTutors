@@ -16,10 +16,10 @@ angular.module('oxstututors')
     // profile page.
 
     var toastPosition = {
-      bottom: true,
+      bottom: false,
       right: true,
       left: false,
-      top: false
+      top: true
     };
 
     Profile.getToastPosition = function () {
@@ -30,6 +30,16 @@ angular.module('oxstututors')
         .join(' ');
     };
 
+    function isCompleted(profile, hasImage) {
+      if(profile.subjects &&
+         profile.approach &&
+         profile.qualifications &&
+         profile.funFact &&
+         hasImage)
+        return true;
+      return false;
+    }
+
     Profile.init = function (userId, scope) {
       scope.img = "/avatar/" + userId;
       return User.get({userId: userId}, function (profile) {
@@ -37,14 +47,14 @@ angular.module('oxstututors')
           _id : userId,
           profile: profile.profile,
           username: profile.username,
-          summary: profile.summary
+          summary: profile.summary,
+          completed: isCompleted(profile.profile, true)
         }
       }).$promise;
     };
 
     Profile.summary = function (userId, result) {
       User.get({userId: userId}, function (user) {
-        console.log(user.summary);
         result[userId] = user.summary;
       });
     };

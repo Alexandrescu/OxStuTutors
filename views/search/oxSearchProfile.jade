@@ -1,9 +1,9 @@
 div(class='row')
-  table(ng-class='{"col-md-12 table table-striped" : !isProfile}')
+  table(ng-class='{"table table-striped" : !isProfile}', class='col-md-12')
     tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories')
       td(style='padding: 20px')
         div(class='row')
-          div(class='col-sm-3')
+          div(class='col-sm-3', ng-hide='isProfile')
             img(ng-src="/avatar/{{user.userId}}", style='max-height:200px')
           div(class='col-sm-9')
             h1
