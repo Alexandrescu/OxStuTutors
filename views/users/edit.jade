@@ -78,7 +78,10 @@ div.container
           md-item(ng-repeat='v in value track by $index')
             md-item-content
               md-input-container
-                input(ng-model='user.profile[key][$index]', size='30', maxlength='30')
+                div(flex)
+                  md-button(class='md-fab', ng-click='removeDegree($index)')
+                    span(class='glyphicon glyphicon-remove')
+                  input(ng-model='user.profile[key][$index]', size='30', maxlength='30', style='display:inline-block')
         md-button(class='md-primary', ng-click='updateDegree()') Add new
       md-content(ng-hide='isSubject(key) || isDegree(key)')
         md-input-container

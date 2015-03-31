@@ -90,6 +90,8 @@ ox.controller('EditProfileCtrl',
         promise.then(function (response) {
           if (response.success) {
             $scope.profileInput[field] = false;
+            $scope.user.summary = response.newSummary;
+            $scope.user.completed = response.completed;
           }
         });
       };
@@ -105,16 +107,27 @@ ox.controller('EditProfileCtrl',
       $scope.cache = {};
       $scope.edit = function(key) {
         $scope.profileInput[key] = true;
-        $scope.cache[key] = $scope.user.profile[key];
+        $scope.cache[key] = angular.copy($scope.user.profile[key]);
+        if($scope.isSubject(key)) {
+          $scope.cacheSubjects = angular.copy($scope.tutoringSubject);
+        }
       };
       $scope.cancelEdit = function(key) {
         $scope.profileInput[key] = false;
-        $scope.user.profile[key] = $scope.cache[key];
+        $scope.user.profile[key] = angular.copy($scope.cache[key]);
         delete $scope.cache[key];
+        if($scope.isSubject(key)) {
+          $scope.tutoringSubject = angular.copy($scope.cacheSubjects);
+          delete $scope.cacheSubjects;
+        }
       };
 
       $scope.removeSubject = function(index) {
         $scope.user.profile.subjects.splice(index, 1);
-      }
+      };
+
+      $scope.removeDegree = function(index) {
+        $scope.user.profile.qualifications.splice(index, 1);
+      };
     }
   ]);
