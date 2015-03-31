@@ -4,12 +4,7 @@ div.container
       p Check here if the profile is complete
   div.row(class='userHeader')
     div.col-sm-8
-      div
-        h1 EDIIIIT {{currentUser}} Profile
-        pre Subjects {{tutoringSubject}}
-        pre {{user.profile}}
-        span Subject this guy teaches
-
+      ox-search-profile(users='[user]', is-profile='true')
     div.col-sm-4
       div(ng-repeat='item in uploader.queue')
         div.crop(ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 200, width: 200 }")

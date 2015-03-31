@@ -13,17 +13,20 @@ div(class='row')
               ng-href='http://localhost:3000/inbox/?receiver={{user.username}}&receiverId={{user.userId}}',
               aria-label='Email')
                 span(class='glyphicon glyphicon-comment')
-            h2 Subjects
-            md-list
-              md-item(ng-repeat='subject in user.summary.summary')
-                md-item-content
-                  div(md-tile-content)
-                    p {{subject.subject}} : {{subject.description}}
-            h2 Degree
-            md-list
-              md-item(ng-repeat='degree in user.summary.degree', class='md-padding')
-                md-item-content
-                  | {{degree}}
+            div(ng-show='user.summary.degree.length > 0 && user.summary.summary.length > 0')
+              h2 Subjects
+              md-list
+                md-item(ng-repeat='subject in user.summary.summary')
+                  md-item-content
+                    div(md-tile-content)
+                      p {{subject.subject}} : {{subject.description}}
+              h2 Degree
+              md-list
+                md-item(ng-repeat='degree in user.summary.degree', class='md-padding')
+                  md-item-content
+                    | {{degree}}
+            div(ng-hide='user.summary.degree.length > 0 && user.summary.summary.length > 0')
+              h3 Profile is incomplete. Please edit your page.
 
 
   //div(class='col-md-12',
