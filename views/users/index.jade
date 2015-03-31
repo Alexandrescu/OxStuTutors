@@ -5,10 +5,8 @@ div.container
   div.row(class='userHeader')
     div.col-sm-8
       div
-        h1 {{username}}
-          a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-sm', style="margin-left:20px") Edit
-        span Subject this guy teaches
-        pre {{summary}}
+        ox-search-profile(users='[user]', is-profile='true')
+        pre {{user}}
     div.col-sm-4
       p We will have a photo here
       img(ng-src='{{img}}', style='max-height:200px')

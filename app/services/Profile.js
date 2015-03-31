@@ -33,9 +33,12 @@ angular.module('oxstututors')
     Profile.init = function (userId, scope) {
       scope.img = "/avatar/" + userId;
       return User.get({userId: userId}, function (profile) {
-        scope.profile = profile.profile;
-        scope.username = profile.username;
-        scope.summary = profile.summary;
+        scope.user = {
+          _id : userId,
+          profile: profile.profile,
+          username: profile.username,
+          summary: profile.summary
+        }
       }).$promise;
     };
 

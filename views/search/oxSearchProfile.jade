@@ -1,5 +1,5 @@
 div(class='row')
-  table(class='col-md-12 table table-striped')
+  table(ng-class='{"col-md-12 table table-striped" : !isProfile}')
     tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories')
       td(style='padding: 20px')
         div(class='row')
@@ -7,7 +7,8 @@ div(class='row')
             img(ng-src="/avatar/{{user.userId}}", style='max-height:200px')
           div(class='col-sm-9')
             h1
-              a(ng-href='/users/{{user.userId}}') {{user.username}}
+              a(ng-href='/users/{{user.userId}}', ng-hide='isProfile') {{user.username}}
+              span(ng-show='isProfile') {{user.username}}
               md-button(class='md-fab md-primary',
               ng-href='http://localhost:3000/inbox/?receiver={{user.username}}&receiverId={{user.userId}}',
               aria-label='Email')

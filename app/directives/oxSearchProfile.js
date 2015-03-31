@@ -6,8 +6,9 @@ ox.directive('oxSearchProfile', function() {
     templateUrl: '/pages/oxSearchProfile',
     scope: {
       users: '=',
-      selectedSubject: '=',
-      selectedCategories: '='
+      selectedSubject: '=?',
+      selectedCategories: '=?',
+      isProfile: '=?'
     }
   }
 });
