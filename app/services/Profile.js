@@ -30,25 +30,16 @@ angular.module('oxstututors')
         .join(' ');
     };
 
-    function isCompleted(profile, hasImage) {
-      if(profile.subjects &&
-         profile.approach &&
-         profile.qualifications &&
-         profile.funFact &&
-         hasImage)
-        return true;
-      return false;
-    }
-
     Profile.init = function (userId, scope) {
       scope.img = "/avatar/" + userId;
       return User.get({userId: userId}, function (profile) {
+        console.log(profile.completed);
         scope.user = {
           _id : userId,
           profile: profile.profile,
           username: profile.username,
           summary: profile.summary,
-          completed: isCompleted(profile.profile, true)
+          completed: profile.completed
         }
       }).$promise;
     };
