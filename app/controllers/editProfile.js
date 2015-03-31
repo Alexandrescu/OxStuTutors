@@ -93,4 +93,14 @@ ox.controller('EditProfileCtrl',
       $scope.selectFile = function(){
         angular.element('#selectFile').trigger('click');
       };
+      $scope.cache = {};
+      $scope.edit = function(key) {
+        $scope.profileInput[key] = true;
+        $scope.cache[key] = $scope.user.profile[key];
+      };
+      $scope.cancelEdit = function(key) {
+        $scope.profileInput[key] = false;
+        $scope.user.profile[key] = $scope.cache[key];
+        delete $scope.cache[key];
+      };
     }]);
