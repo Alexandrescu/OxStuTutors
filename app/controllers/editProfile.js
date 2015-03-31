@@ -29,7 +29,7 @@ ox.controller('EditProfileCtrl',
       $scope.isSubject = Profile.isSubject;
 
       $scope.updateSubject = function () {
-        $scope.profile.subjects.push({subject: "", categories: {}});
+        $scope.user.profile.subjects.push({subject: "", categories: {}});
       };
 
       var getCategoriesPromise = Subject.categories().$promise;
@@ -45,9 +45,9 @@ ox.controller('EditProfileCtrl',
                 subjects[i].categories[categories[j].category] = false;
               }
 
-              for (var j = 0; j < $scope.profile.subjects.length; j++) {
-                if ($scope.profile.subjects[j].subject == subjects[i].subject) {
-                  subjects[i] = $scope.profile.subjects[j];
+              for (var j = 0; j < $scope.user.profile.subjects.length; j++) {
+                if ($scope.user.profile.subjects[j].subject == subjects[i].subject) {
+                  subjects[i] = $scope.user.profile.subjects[j];
                 }
               }
               delete subjects[i]._id;
@@ -65,16 +65,16 @@ ox.controller('EditProfileCtrl',
       $scope.updateUser = function (field) {
         if ($scope.isSubject(field)) {
           // Need to check for dummy subject
-          var dummy = $scope.profile.subjects.pop();
+          var dummy = $scope.user.profile.subjects.pop();
           if (dummy.subject && dummy.subject != "") {
-            $scope.profile.subjects.push(dummy);
+            $scope.user.profile.subjects.push(dummy);
           }
         }
 
         var promise = User.update({
           profile: {
             field: field,
-            fieldValue: $scope.profile[field]
+            fieldValue: $scope.user.profile[field]
           }
         }).$promise;
 
@@ -87,6 +87,6 @@ ox.controller('EditProfileCtrl',
 
       $scope.isDegree = Profile.isDegree;
       $scope.updateDegree = function () {
-        $scope.profile.qualifications.push("");
+        $scope.user.profile.qualifications.push("");
       }
     }]);

@@ -7,7 +7,7 @@ div.container
       div
         h1 EDIIIIT {{currentUser}} Profile
         pre Subjects {{tutoringSubject}}
-        pre {{profile}}
+        pre {{user.profile}}
         span Subject this guy teaches
 
     div.col-sm-4
@@ -17,7 +17,7 @@ div.container
         button(ng-click='item.upload()') Save Changes
       div(ng-hide='uploader.queue.length')
         img(ng-src='{{img}}' style='max-height:200px')
-  div.row(ng-repeat='(key, value) in profile', layout='column', class='md-padding')
+  div.row(ng-repeat='(key, value) in user.profile', layout='column', class='md-padding')
     // Showing
     div.col-sm-12(ng-hide="profileInput[key]")
       md-toolbar.md-theme-light
@@ -55,21 +55,21 @@ div.container
           md-item(ng-repeat='v in value track by $index')
             md-item-content
               div(flex)
-                md-select(ng-model='profile[key][$index]', md-on-open="loadSubjects()")
-                  md-select-label {{ profile[key][$index].subject ? profile[key][$index].subject : 'Choose subject' }}
+                md-select(ng-model='user.profile[key][$index]', md-on-open="loadSubjects()")
+                  md-select-label {{ user.profile[key][$index].subject ? user.profile[key][$index].subject : 'Choose subject' }}
                   md-option(ng-repeat='subject in tutoringSubject',
                   ng-value='subject') {{ subject.subject }}
               div(flex)
-                md-checkbox(ng-repeat='(catKey, truthVal) in profile[key][$index].categories'
-                  ng-model='(profile[key][$parent.$index].categories)[catKey]') {{catKey}}
+                md-checkbox(ng-repeat='(catKey, truthVal) in user.profile[key][$index].categories'
+                  ng-model='(user.profile[key][$parent.$index].categories)[catKey]') {{catKey}}
         md-button(class='md-primary', ng-click='updateSubject()') Add new
       md-content(ng-show='isDegree(key)')
         md-list
           md-item(ng-repeat='v in value track by $index')
             md-item-content
               md-input-container
-                input(ng-model='profile[key][$index]', size='30', maxlength='30')
+                input(ng-model='user.profile[key][$index]', size='30', maxlength='30')
         md-button(class='md-primary', ng-click='updateDegree()') Add new
       md-content(ng-hide='isSubject(key) || isDegree(key)')
         md-input-container
-          textarea(columns="1", md-maxlength="500", ng-model='profile[key]')
+          textarea(columns="1", md-maxlength="500", ng-model='user.profile[key]')
