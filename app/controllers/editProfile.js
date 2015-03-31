@@ -19,7 +19,7 @@ ox.controller('EditProfileCtrl',
       });
 
       uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        console.info('onSuccessItem', fileItem, response, status, headers);
+        uploader.queue.length = 0;
       };
 
       var getProfilePromise = Profile.init($scope.currentUser._id, $scope);
@@ -88,5 +88,9 @@ ox.controller('EditProfileCtrl',
       $scope.isDegree = Profile.isDegree;
       $scope.updateDegree = function () {
         $scope.user.profile.qualifications.push("");
-      }
+      };
+
+      $scope.selectFile = function(){
+        angular.element('#selectFile').trigger('click');
+      };
     }]);

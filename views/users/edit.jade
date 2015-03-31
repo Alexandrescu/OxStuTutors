@@ -11,12 +11,25 @@ div.container
         span Subject this guy teaches
 
     div.col-sm-4
-      input(type='file' nv-file-select uploader='uploader')
       div(ng-repeat='item in uploader.queue')
         div.crop(ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 200, width: 200 }")
-        button(ng-click='item.upload()') Save Changes
       div(ng-hide='uploader.queue.length')
         img(ng-src='{{img}}' style='max-height:200px')
+      div(class="progress" style="")
+        div(class="progress-bar", role="progressbar", ng-style="{ 'width': uploader.progress + '%' }")
+      input(type='file', nv-file-select, uploader='uploader', id='selectFile', style='display:none')
+      button(type='button', class='btn btn-primary', ng-click='selectFile()')
+        span(class='glyphicon glyphicon-search')
+        | Select
+      button(type="button", class="btn btn-success btn-s", ng-click="uploader.uploadAll()", ng-disabled="!uploader.getNotUploadedItems().length")
+        span(class="glyphicon glyphicon-upload")
+        | Upload
+      button(type="button", class="btn btn-warning btn-s", ng-click="uploader.cancelAll()", ng-disabled="!uploader.isUploading")
+        span(class="glyphicon glyphicon-ban-circle")
+        | Cancel
+      button(type="button", class="btn btn-danger btn-s", ng-click="uploader.clearQueue()", ng-disabled="!uploader.queue.length")
+        span(class="glyphicon glyphicon-trash")
+        | Remove
   div.row(ng-repeat='(key, value) in user.profile', layout='column', class='md-padding')
     // Showing
     div.col-sm-12(ng-hide="profileInput[key]")
