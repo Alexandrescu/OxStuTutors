@@ -66,8 +66,17 @@ ox.controller('EditProfileCtrl',
         if ($scope.isSubject(field)) {
           // Need to check for dummy subject
           var dummy = $scope.user.profile.subjects.pop();
-          if (dummy.subject && dummy.subject != "") {
+          if (dummy && dummy.subject && dummy.subject != "") {
             $scope.user.profile.subjects.push(dummy);
+          }
+
+          // Removing duplicates
+          for(var i = 0; i < $scope.user.profile.subjects.length; i++) {
+            for(var j = i + 1; j < $scope.user.profile.subjects.length; j++) {
+              if($scope.user.profile.subjects[i].subject == $scope.user.profile.subjects[j].subject) {
+                $scope.user.profile.subjects.splice(j, 1);
+              }
+            }
           }
         }
 
@@ -103,4 +112,9 @@ ox.controller('EditProfileCtrl',
         $scope.user.profile[key] = $scope.cache[key];
         delete $scope.cache[key];
       };
-    }]);
+
+      $scope.removeSubject = function(index) {
+        $scope.user.profile.subjects.splice(index, 1);
+      }
+    }
+  ]);

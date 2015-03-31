@@ -63,6 +63,8 @@ div.container
           md-item(ng-repeat='v in value track by $index')
             md-item-content
               div(flex)
+                md-button(class='md-fab', ng-click='removeSubject($index)')
+                  span(class='glyphicon glyphicon-remove')
                 md-select(ng-model='user.profile[key][$index]', md-on-open="loadSubjects()")
                   md-select-label {{ user.profile[key][$index].subject ? user.profile[key][$index].subject : 'Choose subject' }}
                   md-option(ng-repeat='subject in tutoringSubject',
