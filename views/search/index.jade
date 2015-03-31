@@ -15,5 +15,16 @@ div(class='row', style='display:block')
       section(layout="row" layout-sm="column" layout-align="center center")
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
-  div(class='col-md-9')
+  div(class='col-md-9', ng-hide='newSearch')
     ox-search-profile(users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
+    md-content(ng-show='userBase.length == 0')
+      md-card
+        md-card-content
+          h4 Sorry, no tutors matched your search.
+  div(class='col-md-9', ng-show='newSearch')
+    md-content(class='md-padding')
+      md-card
+        md-card-content
+          h4 Start searching the subject you want to be tutored in by writing in the box on the left.
+          br
+          h4 Or choose an option by clicking the checkbox to refine the tutors.

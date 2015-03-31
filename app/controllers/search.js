@@ -2,10 +2,21 @@ var ox = angular.module('oxstututors');
 
 ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
   function($scope, User, Subject) {
+    var initCategories = false;
     $scope.categories = [];
     Subject.categories({}, function(categories) {
       $scope.categories = categories;
       $scope.selectAllCategories(false);
+
+      $scope.$watch('selectedCategories', function() {
+        if(!initCategories) {
+          initCategories = true;
+          $scope.newSearch = true;
+        }
+        else {
+          $scope.newSearch = false;
+        }
+      }, true);
     });
 
     $scope.userBase = [];
@@ -49,9 +60,15 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
       }
     }
 
+    var init = false;
     $scope.$watch('searchedSubject', function() {
-      if($scope.searchedSubject === "") {
-        $scope.selectedSubject = $scope.searchedSubject;
+      if(!init) {
+        $scope.newSearch = true;
+        init = true;
       }
-    })
+      else {
+        $scope.newSearch = false;
+      }
+    });
+
 }]);

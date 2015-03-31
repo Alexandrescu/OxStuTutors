@@ -1,6 +1,6 @@
 div(class='row')
   table(ng-class='{"table table-striped" : !isProfile}', class='col-md-12')
-    tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories')
+    tr(ng-repeat='user in filteredUsers = (users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories)')
       td(style='padding: 20px')
         div(class='row')
           div(class='col-sm-3', ng-hide='isProfile')
@@ -27,6 +27,12 @@ div(class='row')
                     | {{degree}}
             div(ng-hide='user.summary.degree.length > 0 && user.summary.summary.length > 0')
               h3 Profile is incomplete. Please edit your page.
+
+div(ng-show='filteredUsers.length == 0', class='row')
+  md-content(class='md-padding')
+    md-card
+      md-card-content
+        h4 Sorry, no tutors found for this search.
 
 
   //div(class='col-md-12',
