@@ -12,7 +12,7 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
     $scope.PrettyName = Profile.fieldName;
 
     $scope.profile.then(function() {
-      if(!$scope.user.completed) {
+      if(!$scope.user.completed && $scope.thisIsMe) {
         $mdToast.show({
           controller: 'EditProfileToast',
           templateUrl: '/pages/editProfileToast',
@@ -24,6 +24,10 @@ ox.controller('UsersCtrl', ['$scope', '$routeParams', 'User', '$mdToast', 'Profi
 
     $scope.isDegree = Profile.isDegree;
     $scope.isSubject = Profile.isSubject;
+
+    $scope.$on('$locationChangeStart', function() {
+      $mdToast.hide();
+    });
   }]
 );
 
