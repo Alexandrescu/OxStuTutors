@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxstututors', [
-  'ui.bootstrap',
+  'duScroll',
   'ngRoute',
   'ngResource',
   'http-auth-interceptor',
@@ -43,6 +43,12 @@ angular.module('oxstututors', [
       })
       .when('/terms/', {
         templateUrl: '/pages/terms'
+      })
+      .when('/contact/', {
+        templateUrl: '/pages/contact'
+      })
+      .when('/about/', {
+        templateUrl: '/pages/about'
       })
       .otherwise({
         // Should redirect to an error page
