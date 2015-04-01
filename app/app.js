@@ -19,8 +19,10 @@ angular.module('oxstututors', [
         templateUrl: '/auth/signup',
         controller: 'SignUpCtrl'
       })
-      .when('/login/', {
-        templateUrl: '/auth/login',
+      .when('/login/:location*?', {
+        templateUrl: function(params) {
+          return '/auth/login/' + (params.location || '');
+        },
         controller: 'LoginCtrl'
       })
       .when('/users/:userId/', {
@@ -49,7 +51,7 @@ angular.module('oxstututors', [
   .run(function ($rootScope, $location) {
     // On catching 401 errors, redirect to the login page.
     $rootScope.$on('event:auth-loginRequired', function () {
-      $location.path('/login');
+      $location.path('/login/' + ($location.url()).toString().substr(1));
       return false;
     });
   });
