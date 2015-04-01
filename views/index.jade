@@ -1,14 +1,63 @@
 link(rel='stylesheet', href='/stylesheets/index.css')
-div.md-content.cover(layout, layout-fill)
-  div(layout-fill)
-    h1 OxStuTutors
-    p.lead
-      | Tutoring made easy.
-      div
-        a.btn.btn-primary.btn-lg(href='/signup/') Create an Account
-div
-  div
-    p Hi - This is the content you want
-  div
-    p List
-
+div(style='height:100%')
+  md-content(layout, layout-fill)
+    div.cover(layout-fill)
+      h1(style='letter-spacing:7px') OxStuTutors
+      p.lead
+        | Tutoring made easy.
+        div
+          a.btn.btn-primary.btn-lg(href='/signup/') Create an Account
+  div.container(class='row whoWeAre', style='text-align:center')
+    div(class='col-md-1')
+    div(class='col-md-10')
+      div.container(layout-fill, style='line-height:1.618')
+        div(class='row', style='margin-bottom:32px')
+          div(class='col-md-7', style='text-align:right;')
+            h1 Who we are
+          div(class='col-md-5', style='text-align:left;')
+            md-icon(md-svg-src='/media/oxfordArms.svg', style='width:100px; height:100px;')
+        div(class='row')
+          div(class='col-md-4')
+            :markdown
+              Oxford Student Tutors is an Oxford-based tutoring company.
+              All our tutors currently attend the University of Oxford,
+              guaranteeing only the brightest, most high-achieving and committed tutors.
+          div(class='col-md-4')
+            :markdown
+              At Oxford Student Tutors, our priority is making you, the client, happy,
+              by putting you in touch with only the best tutors,
+              and making it as simple as possible to book a session at a time which works for you.
+              Because our tutors are students and not professionals, our prices are extremely competitive.
+          div(class='col-md-4')
+            :markdown
+              Acting primarily as the middle man,
+              Oxford Student Tutors will make the whole process hassle-free,
+              and ensure your children receive the best service around.
+              Click here to find out more, or register now!
+  div.container(class='row whoWeAre', style='text-align:center;background-color:whitesmoke')
+    div(class='col-md-1')
+    div(class='col-md-10')
+      div.container(layout-fill, class='row', style='line-height:1.618;')
+        div(class='row', style='margin-bottom:32px')
+          div(class='col-md-7', style='text-align:right')
+            h1 How it works
+          div(class='col-md-5', style='text-align:left;')
+            span(style='font-size:3.236em', class='glyphicon glyphicon-cog')
+        div(class='row')
+          div(class='col-md-4')
+            span(style='font-size:2.427em; width:100%;', class='glyphicon glyphicon-search')
+            :markdown
+              ### Search for tutor
+              To start, simply go on the [search page](/search/) and get the perfect tutor for you.
+          div(class='col-md-4')
+            span(style='font-size:2.427em; width:100%;', class='glyphicon glyphicon-envelope')
+            :markdown
+              ### Make an appointment
+              Start planning your tutorial.
+              Plan an appointment online, at home, or even in an Oxford college.
+          div(class='col-md-4')
+            span(style='font-size:2.427em; width:100%;', class='glyphicon glyphicon-education')
+            :markdown
+              ### Succeed
+              Keep learning and succeed!<br>
+              Make the most in your endeavours!

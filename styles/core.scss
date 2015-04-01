@@ -3,6 +3,8 @@
 html, body {
   overflow-x: hidden;
   height: 100%;
+  font-family: 'Noto Serif', RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
 }
 
 body {
@@ -120,4 +122,47 @@ select, textarea, input, .form-control {
 
 .message-them {
   background: whitesmoke;
+}
+
+md-grid-tile {
+  &.red {
+    background: #ff8a80;
+  }
+  &.blue {
+    background: #84ffff;
+  }
+  &.darkBlue {
+    background: #80d8ff;
+  }
+  &.front {
+    padding: 8px;
+  }
+
+  &.gray {
+    background: #f5f5f5;
+  }
+
+  &.green {
+    background: #b9f6ca;
+  }
+
+  &.yellow {
+    background: #ffff8d;
+  }
+
+  &.purple {
+    background: #b388ff;
+  }
+}
+
+.whoWeAre {
+  padding: 50px;
+  width: 100%;
+}
+
+md-toolbar{
+  &.navbar {
+    background-color: whitesmoke;
+
+  }
 }
