@@ -54,7 +54,12 @@ angular.module('oxstututors')
       currentUser: function (callback) {
         var cb = callback || angular.noop;
         Session.get({}, function (user) {
-          $rootScope.currentUser = user;
+          if(!user.username) {
+            $rootScope.currentUser = null;
+          }
+          else {
+            $rootScope.currentUser = user;
+          }
           cb();
         }, function(err) {
           $rootScope.currentUser = null;

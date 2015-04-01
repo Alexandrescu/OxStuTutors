@@ -64,6 +64,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   loadMessages();
 
   $scope.showMessages = function(receiver, receiverId, msgs) {
+    $scope.message = "";
     $scope.messageRequired = false;
     $scope.buttonDisable = false;
     $scope.messageDisable = false;
@@ -83,6 +84,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   };
 
   $scope.newMessage = function() {
+    $scope.message = "";
     if($routeParams.receiver && $routeParams.receiverId) {
       $scope.receiver = {
         _id: $routeParams.receiverId,

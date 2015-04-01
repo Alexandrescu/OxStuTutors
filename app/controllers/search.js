@@ -26,7 +26,7 @@ ox.controller('SearchCtrl', ['$scope', 'User', 'Subject',
 
     $scope.selectedCategories = {};
     $scope.selectAllCategories = function (value) {
-      for(var i in $scope.categories) {
+      for(var i = 0; i < $scope.categories.length; i++) {
         $scope.selectedCategories[$scope.categories[i].category] = value;
       }
     };
