@@ -41,6 +41,9 @@ angular.module('oxstututors', [
         templateUrl: '/message/inbox',
         controller: 'InboxCtrl'
       })
+      .when('/terms/', {
+        templateUrl: '/pages/terms'
+      })
       .otherwise({
         // Should redirect to an error page
         redirectTo: '/'

@@ -4,7 +4,8 @@ md-content(class='md-padding', style='padding-bottom:64px')
       md-icon(md-svg-src='/media/oxfordLogo.svg', style='width:100px; height:100px')
       md-tooltip(md-direction='bottom')
         | Registering as tutor
-    span Select a role to start
+    span(ng-hide='user.role') Select a role to start
+    span(ng-show='user.role') Registering as {{user.role}}
     md-button(aria-label='Tutor', class='md-fab md-primary', ng-click='user.role="Client"')
       span(class='glyphicon glyphicon-education')
       md-tooltip

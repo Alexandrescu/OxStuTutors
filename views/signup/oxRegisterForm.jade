@@ -51,5 +51,8 @@ md-content(class='md-padding')
           div(ng-message='required') Password is required.
           div(ng-message='minlength') Minimum length is 5.
       md-input-container
-        h4(align='center') By pressing the submit button you agree with the terms and conditions for becoming a {{user.role}}.
+        h4(align='center')
+          | By pressing the submit button you agree with the&nbsp
+          a(href='/terms/', target='_blank') terms and conditions
+          | &nbspfor becoming a {{user.role}}.
         md-button(type='submit', class='md-primary md-raised') Create account
