@@ -2,7 +2,7 @@
 
 angular.module('oxstututors')
   .factory('Auth', ['$location', '$rootScope', 'Session', 'User', 'Inbox',
-    function Auth($location, $rootScope, Session, User, Inbox) {
+    function ($location, $rootScope, Session, User, Inbox) {
     return {
 
       login: function (provider, user, callback) {
