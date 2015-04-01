@@ -27,12 +27,12 @@ angular.module('oxstututors')
 
         Session.delete(function (res) {
             delete $rootScope.unread;
-            delete $rootScope.currentUser;
+            $rootScope.currentUser = null;
             return cb();
           },
           function (err) {
             delete $rootScope.unread;
-            delete $rootScope.currentUser;
+            $rootScope.currentUser = null;
             return cb(err.data);
           });
       },
