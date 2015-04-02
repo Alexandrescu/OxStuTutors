@@ -35,8 +35,26 @@ html
 
   body(ng-app='oxstututors')
     include navbar
-    div.page.content(ng-view)
-
+    div(id='main-wrapper')
+      div.page.content(ng-view, style='display:block')
+      footer.footer.container.row
+        div.quicklinks-group.row(class='col-sm-6', style='border-right:1px solid #ccc')
+          h3.small-header Quicklinks
+          div(class='col-sm-4')
+            md-button(href='/search/') Search
+          div(class='col-sm-4', style='border-left:1px solid #ccc;border-right:1px solid #ccc')
+            md-button(href='/about/') About
+          div(class='col-sm-4')
+            md-button(href='/contact/') Contact
+        div.social-group.row(class='col-sm-6')
+          h3.small-header Social media
+          div(class='col-sm-12', style='display:inline-block')
+            a(href='https://facebook.com', target='_blank')
+              img(src='/media/fbicon.png')
+            a(href='https://twitter.com', target='_blank')
+              img(src='/media/twittericon.png')
+            a(href='https://gplus.com', target='_blank')
+              img(src='/media/gplusicon.png')
 
     script(src='/javascripts/app.js')
     script(src='/javascripts/controllers.js')

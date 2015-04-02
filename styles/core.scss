@@ -77,37 +77,6 @@ select, textarea, input, .form-control {
   }
 }
 
-.footer {
-  margin-top: 50px;
-  color: #999;
-
-  .container {
-    border-top: 1px solid #ccc;
-    padding: 20px 5px 20px 5px;
-    border-radius: 4px;
-  }
-  a, a:visited {
-    color: #999;
-  }
-  .links {
-    margin: 0;
-    padding: 0;
-
-    li {
-      display: inline-block;
-      padding-right: 10px;
-      margin-right: 10px;
-      list-style: none;
-      border-right: 1px dotted #999;
-    }
-    li:last-child {
-      padding-right: 0;
-      margin-right: 0;
-      border: none;
-    }
-  }
-}
-
 .force-wrap {
  white-space: pre-wrap; /* css-3 */
  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
@@ -169,4 +138,50 @@ md-toolbar{
 
 .my-navbar-collapse {
   background-color:whitesmoke;
+}
+
+#main-wrapper {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 0 0 100px;
+  position: relative;
+}
+
+.small-header {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 12px;
+  opacity: .8468;
+  text-align: center;
+}
+
+.footer {
+  background-color: whitesmoke;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  vertical-align: baseline;
+  position: absolute;
+  margin-top: 50px;
+
+  &.container {
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .md-button {
+    opacity: .8468;
+    font-size: 10px;
+  }
+
+  .social-group {
+    img {
+      margin: 8px;
+      height: 32px;
+      width: 32px;
+    }
+  }
 }
