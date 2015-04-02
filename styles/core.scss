@@ -145,14 +145,13 @@ md-toolbar{
   box-sizing: border-box;
   min-height: 100%;
   position: relative;
-  display-inside: block;
 
   @media (max-width: $screen-sm-max) {
     padding: 0 0 310px;
     border-bottom: 1px solid #ccc;
   }
   @media(min-width: $screen-md-min) {
-    padding: 0 0 110px;
+    padding: 0 0 106px;
     border-right: 1px solid #ccc;
   }
 }
@@ -168,8 +167,6 @@ md-toolbar{
 }
 
 .footer {
-  @include box-shadow(0 -2px 5px -1px rgba(0, 0, 0, .125));
-
   background-color: whitesmoke;
   bottom: 0;
   width: 100%;
@@ -188,12 +185,12 @@ md-toolbar{
   }
 
   .quicklinks-group {
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: $screen-xs-max) {
       max-height: 310px;
       border-bottom: 1px solid #ccc;
     }
-    @media(min-width: $screen-md-min) {
-      max-height: 110px;
+    @media(min-width: $screen-sm-min) {
+      max-height: 106px;
       border-right: 1px solid #ccc;
     }
   }
@@ -220,10 +217,12 @@ ox-search-profile {
 }
 
 .userHeader {
+  width: 100%;
   background-color:whitesmoke;
   @include box-shadow(0px 0px 8px 6px rgba(0, 0, 0, .125));
-
+  margin-bottom: 8px;
   min-height:250px;
+  padding-bottom: 10px;
 }
 
 .editPage{

@@ -3,11 +3,11 @@ div.container.showPage
     div.col-sm-8
       div
         ox-search-profile(users='[user]', is-profile='true')
-        a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-sm', style="margin-left:20px") Edit
     div.col-sm-4
       img(ng-src='/avatar/{{user._id}}', style='max-height:200px;margin:20px;display:block', class="img-rounded")
-  div.row(ng-repeat='(key, value) in user.profile', layout='column', class='md-padding')
-    div.col-sm-12(ng-show='value.length')
+      a(ng-show='thisIsMe', href='/editProfile', class='btn btn-primary btn-sm', style="margin-left:20px") Edit Profile
+  div.row(ng-repeat='(key, value) in user.profile', layout='column')
+    div.col-sm-10.col-sm-offset-1(ng-show='value.length')
       md-toolbar.md-theme-light
         h1.md-toolbar-tools
           span {{ PrettyName(key) }}

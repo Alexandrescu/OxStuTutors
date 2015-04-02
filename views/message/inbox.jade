@@ -1,12 +1,13 @@
-div(layout='column', style='height:100%')
-  section(layout='row', flex)
-    md-sidenav(class='md-sidenave-left md-whiteframe-z1',md-component-id="left", md-is-locked-open="$mdMedia('gt-md')")
+div(style='height: calc(100vh - 50px);')
+  section(layout='row', flex, layout-fill)
+    md-sidenav(class='md-sidenav-left',md-component-id="left", md-is-locked-open="$mdMedia('gt-md')"
+    style='border-right:1px solid #ccc;')
       md-toolbar(class="md-theme-indigo")
         h1(class="md-toolbar-tools") Inbox
       md-content(class="md-padding")
         md-list
           md-item(ng-repeat='(keyUser, msgs) in inbox')
-            md-item-content
+            md-item-content(style="width:100%")
               md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
               ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
                 md-content {{keyUser}}
@@ -28,14 +29,11 @@ div(layout='column', style='height:100%')
           span(md-highlight-text="searchText") {{user.username}}
       md-content(flex, layout-fill)
         md-list
-          md-item(ng-repeat='msg in displayMessages')
-            md-item-content(ng-class='{"message-them" : msg.from._id == currentUser._id}')
-              div(class='md-tile-left md-padding')
-              | {{msg.date | date:'shortTime'}} <br>
-              | {{msg.date | date:'MMM d'}}
-              div(class='md-tile-content')
-                h2 {{msg.from.username}}
-                h3 {{msg.content}}
+          md-item(ng-repeat='msg in displayMessages', class='md-3-line', ng-class='{"message-them" : msg.from._id == currentUser._id}')
+            div(class='md-item-text')
+              h2 {{msg.from.username}}
+              h3 {{msg.content}}
+              p At: {{msg.date | date:'shortTime'}} &nbsp On: {{msg.date | date:'d MMM y'}}
             md-divider
         md-progress-linear(ng-show='sendingMessage', md-mode="indeterminate")
       div(layout='row', layout-fill, style='height:200px')

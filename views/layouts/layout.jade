@@ -18,11 +18,11 @@ html
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js')
     //script(src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js")
-    script(src="https://rawgit.com/angular/bower-material/master/angular-material.js")
+    script(src="/vendor/material/angular-material.js")
     //script(src='/vendor/material/angular-material.js')
     script(src='/vendor/angular-file-upload/angular-file-upload.js')
     //link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css')
-    link(rel="stylesheet", href="https://rawgit.com/angular/bower-material/master/angular-material.css")
+    link(rel="stylesheet", href="/vendor/material/angular-material.css")
     link(rel='stylesheet', href='/stylesheets/core.css')
     link(rel='stylesheet', href='/stylesheets/users/users.css')
     link(rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic")
@@ -36,7 +36,7 @@ html
   body(ng-app='oxstututors')
     include navbar
     div(id='main-wrapper')
-      div.content(ng-view, style='display:block')
+      div(ng-view, style='display:block;height:100%')
       footer.footer.container.row
         div.quicklinks-group.row(class='col-sm-6')
           h3.small-header Quicklinks

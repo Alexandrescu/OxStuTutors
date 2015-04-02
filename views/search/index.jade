@@ -1,5 +1,5 @@
 div(class='row', style='display:block')
-  div(class='col-md-3', data-spy="affix", data-offset-top="60")
+  div(class='col-md-3', data-spy="affix", data-offset-top="70", style='padding-top:10px')
     md-autocomplete(
       placeholder="What subject are you looking for?",
       md-selected-item="selectedSubject",
@@ -12,7 +12,7 @@ div(class='row', style='display:block')
     div(flex)
       md-checkbox(ng-repeat='category in categories'
       ng-model='selectedCategories[category.category]') {{category.category}}
-      section(layout="row" layout-sm="column" layout-align="center center")
+      section(layout="row" layout-sm="column" layout-align="left center")
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
   div(class='col-md-9', ng-hide='newSearch')

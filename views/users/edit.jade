@@ -26,7 +26,7 @@ div.container.editPage
       button(type="button", class="btn btn-danger btn-s", ng-click="uploader.clearQueue()", ng-disabled="!uploader.queue.length")
         span(class="glyphicon glyphicon-trash")
         | Remove
-  div.row(ng-repeat='(key, value) in user.profile', layout='column', class='md-padding')
+  div.row(ng-repeat='(key, value) in user.profile', layout='column')
     // Showing
     div.col-sm-12(ng-hide="profileInput[key]")
       md-toolbar.md-theme-light

@@ -36,15 +36,19 @@ vendor = [
   },
   {
     file: './bower_components/angular-material/angular-material.*',
-    destination: './public/vendor/material/'
+    destination: './public/vendor/angular-material/'
   },
   {
     file: './bower_components/angular-material/default-theme.*',
-    destination: './public/vendor/material/'
+    destination: './public/vendor/angular-material/'
   },
   {
     file: './bower_components/angular-file-upload/angular-file-upload.js',
     destination: './public/vendor/angular-file-upload/'
+  },
+  {
+    file: './module/material/*',
+    destination: './public/vendor/material'
   }
 ];
 
