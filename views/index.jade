@@ -11,10 +11,9 @@ div(style='height:100%')
     div(class='col-md-10')
       div.container(layout-fill, style='line-height:1.618')
         div(class='row', style='margin-bottom:32px')
-          div(class='col-md-7', style='text-align:right;')
+          div(class='col-md-12', style='text-align:center;display:inline-block')
             h1 Who we are
-          div(class='col-md-5', style='text-align:left;')
-            md-icon(md-svg-src='/media/oxfordArms.svg', style='width:100px; height:100px;')
+              md-icon(md-svg-src='/media/oxfordArms.svg', style='width:100px; height:100px;')
         div(class='row')
           div(class='col-md-4')
             :markdown
@@ -38,10 +37,10 @@ div(style='height:100%')
     div(class='col-md-10')
       div.container(layout-fill, class='row', style='line-height:1.618;')
         div(class='row', style='margin-bottom:32px')
-          div(class='col-md-7', style='text-align:right')
-            h1 How it works
-          div(class='col-md-5', style='text-align:left;')
-            span(style='font-size:3.236em', class='glyphicon glyphicon-cog')
+          div(class='col-md-12')
+            h1
+              span(class='glyphicon glyphicon-cog')
+              | &nbspHow it works
         div(class='row')
           div(class='col-md-4')
             span(style='font-size:2.427em; width:100%;', class='glyphicon glyphicon-search')

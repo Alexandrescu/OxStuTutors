@@ -10,9 +10,10 @@ ox.controller('EditProfileCtrl',
       $scope.profileInput = [];
 
       if (!$scope.currentUser) {
-        $location.path('/login');
+        return $location.path('/login');
       }
 
+      $scope.imgSrc = $scope.currentUser._id;
       var uploader = $scope.uploader = new FileUploader({
         url: '/avatar/',
         queueLimit: 1
@@ -20,6 +21,8 @@ ox.controller('EditProfileCtrl',
 
       uploader.onSuccessItem = function (fileItem, response, status, headers) {
         uploader.queue.length = 0;
+        // Hack to reload ngSrc
+        $scope.imgSrc = $scope.currentUser._id + '?' + (new Date()).toString();
       };
 
       var getProfilePromise = Profile.init($scope.currentUser._id, $scope);

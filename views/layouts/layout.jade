@@ -36,9 +36,9 @@ html
   body(ng-app='oxstututors')
     include navbar
     div(id='main-wrapper')
-      div.page.content(ng-view, style='display:block')
+      div.content(ng-view, style='display:block')
       footer.footer.container.row
-        div.quicklinks-group.row(class='col-sm-6', style='border-right:1px solid #ccc')
+        div.quicklinks-group.row(class='col-sm-6')
           h3.small-header Quicklinks
           div(class='col-sm-4')
             md-button(href='/search/') Search

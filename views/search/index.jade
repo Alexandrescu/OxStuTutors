@@ -1,5 +1,5 @@
 div(class='row', style='display:block')
-  div(class='col-md-3', data-spy="affix", data-offset-top="60", data-offset-bottom="200")
+  div(class='col-md-3', data-spy="affix", data-offset-top="60")
     md-autocomplete(
       placeholder="What subject are you looking for?",
       md-selected-item="selectedSubject",
@@ -16,7 +16,7 @@ div(class='row', style='display:block')
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
   div(class='col-md-9', ng-hide='newSearch')
-    ox-search-profile(users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
+    ox-search-profile(style='display:block', users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
     md-content(ng-show='userBase.length == 0')
       md-card
         md-card-content

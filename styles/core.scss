@@ -1,4 +1,5 @@
 @import '../sass/bootstrap/_mixins.scss';
+@import '../sass/bootstrap/variables';
 
 html, body {
   overflow-x: hidden;
@@ -143,8 +144,17 @@ md-toolbar{
 #main-wrapper {
   box-sizing: border-box;
   min-height: 100%;
-  padding: 0 0 100px;
   position: relative;
+  display-inside: block;
+
+  @media (max-width: $screen-sm-max) {
+    padding: 0 0 310px;
+    border-bottom: 1px solid #ccc;
+  }
+  @media(min-width: $screen-md-min) {
+    padding: 0 0 110px;
+    border-right: 1px solid #ccc;
+  }
 }
 
 .small-header {
@@ -158,23 +168,34 @@ md-toolbar{
 }
 
 .footer {
+  @include box-shadow(0 -2px 5px -1px rgba(0, 0, 0, .125));
+
   background-color: whitesmoke;
   bottom: 0;
   width: 100%;
   display: block;
   vertical-align: baseline;
   position: absolute;
-  margin-top: 50px;
 
   &.container {
     border-top: 1px solid #ccc;
     padding: 5px;
-    border-radius: 4px;
     text-align: center;
   }
   .md-button {
     opacity: .8468;
     font-size: 10px;
+  }
+
+  .quicklinks-group {
+    @media (max-width: $screen-sm-max) {
+      max-height: 310px;
+      border-bottom: 1px solid #ccc;
+    }
+    @media(min-width: $screen-md-min) {
+      max-height: 110px;
+      border-right: 1px solid #ccc;
+    }
   }
 
   .social-group {
@@ -183,5 +204,36 @@ md-toolbar{
       height: 32px;
       width: 32px;
     }
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+ox-search-profile {
+  display: block;
+}
+
+.oddRow {
+  background-color: whitesmoke;
+}
+
+.userHeader {
+  background-color:whitesmoke;
+  @include box-shadow(0px 0px 8px 6px rgba(0, 0, 0, .125));
+
+  min-height:250px;
+}
+
+.editPage{
+  md-content {
+    border: 3px solid whitesmoke;
+  }
+}
+
+.showPage {
+  md-content {
+    border: 3px solid whitesmoke;
   }
 }
