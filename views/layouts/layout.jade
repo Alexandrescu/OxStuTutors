@@ -35,7 +35,7 @@ html
 
   body(ng-app='oxstututors')
     include navbar
-    div(id='main-wrapper')
+    div(id='main-wrapper', ng-class='{"hackMe": hack}')
       div(ng-view, style='display:block;height:100%')
       footer.footer.container.row
         div.quicklinks-group.row(class='col-sm-6')

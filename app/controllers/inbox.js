@@ -1,7 +1,13 @@
 var ox = angular.module('oxstututors');
 
-ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams',
-  function($scope, Message, Inbox, User, $routeParams) {
+ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams', '$rootScope',
+  function($scope, Message, Inbox, User, $routeParams, $rootScope) {
+
+    $scope.$on('$destroy', function() {
+      delete $rootScope.hack;
+    });
+
+  $rootScope.hack = true;
   var reloadReceiver;
   // Keeping track if new Message
   $scope.newMessageFlag = false;

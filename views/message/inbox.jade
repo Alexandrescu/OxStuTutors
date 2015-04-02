@@ -1,4 +1,4 @@
-div(style='height: calc(100vh - 50px);')
+div(style='height: 100%', layout-fill)
   section(layout='row', flex, layout-fill)
     md-sidenav(class='md-sidenav-left',md-component-id="left", md-is-locked-open="$mdMedia('gt-md')"
     style='border-right:1px solid #ccc;')
@@ -17,7 +17,7 @@ div(style='height: calc(100vh - 50px);')
           md-content
             span(class='glyphicon glyphicon-plus')
             | New message
-    md-content(flex, class="md-padding", layout='column', layout-fill, layout-align='space-between center')
+    md-content(class="md-padding", layout='column', layout-fill, layout-align='space-between center')
       div(layout='row', layout-fill, style='min-height:64px')
         md-autocomplete(flex,
         ng-disabled='disableReceiver',
@@ -27,7 +27,7 @@ div(style='height: calc(100vh - 50px);')
         md-item-text='user.username',
         md-floating-label='Receiver', required)
           span(md-highlight-text="searchText") {{user.username}}
-      md-content(flex, layout-fill)
+      md-content(layout-fill)
         md-list
           md-item(ng-repeat='msg in displayMessages', class='md-3-line', ng-class='{"message-them" : msg.from._id == currentUser._id}')
             div(class='md-item-text')
