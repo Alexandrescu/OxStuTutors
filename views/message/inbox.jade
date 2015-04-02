@@ -1,5 +1,5 @@
-div(style='height: 100%', layout-fill)
-  section(layout='row', flex, layout-fill)
+div(style='height: 100%')
+  section(layout='row', style='height: 100%')
     md-sidenav(class='md-sidenav-left',md-component-id="left", md-is-locked-open="$mdMedia('gt-md')"
     style='border-right:1px solid #ccc;')
       md-toolbar(class="md-theme-indigo")
@@ -7,16 +7,15 @@ div(style='height: 100%', layout-fill)
       md-content(class="md-padding")
         md-list
           md-item(ng-repeat='(keyUser, msgs) in inbox')
-            md-item-content(style="width:100%")
-              md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
-              ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
-                md-content {{keyUser}}
-                  span(class='badge',
-                  ng-show='msgs.unread') {{msgs.unread}}
+            md-button(layout-fill, ng-click='showMessages(keyUser, msgs.receiver, msgs.messages)',
+            ng-class='{"md-primary": receiver.username == keyUser && !newMessageFlag}')
+              md-content {{keyUser}}
+                span(class='badge',
+                ng-show='msgs.unread') {{msgs.unread}}
         md-button(layout-fill, ng-click='newMessage()')
           md-content
             span(class='glyphicon glyphicon-plus')
-            | New message
+            | &nbspNew message
     md-content(class="md-padding", layout='column', layout-fill, layout-align='space-between center')
       div(layout='row', layout-fill, style='min-height:64px')
         md-autocomplete(flex,
