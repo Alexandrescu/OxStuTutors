@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('oxstututors', [
-  'duScroll',
   'ngRoute',
   'ngResource',
   'http-auth-interceptor',
