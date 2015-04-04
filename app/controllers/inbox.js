@@ -1,7 +1,13 @@
 var ox = angular.module('oxstututors');
 
-ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams',
-  function($scope, Message, Inbox, User, $routeParams) {
+ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams', '$rootScope',
+  function($scope, Message, Inbox, User, $routeParams, $rootScope) {
+
+    $scope.$on('$destroy', function() {
+      delete $rootScope.hack;
+    });
+
+  $rootScope.hack = true;
   var reloadReceiver;
   // Keeping track if new Message
   $scope.newMessageFlag = false;
@@ -64,6 +70,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   loadMessages();
 
   $scope.showMessages = function(receiver, receiverId, msgs) {
+    $scope.message = "";
     $scope.messageRequired = false;
     $scope.buttonDisable = false;
     $scope.messageDisable = false;
@@ -83,6 +90,7 @@ ox.controller('InboxCtrl', ['$scope', 'Message', 'Inbox', 'User', '$routeParams'
   };
 
   $scope.newMessage = function() {
+    $scope.message = "";
     if($routeParams.receiver && $routeParams.receiverId) {
       $scope.receiver = {
         _id: $routeParams.receiverId,

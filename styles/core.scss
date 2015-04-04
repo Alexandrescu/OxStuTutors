@@ -1,8 +1,11 @@
 @import '../sass/bootstrap/_mixins.scss';
+@import '../sass/bootstrap/variables';
 
 html, body {
   overflow-x: hidden;
   height: 100%;
+  font-family: 'Noto Serif', RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+  font-weight: 400;
 }
 
 body {
@@ -75,37 +78,6 @@ select, textarea, input, .form-control {
   }
 }
 
-.footer {
-  margin-top: 50px;
-  color: #999;
-
-  .container {
-    border-top: 1px solid #ccc;
-    padding: 20px 5px 20px 5px;
-    border-radius: 4px;
-  }
-  a, a:visited {
-    color: #999;
-  }
-  .links {
-    margin: 0;
-    padding: 0;
-
-    li {
-      display: inline-block;
-      padding-right: 10px;
-      margin-right: 10px;
-      list-style: none;
-      border-right: 1px dotted #999;
-    }
-    li:last-child {
-      padding-right: 0;
-      margin-right: 0;
-      border: none;
-    }
-  }
-}
-
 .force-wrap {
  white-space: pre-wrap; /* css-3 */
  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
@@ -120,4 +92,151 @@ select, textarea, input, .form-control {
 
 .message-them {
   background: whitesmoke;
+}
+
+md-grid-tile {
+  &.red {
+    background: #ff8a80;
+  }
+  &.blue {
+    background: #84ffff;
+  }
+  &.darkBlue {
+    background: #80d8ff;
+  }
+  &.front {
+    padding: 8px;
+  }
+
+  &.gray {
+    background: #f5f5f5;
+  }
+
+  &.green {
+    background: #b9f6ca;
+  }
+
+  &.yellow {
+    background: #ffff8d;
+  }
+
+  &.purple {
+    background: #b388ff;
+  }
+}
+
+.whoWeAre {
+  padding: 50px;
+  width: 100%;
+}
+
+md-toolbar{
+  &.navbar {
+    background-color: whitesmoke;
+
+  }
+}
+
+.my-navbar-collapse {
+  background-color:whitesmoke;
+}
+
+#main-wrapper {
+  box-sizing: border-box;
+  min-height: 100%;
+  position: relative;
+
+  @media (max-width: $screen-sm-max) {
+    padding: 0 0 310px;
+    border-bottom: 1px solid #ccc;
+  }
+  @media(min-width: $screen-md-min) {
+    padding: 0 0 106px;
+    border-right: 1px solid #ccc;
+  }
+}
+
+.small-header {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 12px;
+  opacity: .8468;
+  text-align: center;
+}
+
+.footer {
+  background-color: whitesmoke;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  vertical-align: baseline;
+  position: absolute;
+
+  &.container {
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+  }
+  .md-button {
+    opacity: .8468;
+    font-size: 10px;
+  }
+
+  .quicklinks-group {
+    @media (max-width: $screen-xs-max) {
+      max-height: 310px;
+      border-bottom: 1px solid #ccc;
+    }
+    @media(min-width: $screen-sm-min) {
+      max-height: 106px;
+      border-right: 1px solid #ccc;
+    }
+  }
+
+  .social-group {
+    img {
+      margin: 8px;
+      height: 32px;
+      width: 32px;
+    }
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+ox-search-profile {
+  display: block;
+}
+
+.oddRow {
+  background-color: whitesmoke;
+}
+
+.userHeader {
+  width: 100%;
+  background-color:whitesmoke;
+  @include box-shadow(0px 0px 8px 6px rgba(0, 0, 0, .125));
+  margin-bottom: 8px;
+  min-height:250px;
+  padding-bottom: 10px;
+}
+
+.editPage{
+  md-content {
+    border: 3px solid whitesmoke;
+  }
+}
+
+.showPage {
+  md-content {
+    border: 3px solid whitesmoke;
+  }
+}
+
+.hackMe {
+  height: 100%;
 }

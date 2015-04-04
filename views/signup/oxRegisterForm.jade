@@ -1,0 +1,58 @@
+md-content(class='md-padding')
+  form(name='userForm', ng-model-options="{ updateOn: 'default blur', debounce: {default:250, blur: 0} }",
+  ng-submit='submit(userForm)')
+    div(layout='column', layout-fill)
+      div(layout='row', flex)
+        md-input-container(flex)
+          label Username
+          input(ng-model='user.username',
+          required,
+          name='username',
+          autocomplete='off',
+          ox-unique-username)
+          div(ng-messages='userForm.username.$error')
+            div(ng-message='required') This field is required.
+            div(ng-message='unique') This username is taken.
+        md-input-container(flex)
+          label(ng-show='tutor') Oxford email address (ox.ac.uk)
+          label(ng-hide='tutor') Email address
+          input(ng-model='user.email',
+          required,
+          name='email',
+          type='email',
+          ox-oxford-email, tutor='tutor')
+          div(ng-messages='userForm.email.$error')
+            div(ng-message='required') Email is required.
+            div(ng-message='oxford') Not a valid Oxford email.
+            div(ng-message='mongoose') Email is registered already.
+      div(layout='row', flex)
+        md-input-container(flex)
+          label First name
+          input(ng-model='user.firstName',
+          required,
+          name='firstName')
+          div(ng-messages='userForm.firstName.$error')
+            div(ng-message='required') First name is required.
+        md-input-container(flex)
+          label Last name
+          input(ng-model='user.lastName',
+          required,
+          name='lastName')
+          div(ng-messages='userForm.lastName.$error')
+            div(ng-message='required') Last name is required.
+      md-input-container
+        label Password
+        input(ng-model='user.password',
+        required,
+        name='password',
+        type='password',
+        ng-minlength='5')
+        div(ng-messages='userForm.password.$error')
+          div(ng-message='required') Password is required.
+          div(ng-message='minlength') Minimum length is 5.
+      md-input-container
+        h4(align='center')
+          | By pressing the submit button you agree with the&nbsp
+          a(href='/terms/', target='_blank') terms and conditions
+          | &nbspfor becoming a {{user.role}}.
+        md-button(type='submit', class='md-primary md-raised') Create account

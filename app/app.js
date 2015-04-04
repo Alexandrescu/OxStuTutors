@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('oxstututors', [
-  'ui.bootstrap',
   'ngRoute',
   'ngResource',
   'http-auth-interceptor',
   'ngMaterial',
-  'angularFileUpload'
+  'angularFileUpload',
+  'ngMessages'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -18,8 +18,10 @@ angular.module('oxstututors', [
         templateUrl: '/auth/signup',
         controller: 'SignUpCtrl'
       })
-      .when('/login/', {
-        templateUrl: '/auth/login',
+      .when('/login/:location*?', {
+        templateUrl: function(params) {
+          return '/auth/login/' + (params.location || '');
+        },
         controller: 'LoginCtrl'
       })
       .when('/users/:userId/', {
@@ -38,6 +40,15 @@ angular.module('oxstututors', [
         templateUrl: '/message/inbox',
         controller: 'InboxCtrl'
       })
+      .when('/terms/', {
+        templateUrl: '/pages/terms'
+      })
+      .when('/contact/', {
+        templateUrl: '/pages/contact'
+      })
+      .when('/about/', {
+        templateUrl: '/pages/about'
+      })
       .otherwise({
         // Should redirect to an error page
         redirectTo: '/'
@@ -48,7 +59,7 @@ angular.module('oxstututors', [
   .run(function ($rootScope, $location) {
     // On catching 401 errors, redirect to the login page.
     $rootScope.$on('event:auth-loginRequired', function () {
-      $location.path('/login');
+      $location.path('/login/' + ($location.url()).toString().substr(1));
       return false;
     });
   });

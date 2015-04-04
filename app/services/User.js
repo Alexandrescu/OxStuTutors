@@ -20,6 +20,10 @@ angular.module('oxstututors')
           method: 'GET',
           isArray: true,
           url: '/auth/users/all'
+        },
+        'isUser' : {
+          method: 'GET',
+          url: '/auth/users/exists/:username'
         }
       });
   });

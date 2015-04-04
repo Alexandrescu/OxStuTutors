@@ -14,17 +14,19 @@ html
 
     script(src='http://hammerjs.github.io/dist/hammer.min.js')
     script(src='/javascripts/allangular.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-messages.js')
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js')
     //script(src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js")
-    script(src="https://rawgit.com/angular/bower-material/master/angular-material.js")
+    script(src="/vendor/material/angular-material.js")
     //script(src='/vendor/material/angular-material.js')
     script(src='/vendor/angular-file-upload/angular-file-upload.js')
     //link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css')
-    link(rel="stylesheet", href="https://rawgit.com/angular/bower-material/master/angular-material.css")
+    link(rel="stylesheet", href="/vendor/material/angular-material.css")
     link(rel='stylesheet', href='/stylesheets/core.css')
     link(rel='stylesheet', href='/stylesheets/users/users.css')
-
+    link(rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic")
+    link(rel='stylesheet' href='http://fonts.googleapis.com/css?family=Noto+Serif', type='text/css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js')
 
     base(href='/')
@@ -33,8 +35,26 @@ html
 
   body(ng-app='oxstututors')
     include navbar
-    div.page.content(ng-view)
-
+    div(id='main-wrapper', ng-class='{"hackMe": hack}')
+      div(ng-view, style='display:block;height:100%')
+      footer.footer.container.row
+        div.quicklinks-group.row(class='col-sm-6')
+          h3.small-header Quicklinks
+          div(class='col-sm-4')
+            md-button(href='/search/') Search
+          div(class='col-sm-4', style='border-left:1px solid #ccc;border-right:1px solid #ccc')
+            md-button(href='/about/') About
+          div(class='col-sm-4')
+            md-button(href='/contact/') Contact
+        div.social-group.row(class='col-sm-6')
+          h3.small-header Social media
+          div(class='col-sm-12', style='display:inline-block')
+            a(href='https://facebook.com', target='_blank')
+              img(src='/media/fbicon.png')
+            a(href='https://twitter.com', target='_blank')
+              img(src='/media/twittericon.png')
+            a(href='https://gplus.com', target='_blank')
+              img(src='/media/gplusicon.png')
 
     script(src='/javascripts/app.js')
     script(src='/javascripts/controllers.js')
@@ -48,3 +68,6 @@ html
     script(src='/javascripts/services/User.js')
     script(src='/javascripts/directives/ngThumb.js')
     script(src='/javascripts/directives/oxSearchProfile.js')
+    script(src='/javascripts/directives/oxUniqueUsername.js')
+    script(src='/javascripts/directives/oxRegisterForm.js')
+    script(src='/javascripts/directives/oxOxfordEmail.js')

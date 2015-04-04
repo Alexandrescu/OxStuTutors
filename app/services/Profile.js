@@ -16,10 +16,10 @@ angular.module('oxstututors')
     // profile page.
 
     var toastPosition = {
-      bottom: true,
+      bottom: false,
       right: true,
       left: false,
-      top: false
+      top: true
     };
 
     Profile.getToastPosition = function () {
@@ -33,15 +33,19 @@ angular.module('oxstututors')
     Profile.init = function (userId, scope) {
       scope.img = "/avatar/" + userId;
       return User.get({userId: userId}, function (profile) {
-        scope.profile = profile.profile;
-        scope.username = profile.username;
-        scope.summary = profile.summary;
+        console.log(profile.completed);
+        scope.user = {
+          _id : userId,
+          profile: profile.profile,
+          username: profile.username,
+          summary: profile.summary,
+          completed: profile.completed
+        }
       }).$promise;
     };
 
     Profile.summary = function (userId, result) {
       User.get({userId: userId}, function (user) {
-        console.log(user.summary);
         result[userId] = user.summary;
       });
     };

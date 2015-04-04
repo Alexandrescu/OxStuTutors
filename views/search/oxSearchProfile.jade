@@ -1,28 +1,37 @@
-div(class='row')
-  table(class='col-md-12 table table-striped')
-    tr(ng-repeat='user in users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories')
-      td(style='padding: 20px')
-        div(class='row')
-          div(class='col-sm-3')
-            img(ng-src="/avatar/{{user.userId}}", style='max-height:200px')
-          div(class='col-sm-9')
-            h1
-              a(ng-href='/users/{{user.userId}}') {{user.username}}
-              md-button(class='md-fab md-primary',
-              ng-href='http://localhost:3000/inbox/?receiver={{user.username}}&receiverId={{user.userId}}',
-              aria-label='Email')
-                span(class='glyphicon glyphicon-comment')
-            h2 Subjects
-            md-list
-              md-item(ng-repeat='subject in user.summary.summary')
-                md-item-content
-                  div(md-tile-content)
-                    p {{subject.subject}} : {{subject.description}}
-            h2 Degree
-            md-list
-              md-item(ng-repeat='degree in user.summary.degree', class='md-padding')
-                md-item-content
-                  | {{degree}}
+div(ng-repeat='user in filteredUsers = (users | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories)'
+class='row',
+ng-class-odd='{oddRow: !isProfile}',
+ng-class-even='{evenRow: !isProfile}')
+  div(class='col-sm-3', ng-hide='isProfile')
+    img(ng-src="/avatar/{{user._id}}", style='max-height:200px;margin:20px;display:block', class="img-rounded")
+  div(class='col-sm-9', style='display:table-cell')
+    h1
+      md-button(class='md-fab md-primary',
+      ng-href='/inbox/?receiver={{user.username}}&receiverId={{user._id}}',
+      aria-label='Email')
+        span(class='glyphicon glyphicon-comment')
+      a(ng-href='/users/{{user._id}}', ng-hide='isProfile') {{user.firstName + " " + user.lastName}}
+      span(ng-show='isProfile') {{user.username}}
+    div(ng-show='user.summary.degree.length > 0 && user.summary.summary.length > 0')
+      h2 Subjects
+      md-list
+        md-item(ng-repeat='subject in user.summary.summary')
+          md-item-content
+            div(md-tile-content)
+              p {{subject.subject}} : {{subject.description}}
+      h2 Degree
+      md-list
+        md-item(ng-repeat='degree in user.summary.degree', class='md-padding')
+          md-item-content
+            | {{degree}}
+    div(ng-hide='user.summary.degree.length > 0 && user.summary.summary.length > 0')
+        h3 Profile is incomplete. Please edit your page.
+
+div(ng-show='filteredUsers.length == 0', class='row')
+  md-content(class='md-padding')
+    md-card
+      md-card-content
+        h4 Sorry, no tutors found for this search.
 
 
   //div(class='col-md-12',

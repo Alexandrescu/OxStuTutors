@@ -1,6 +1,7 @@
 @import '../sass/bootstrap/_variables.scss';
 
 .cover {
+  min-height: calc(100vh - 50px);
   background-image: url('/media/oxford.jpg');
   background-size: cover;
   background-repeat: no-repeat;

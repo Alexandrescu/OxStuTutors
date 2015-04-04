@@ -1,5 +1,5 @@
 div(class='row', style='display:block')
-  div(class='col-md-3', data-spy="affix", data-offset-top="60", data-offset-bottom="200")
+  div(class='col-md-3', data-spy="affix", data-offset-top="70", style='padding-top:10px')
     md-autocomplete(
       placeholder="What subject are you looking for?",
       md-selected-item="selectedSubject",
@@ -12,13 +12,19 @@ div(class='row', style='display:block')
     div(flex)
       md-checkbox(ng-repeat='category in categories'
       ng-model='selectedCategories[category.category]') {{category.category}}
-      section(layout="row" layout-sm="column" layout-align="center center")
+      section(layout="row" layout-sm="column" layout-align="left center")
         md-button(class="md-raised md-primary", ng-click='selectAllCategories(true)') Select All
         md-button(class="md-raised md-warn", ng-click='selectAllCategories(false)') Deselect All
-      pre Asteas: {{selectedCategories}}
-      pre Subject: {{selectedSubject}}
-      pre Cat: {{categories}}
-
-  div(class='col-md-9')
-    ox-search-profile(users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
-pre {{userBase | filterSubject:selectedSubject | filterCategoriesInSubject:selectedSubject:selectedCategories}}
+  div(class='col-md-9', ng-hide='newSearch')
+    ox-search-profile(style='display:block', users='userBase', selected-subject='selectedSubject', selected-categories='selectedCategories')
+    md-content(ng-show='userBase.length == 0')
+      md-card
+        md-card-content
+          h4 Sorry, no tutors matched your search.
+  div(class='col-md-9', ng-show='newSearch')
+    md-content(class='md-padding')
+      md-card
+        md-card-content
+          h4 Start searching the subject you want to be tutored in by writing in the box on the left.
+          br
+          h4 Or choose an option by clicking the checkbox to refine the tutors.

@@ -2,7 +2,7 @@
 
 angular.module('oxstututors')
   .factory('Auth', ['$location', '$rootScope', 'Session', 'User', 'Inbox',
-    function Auth($location, $rootScope, Session, User, Inbox) {
+    function ($location, $rootScope, Session, User, Inbox) {
     return {
 
       login: function (provider, user, callback) {
@@ -27,12 +27,12 @@ angular.module('oxstututors')
 
         Session.delete(function (res) {
             delete $rootScope.unread;
-            delete $rootScope.currentUser;
+            $rootScope.currentUser = null;
             return cb();
           },
           function (err) {
             delete $rootScope.unread;
-            delete $rootScope.currentUser;
+            $rootScope.currentUser = null;
             return cb(err.data);
           });
       },
@@ -53,9 +53,16 @@ angular.module('oxstututors')
 
       currentUser: function (callback) {
         var cb = callback || angular.noop;
-        Session.get(function (user) {
-          $rootScope.currentUser = user;
+        Session.get({}, function (user) {
+          if(!user.username) {
+            $rootScope.currentUser = null;
+          }
+          else {
+            $rootScope.currentUser = user;
+          }
           cb();
+        }, function(err) {
+          $rootScope.currentUser = null;
         });
       },
 
